@@ -3,84 +3,102 @@ import {
   BookOpen, 
   Volume2, 
   CheckCircle, 
-  ArrowRight, 
   Lightbulb, 
   Sparkles,
   MessageCircleQuestion,
-  ShieldAlert
+  ShieldAlert,
+  Headphones,
+  Check,
+  Eye,
+  EyeOff
 } from 'lucide-react';
-import type { CourseLesson, LessonExercise } from '../types/curriculum';
+import type { CourseLesson } from '../types/curriculum';
 import { useSpeech } from '../hooks/useSpeech';
+import { InteractiveWorkbook } from './InteractiveWorkbook';
 
 interface Props {
   lessons: CourseLesson[];
   completedLessons: string[];
-  onCompleteExercise: (lessonId: string, chunk: string, error?: { error: string; correction: string }) => void;
+  savedAnswers: Record<string, string>;
+  lastActiveLessonId?: string;
+  lastActiveStep?: string;
+  onSavePosition: (lessonId: string, step: string) => void;
+  onSaveWorkbookAnswer: (lessonId: string, questionId: string, text: string) => void;
+  onMarkLessonCompleted: (lessonId: string) => void;
 }
 
-export const CurriculumHub: React.FC<Props> = ({ lessons, completedLessons, onCompleteExercise }) => {
-  const [selectedLevel, setSelectedLevel] = useState<'A1' | 'A2' | 'B1' | 'B2'>('A1');
-  const [selectedLesson, setSelectedLesson] = useState<CourseLesson>(() => {
-    return lessons.find(l => l.level === 'A1') || lessons[0];
+export const CurriculumHub: React.FC<Props> = ({ 
+  lessons, 
+  completedLessons,
+  savedAnswers,
+  lastActiveLessonId,
+  lastActiveStep,
+  onSavePosition,
+  onSaveWorkbookAnswer,
+  onMarkLessonCompleted
+}) => {
+  const [selectedLevel, setSelectedLevel] = useState<'A1' | 'A2' | 'B1' | 'B2'>(() => {
+    if (lastActiveLessonId) {
+      if (lastActiveLessonId.includes('a2')) return 'A2';
+      if (lastActiveLessonId.includes('b1')) return 'B1';
+      if (lastActiveLessonId.includes('b2')) return 'B2';
+    }
+    return 'A1';
   });
-  const [activeStep, setActiveStep] = useState<'theory' | 'chunks' | 'clarification' | 'drills'>('theory');
 
-  // Exercise runner state
-  const [exerciseIdx, setExerciseIdx] = useState(0);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [answered, setAnswered] = useState(false);
+  const [selectedLesson, setSelectedLesson] = useState<CourseLesson>(() => {
+    if (lastActiveLessonId) {
+      const match = lessons.find(l => l.id === lastActiveLessonId);
+      if (match) return match;
+    }
+    return lessons[0];
+  });
 
-  const { speak } = useSpeech();
+  const [activeStep, setActiveStep] = useState<'theory' | 'vocabulary' | 'chunks' | 'clarification' | 'listening' | 'workbook'>(
+    (lastActiveStep as any) || 'theory'
+  );
+
+  // Micro-listening state
+  const [selectedListeningOption, setSelectedListeningOption] = useState<string | null>(null);
+  const [showScript, setShowScript] = useState(false);
+
+  const { speak, isSpeaking } = useSpeech();
 
   const filteredLessons = lessons.filter(l => l.level === selectedLevel);
-  const currentExercise: LessonExercise | undefined = selectedLesson.exercises[exerciseIdx];
+
+  const handleStepChange = (step: 'theory' | 'vocabulary' | 'chunks' | 'clarification' | 'listening' | 'workbook') => {
+    setActiveStep(step);
+    onSavePosition(selectedLesson.id, step);
+  };
+
+  const handleSelectLesson = (lesson: CourseLesson) => {
+    setSelectedLesson(lesson);
+    setActiveStep('theory');
+    setSelectedListeningOption(null);
+    setShowScript(false);
+    onSavePosition(lesson.id, 'theory');
+  };
 
   const handleLevelChange = (lvl: 'A1' | 'A2' | 'B1' | 'B2') => {
     setSelectedLevel(lvl);
     const firstOfLevel = lessons.find(l => l.level === lvl);
     if (firstOfLevel) {
-      setSelectedLesson(firstOfLevel);
-      setActiveStep('theory');
-      setExerciseIdx(0);
-      setAnswered(false);
-      setSelectedOption(null);
-    }
-  };
-
-  const handleOptionSelect = (option: string) => {
-    if (answered || !currentExercise) return;
-    setSelectedOption(option);
-    setAnswered(true);
-
-    const isCorrect = option === currentExercise.correctAnswer;
-    if (isCorrect) {
-      onCompleteExercise(selectedLesson.id, selectedLesson.coreChunks[0].chunk);
-    } else {
-      onCompleteExercise(selectedLesson.id, selectedLesson.coreChunks[0].chunk, {
-        error: option,
-        correction: currentExercise.correctAnswer
-      });
-    }
-  };
-
-  const handleNextExercise = () => {
-    setSelectedOption(null);
-    setAnswered(false);
-    if (exerciseIdx < selectedLesson.exercises.length - 1) {
-      setExerciseIdx(prev => prev + 1);
-    } else {
-      setExerciseIdx(0);
-      setActiveStep('theory');
+      handleSelectLesson(firstOfLevel);
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
-      {/* Level Selector Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-3 sm:p-4 rounded-2xl shadow-md">
-        <div className="flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-indigo-400" />
-          <span className="text-sm font-bold text-white uppercase tracking-wider">Plan de Clases Prácticas</span>
+    <div className="max-w-7xl mx-auto space-y-6">
+      {/* Level Selector Bar (Clean White & Blue Style) */}
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 p-4 rounded-3xl shadow-xs">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+            <BookOpen className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Plan de Clases Prácticas</h3>
+            <p className="text-xs text-slate-500">20 Clases Maestras con Práctica Extensiva</p>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -88,10 +106,10 @@ export const CurriculumHub: React.FC<Props> = ({ lessons, completedLessons, onCo
             <button
               key={lvl}
               onClick={() => handleLevelChange(lvl)}
-              className={`px-4 py-2 rounded-xl text-xs font-black transition-all ${
+              className={`px-4 py-2 rounded-2xl text-xs font-black transition-all ${
                 selectedLevel === lvl
-                  ? 'bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/20 scale-105'
-                  : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'
+                  ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30 scale-105'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
               }`}
             >
               Nivel {lvl}
@@ -100,11 +118,11 @@ export const CurriculumHub: React.FC<Props> = ({ lessons, completedLessons, onCo
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left sidebar: Lessons list */}
-        <div className="lg:col-span-1 space-y-2">
-          <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 px-1">
-            Clases de {selectedLevel}
+        <div className="lg:col-span-3 space-y-2">
+          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2 px-1">
+            Clases del Nivel {selectedLevel}
           </div>
           {filteredLessons.map(lesson => {
             const isCompleted = completedLessons.includes(lesson.id);
@@ -112,312 +130,446 @@ export const CurriculumHub: React.FC<Props> = ({ lessons, completedLessons, onCo
             return (
               <button
                 key={lesson.id}
-                onClick={() => {
-                  setSelectedLesson(lesson);
-                  setActiveStep('theory');
-                  setExerciseIdx(0);
-                  setAnswered(false);
-                  setSelectedOption(null);
-                }}
-                className={`w-full text-left p-3.5 rounded-2xl border transition-all ${
+                onClick={() => handleSelectLesson(lesson)}
+                className={`w-full text-left p-4 rounded-2xl border transition-all ${
                   isCurrent
-                    ? 'bg-slate-800 border-indigo-500 shadow-md ring-1 ring-indigo-500/50'
-                    : 'bg-slate-900/70 border-slate-800 hover:bg-slate-800/60'
+                    ? 'bg-blue-50/70 border-blue-500 shadow-xs ring-1 ring-blue-500/30'
+                    : 'bg-white border-slate-200 hover:border-slate-300'
                 }`}
               >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-full ${
+                    isCurrent ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
+                  }`}>
                     Clase {lesson.lessonNumber}
                   </span>
                   {isCompleted && (
-                    <span className="text-[10px] text-emerald-400 flex items-center gap-1 font-semibold">
-                      <CheckCircle className="w-3 h-3" /> Completada
+                    <span className="text-[10px] text-emerald-600 flex items-center gap-1 font-bold">
+                      <CheckCircle className="w-3.5 h-3.5" /> Completada
                     </span>
                   )}
                 </div>
-                <h4 className="text-xs font-bold text-white line-clamp-1">{lesson.title}</h4>
-                <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">{lesson.tagline}</p>
+                <h4 className="text-xs font-bold text-slate-900 line-clamp-1">{lesson.title}</h4>
+                <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">{lesson.tagline}</p>
               </button>
             );
           })}
         </div>
 
         {/* Right side: Lesson Content Engine */}
-        <div className="lg:col-span-3 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col justify-between">
-          <div>
-            {/* Lesson Title Header */}
-            <div className="border-b border-slate-800 pb-5 mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                  {selectedLesson.level} • Módulo {selectedLesson.lessonNumber}
-                </span>
-                <span className="text-xs text-slate-400">Objetivo comunicativo claro</span>
-              </div>
-              <h2 className="text-2xl font-black text-white">{selectedLesson.title}</h2>
-              <p className="text-sm text-slate-300 mt-1.5 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>{selectedLesson.practicalGoal}</span>
-              </p>
+        <div className="lg:col-span-9 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs">
+          {/* Lesson Header */}
+          <div className="border-b border-slate-100 pb-5 mb-6">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="px-3 py-0.5 rounded-full text-[11px] font-black bg-blue-100 text-blue-800 border border-blue-200">
+                {selectedLesson.level} • Clase {selectedLesson.lessonNumber}
+              </span>
+              <span className="text-xs text-slate-500 font-medium">{selectedLesson.grammarFocus}</span>
             </div>
+            <h2 className="text-2xl font-black text-slate-900">{selectedLesson.title}</h2>
+            <p className="text-sm text-slate-600 mt-1.5 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+              <span>{selectedLesson.practicalGoal}</span>
+            </p>
+          </div>
 
-            {/* Navigation Tabs inside the Lesson */}
-            <div className="flex gap-2 border-b border-slate-800/80 pb-4 mb-6 overflow-x-auto">
-              <button
-                onClick={() => setActiveStep('theory')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                  activeStep === 'theory'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-800/60 text-slate-400 hover:text-white'
-                }`}
-              >
-                <Lightbulb className="w-4 h-4" />
-                <span>1. Teoría Práctica</span>
-              </button>
+          {/* Navigation Steps inside the Lesson */}
+          <div className="flex gap-2 border-b border-slate-100 pb-4 mb-6 overflow-x-auto">
+            <button
+              onClick={() => handleStepChange('theory')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
+                activeStep === 'theory'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Lightbulb className="w-4 h-4" />
+              <span>1. Teoría & Tiempos</span>
+            </button>
 
-              <button
-                onClick={() => setActiveStep('chunks')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                  activeStep === 'chunks'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-800/60 text-slate-400 hover:text-white'
-                }`}
-              >
-                <Sparkles className="w-4 h-4" />
-                <span>2. Chunks Clave ({selectedLesson.coreChunks.length})</span>
-              </button>
+            <button
+              onClick={() => handleStepChange('vocabulary')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
+                activeStep === 'vocabulary'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>2. Vocabulario ({selectedLesson.vocabulary.length})</span>
+            </button>
 
-              <button
-                onClick={() => setActiveStep('clarification')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                  activeStep === 'clarification'
-                    ? 'bg-amber-500 text-slate-950 font-black'
-                    : 'bg-slate-800/60 text-slate-400 hover:text-white'
-                }`}
-              >
-                <MessageCircleQuestion className="w-4 h-4" />
-                <span>3. ¿Si No Sé Algo? (Preguntas Salvavidas)</span>
-              </button>
+            <button
+              onClick={() => handleStepChange('chunks')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
+                activeStep === 'chunks'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>3. Chunks Clave ({selectedLesson.coreChunks.length})</span>
+            </button>
 
-              <button
-                onClick={() => setActiveStep('drills')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
-                  activeStep === 'drills'
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-slate-800/60 text-slate-400 hover:text-white'
-                }`}
-              >
-                <CheckCircle className="w-4 h-4" />
-                <span>4. Práctica Interactiva</span>
-              </button>
-            </div>
+            <button
+              onClick={() => handleStepChange('clarification')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
+                activeStep === 'clarification'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <MessageCircleQuestion className="w-4 h-4" />
+              <span>4. ¿Si No Sé Algo? (Preguntas)</span>
+            </button>
 
-            {/* TAB 1: THEORY */}
-            {activeStep === 'theory' && (
-              <div className="space-y-6">
-                <div className="bg-slate-800/80 rounded-2xl p-6 border border-slate-700/70">
-                  <h3 className="text-lg font-bold text-white mb-2">{selectedLesson.theory.title}</h3>
-                  <p className="text-sm text-slate-300 leading-relaxed">
-                    {selectedLesson.theory.explanationEs}
-                  </p>
+            <button
+              onClick={() => handleStepChange('listening')}
+              className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
+                activeStep === 'listening'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Headphones className="w-4 h-4" />
+              <span>5. Micro-Listening</span>
+            </button>
 
-                  <div className="mt-5 p-4 bg-indigo-950/40 border border-indigo-500/30 rounded-xl">
-                    <span className="text-xs font-bold uppercase tracking-wider text-indigo-400 block mb-1">
-                      Fórmula de uso inmediato:
-                    </span>
-                    <span className="text-base font-mono font-bold text-white">
-                      {selectedLesson.theory.practicalFormula}
-                    </span>
-                  </div>
+            <button
+              onClick={() => handleStepChange('workbook')}
+              className={`px-4 py-2 rounded-2xl text-xs font-black transition flex items-center gap-1.5 whitespace-nowrap ${
+                activeStep === 'workbook'
+                  ? 'bg-blue-600 text-white shadow-xs ring-2 ring-blue-400/30'
+                  : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+              }`}
+            >
+              <CheckCircle className="w-4 h-4" />
+              <span>6. Workbook Práctico ({selectedLesson.workbook.length})</span>
+            </button>
+          </div>
 
-                  <div className="mt-4 p-4 bg-amber-950/20 border border-amber-500/30 rounded-xl flex items-start gap-3">
-                    <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-amber-400 block mb-0.5">
-                        El error común del hispanohablante:
-                      </span>
-                      <p className="text-xs text-amber-200/90 leading-relaxed">
-                        {selectedLesson.theory.comparisonSpanish}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setActiveStep('chunks')}
-                  className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition flex items-center justify-center gap-2"
-                >
-                  <span>Continuar a los Chunks Clave</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
-            {/* TAB 2: CHUNKS */}
-            {activeStep === 'chunks' && (
-              <div className="space-y-4">
-                <p className="text-xs text-slate-400 mb-2">
-                  No memorices palabras sueltas. Memoriza la frase completa con su pronunciación natural:
+          {/* STEP 1: THEORY */}
+          {activeStep === 'theory' && (
+            <div className="space-y-6">
+              <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{selectedLesson.theory.title}</h3>
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  {selectedLesson.theory.explanationEs}
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {selectedLesson.coreChunks.map((chk, i) => (
-                    <div
-                      key={i}
-                      className="bg-slate-800/90 border border-slate-700/70 rounded-2xl p-5 flex flex-col justify-between"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded">
-                            {chk.usageContext}
-                          </span>
-                          <button
-                            onClick={() => speak(chk.chunk)}
-                            className="p-1.5 rounded-lg bg-slate-700 hover:bg-indigo-600 text-slate-300 hover:text-white transition"
-                            title="Escuchar audio"
-                          >
-                            <Volume2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                        <h4 className="text-base font-bold text-white mb-1">"{chk.chunk}"</h4>
-                        <p className="text-xs text-amber-300 font-medium mb-3">👉 {chk.meaningEs}</p>
-                        <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 italic">
-                          "{chk.exampleSentence}"
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+
+                <div className="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-2xl">
+                  <span className="text-xs font-bold uppercase tracking-wider text-blue-800 block mb-1">
+                    Fórmula de Uso Inmediato:
+                  </span>
+                  <span className="text-base font-mono font-bold text-slate-900">
+                    {selectedLesson.theory.practicalFormula}
+                  </span>
                 </div>
 
-                <button
-                  onClick={() => setActiveStep('clarification')}
-                  className="w-full mt-4 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition flex items-center justify-center gap-2"
-                >
-                  <span>Ver Frases Salvavidas para Preguntar</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
-            {/* TAB 3: CLARIFICATION (SI NO SÉ ALGO) */}
-            {activeStep === 'clarification' && (
-              <div className="space-y-5">
-                <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4">
-                  <h4 className="text-sm font-bold text-amber-300 mb-1 flex items-center gap-2">
-                    <MessageCircleQuestion className="w-4 h-4" />
-                    Cómo pedir ayuda o aclaración como un nativo
-                  </h4>
-                  <p className="text-xs text-slate-300">
-                    Si no sabes una palabra o no entendiste, no te quedes en silencio. Usa estas frases para tomar la iniciativa en la conversación.
-                  </p>
-                </div>
-
-                <div className="space-y-3">
-                  {selectedLesson.clarificationTools.map((tool, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-                    >
-                      <div>
-                        <span className="text-[11px] font-bold text-slate-400 block mb-1">
-                          Situación: {tool.triggerSituation}
-                        </span>
-                        <div className="text-base font-bold text-white flex items-center gap-2">
-                          "{tool.phrase}"
-                          <button
-                            onClick={() => speak(tool.audioText)}
-                            className="p-1 rounded bg-slate-700 hover:bg-indigo-600 text-slate-300 hover:text-white transition"
-                            title="Escuchar audio"
-                          >
-                            <Volume2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                        <p className="text-xs text-emerald-400 mt-1 font-medium">👉 {tool.meaningEs}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => setActiveStep('drills')}
-                  className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-lg"
-                >
-                  <span>Comenzar Ejercicios Interactivos</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
-            {/* TAB 4: DRILLS */}
-            {activeStep === 'drills' && currentExercise && (
-              <div className="space-y-6">
-                <div className="bg-slate-800/90 border border-slate-700 rounded-2xl p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
-                      Ejercicio {exerciseIdx + 1} de {selectedLesson.exercises.length}
+                {selectedLesson.theory.timeExpressions && (
+                  <div className="mt-4 p-4 bg-white border border-slate-200 rounded-2xl">
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
+                      Expresiones Temporales Frecuentes:
                     </span>
-                    <span className="text-xs text-slate-400">Tipo: {currentExercise.type.replace('_', ' ')}</span>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedLesson.theory.timeExpressions.map((exp, i) => (
+                        <span key={i} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-xl text-xs font-medium">
+                          {exp}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+                )}
 
-                  <div className="mb-6">
-                    <label className="block text-xs uppercase text-slate-400 font-semibold mb-1">Escenario</label>
-                    <p className="text-base font-medium text-white">{currentExercise.promptEs}</p>
-                    {currentExercise.promptEn && (
-                      <p className="text-sm text-indigo-300 font-semibold mt-2">
-                        Te dicen: "{currentExercise.promptEn}"
-                      </p>
-                    )}
+                <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3">
+                  <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-amber-900 block mb-0.5">
+                      El error típico del hispanohablante:
+                    </span>
+                    <p className="text-xs text-amber-900/90 leading-relaxed">
+                      {selectedLesson.theory.commonMistakeEs || selectedLesson.theory.comparisonSpanish}
+                    </p>
                   </div>
+                </div>
+              </div>
 
-                  {/* Options */}
-                  <div className="space-y-2.5">
-                    {currentExercise.options?.map((opt, i) => {
-                      const isSelected = selectedOption === opt;
-                      const isCorrect = opt === currentExercise.correctAnswer;
+              <button
+                onClick={() => handleStepChange('vocabulary')}
+                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
+              >
+                <span>Continuar al Vocabulario Frecuente (20 Palabras)</span>
+                <span>→</span>
+              </button>
+            </div>
+          )}
 
-                      let btnStyle = "w-full text-left p-4 rounded-xl text-sm font-medium border transition flex items-center justify-between ";
-                      if (!answered) {
-                        btnStyle += "bg-slate-900 border-slate-700 text-slate-200 hover:border-slate-500 hover:bg-slate-800";
+          {/* STEP 2: VOCABULARY (20 Palabras) */}
+          {activeStep === 'vocabulary' && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-slate-600">
+                  Las 20 palabras indispensables de este tema. Pulsa el altavoz para escuchar su pronunciación:
+                </p>
+                <span className="text-xs font-bold text-blue-600">{selectedLesson.vocabulary.length} palabras</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                {selectedLesson.vocabulary.map(v => (
+                  <div
+                    key={v.id}
+                    className="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-300 transition-all flex flex-col justify-between shadow-2xs"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-bold text-slate-900">{v.word}</span>
+                          {v.phonetic && <span className="text-[11px] font-mono text-slate-400">{v.phonetic}</span>}
+                        </div>
+                        <button
+                          onClick={() => speak(v.word)}
+                          className="p-1.5 rounded-lg bg-white hover:bg-blue-600 text-blue-600 hover:text-white transition border border-slate-200 shadow-2xs"
+                          title="Pronunciación"
+                        >
+                          <Volume2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
+                      <div className="text-xs text-blue-700 font-semibold mb-2">
+                        👉 {v.meaningEs} <span className="text-[10px] text-slate-400 font-normal">({v.partOfSpeech})</span>
+                      </div>
+
+                      <div className="bg-white p-2.5 rounded-xl border border-slate-200 text-xs text-slate-600 italic">
+                        "{v.exampleEn}"
+                        <span className="block not-italic text-slate-400 text-[11px] mt-0.5">{v.exampleEs}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handleStepChange('chunks')}
+                className="w-full mt-4 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
+              >
+                <span>Continuar a los Chunks de Oro (10 Frases)</span>
+                <span>→</span>
+              </button>
+            </div>
+          )}
+
+          {/* STEP 3: CHUNKS (10 Chunks) */}
+          {activeStep === 'chunks' && (
+            <div className="space-y-4">
+              <p className="text-xs text-slate-600">
+                Los 10 chunks automáticos para hablar sin traducir palabra por palabra:
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {selectedLesson.coreChunks.map((chk, i) => (
+                  <div
+                    key={chk.id || i}
+                    className="p-4 rounded-2xl border border-slate-200 bg-white hover:border-blue-400 transition-all flex flex-col justify-between shadow-xs"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-[10px] font-bold text-blue-700 uppercase tracking-wider bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+                          {chk.usageContext}
+                        </span>
+                        <button
+                          onClick={() => speak(chk.chunk)}
+                          className="p-1.5 rounded-lg bg-slate-100 hover:bg-blue-600 text-slate-700 hover:text-white transition"
+                          title="Escuchar audio"
+                        >
+                          <Volume2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 mb-1">"{chk.chunk}"</h4>
+                      <p className="text-xs text-amber-700 font-semibold mb-2">👉 {chk.meaningEs}</p>
+                      <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-xs text-slate-600 italic">
+                        "{chk.exampleSentence}"
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handleStepChange('clarification')}
+                className="w-full mt-4 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
+              >
+                <span>Ver Fórmulas Salvavidas ("¿Y si no sé algo?")</span>
+                <span>→</span>
+              </button>
+            </div>
+          )}
+
+          {/* STEP 4: CLARIFICATION (6 Fórmulas para Preguntar) */}
+          {activeStep === 'clarification' && (
+            <div className="space-y-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
+                <h4 className="text-sm font-bold text-blue-900 mb-0.5 flex items-center gap-2">
+                  <MessageCircleQuestion className="w-4 h-4 text-blue-600" />
+                  Cómo preguntar y pedir ayuda como un nativo
+                </h4>
+                <p className="text-xs text-slate-600">
+                  Si no entendiste, no sabes cómo se dice algo o hablaron muy rápido, usa estas 6 fórmulas para tomar el control de la charla:
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                {selectedLesson.clarificationTools.map((tool, idx) => (
+                  <div
+                    key={tool.id || idx}
+                    className="p-4 rounded-2xl border border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
+                  >
+                    <div>
+                      <span className="text-[11px] font-bold text-slate-400 block mb-0.5">
+                        Situación: {tool.triggerSituation}
+                      </span>
+                      <div className="text-base font-bold text-slate-900 flex items-center gap-2">
+                        "{tool.phrase}"
+                        <button
+                          onClick={() => speak(tool.audioSample || tool.phrase)}
+                          className="p-1 rounded bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white transition"
+                          title="Audio"
+                        >
+                          <Volume2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <p className="text-xs text-blue-700 font-semibold mt-0.5">👉 {tool.meaningEs}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handleStepChange('listening')}
+                className="w-full mt-4 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
+              >
+                <span>Continuar al Micro-Listening</span>
+                <span>→</span>
+              </button>
+            </div>
+          )}
+
+          {/* STEP 5: LISTENING */}
+          {activeStep === 'listening' && (
+            <div className="space-y-6">
+              <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                  <div>
+                    <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800 rounded-full">
+                      Micro-Listening Nativo
+                    </span>
+                    <h3 className="text-lg font-bold text-slate-900 mt-2">Entrenamiento Auditivo en Contexto</h3>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-4 mb-6 border border-slate-200">
+                  <p className="text-xs uppercase font-bold text-slate-400 mb-1">Contexto:</p>
+                  <p className="text-sm text-slate-700">{selectedLesson.listening.spanishContext}</p>
+                </div>
+
+                {/* Audio controls */}
+                <div className="flex flex-wrap items-center justify-center gap-4 py-6 bg-blue-50/50 rounded-2xl border border-blue-100 mb-6">
+                  <button
+                    onClick={() => speak(selectedLesson.listening.audioScript, 0.95)}
+                    className="flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition shadow-sm"
+                  >
+                    <Volume2 className="w-5 h-5" />
+                    <span>{isSpeaking ? 'Escuchando...' : 'Velocidad Normal (1.0x)'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => speak(selectedLesson.listening.audioScript, 0.75)}
+                    className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition"
+                  >
+                    <Volume2 className="w-4 h-4 text-blue-600" />
+                    <span>Lento (0.75x)</span>
+                  </button>
+
+                  <button
+                    onClick={() => setShowScript(!showScript)}
+                    className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition"
+                  >
+                    {showScript ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4 text-emerald-600" />}
+                    <span>{showScript ? 'Ocultar Guion' : 'Revelar Guion'}</span>
+                  </button>
+                </div>
+
+                {showScript && (
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mb-6 text-center">
+                    <p className="text-xs uppercase font-bold text-emerald-800 mb-1">Guion Completo:</p>
+                    <p className="text-base font-semibold text-slate-900 italic">"{selectedLesson.listening.audioScript}"</p>
+                  </div>
+                )}
+
+                {/* Comprehension Question */}
+                <div className="mb-4">
+                  <label className="block text-sm font-bold text-slate-800 mb-3">
+                    {selectedLesson.listening.comprehensionQuestion}
+                  </label>
+                  <div className="space-y-2">
+                    {selectedLesson.listening.options.map((opt, i) => {
+                      const isCorrect = opt === selectedLesson.listening.correctAnswer;
+                      const isSelected = selectedListeningOption === opt;
+
+                      let style = "w-full text-left p-3.5 rounded-2xl border text-sm font-medium transition flex items-center justify-between ";
+                      if (!selectedListeningOption) {
+                        style += "bg-white border-slate-200 text-slate-700 hover:border-blue-400 hover:bg-blue-50/20";
                       } else if (isCorrect) {
-                        btnStyle += "bg-emerald-950/60 border-emerald-500 text-emerald-200";
+                        style += "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold";
                       } else if (isSelected && !isCorrect) {
-                        btnStyle += "bg-rose-950/60 border-rose-500 text-rose-200";
+                        style += "bg-rose-50 border-rose-400 text-rose-900";
                       } else {
-                        btnStyle += "bg-slate-900/40 border-slate-800 text-slate-500 opacity-60";
+                        style += "bg-slate-50 border-slate-200 text-slate-400 opacity-60";
                       }
 
                       return (
                         <button
                           key={i}
-                          disabled={answered}
-                          onClick={() => handleOptionSelect(opt)}
-                          className={btnStyle}
+                          disabled={!!selectedListeningOption}
+                          onClick={() => setSelectedListeningOption(opt)}
+                          className={style}
                         >
                           <span>{opt}</span>
-                          {answered && isCorrect && <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />}
+                          {selectedListeningOption && isCorrect && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
                         </button>
                       );
                     })}
                   </div>
-
-                  {answered && (
-                    <div className="mt-5 p-4 rounded-xl bg-slate-900/90 border border-slate-700 text-xs">
-                      <span className="font-bold text-slate-300 uppercase block mb-1">Feedback Práctico:</span>
-                      <p className="text-slate-300">{currentExercise.explanation}</p>
-                    </div>
-                  )}
                 </div>
 
-                {answered && (
-                  <button
-                    onClick={handleNextExercise}
-                    className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition flex items-center justify-center gap-2"
-                  >
-                    <span>{exerciseIdx < selectedLesson.exercises.length - 1 ? 'Siguiente Ejercicio' : 'Completar Módulo'}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                {selectedListeningOption && (
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 text-xs text-slate-600">
+                    <span className="font-bold text-slate-800 block mb-1">Explicación:</span>
+                    {selectedLesson.listening.explanation}
+                  </div>
                 )}
               </div>
-            )}
-          </div>
+
+              <button
+                onClick={() => handleStepChange('workbook')}
+                className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black rounded-2xl text-sm transition shadow-md flex items-center justify-center gap-2"
+              >
+                <span>¡Ir al Workbook de Práctica Extensiva (20 Ejercicios)!</span>
+                <span>→</span>
+              </button>
+            </div>
+          )}
+
+          {/* STEP 6: WORKBOOK (20 Ejercicios Interactivos con Respuestas Guardadas) */}
+          {activeStep === 'workbook' && (
+            <InteractiveWorkbook
+              prompts={selectedLesson.workbook}
+              savedAnswers={savedAnswers}
+              onSaveAnswer={(qId, text) => {
+                onSaveWorkbookAnswer(selectedLesson.id, qId, text);
+                onMarkLessonCompleted(selectedLesson.id);
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

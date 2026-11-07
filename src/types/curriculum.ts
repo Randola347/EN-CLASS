@@ -2,12 +2,25 @@ export type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2';
 
 export interface TheoryPoint {
   title: string;
-  explanationEs: string; // Explicación directa y práctica, sin terminología técnica pesada
-  practicalFormula: string; // e.g. "Do you mind if + I + [verbo presente]?"
-  comparisonSpanish: string; // Comparación con el error típico del hispanohablante
+  explanationEs: string;
+  practicalFormula: string;
+  timeExpressions?: string[];
+  commonMistakeEs?: string;
+  comparisonSpanish?: string;
+}
+
+export interface VocabularyItem {
+  id: string;
+  word: string;
+  phonetic?: string;
+  partOfSpeech: string;
+  meaningEs: string;
+  exampleEn: string;
+  exampleEs: string;
 }
 
 export interface FunctionalChunk {
+  id?: string;
   chunk: string;
   meaningEs: string;
   usageContext: string;
@@ -15,22 +28,33 @@ export interface FunctionalChunk {
 }
 
 export interface ClarificationQuestion {
-  triggerSituation: string; // "Si no entendiste una palabra técnica"
-  phrase: string; // "Could you rephrase that in simpler terms?"
-  audioText: string;
+  id?: string;
+  triggerSituation: string;
+  phrase: string;
+  audioText?: string;
+  audioSample?: string;
   meaningEs: string;
+  whyItWorks?: string;
 }
 
-export interface LessonExercise {
+export interface MicroListeningItem {
   id: string;
-  type: 'fill_chunk' | 'reflex_reply' | 'micro_listening' | 'ask_clarification';
-  promptEs: string;
-  promptEn?: string;
-  audioPrompt?: string;
-  options?: string[];
+  audioScript: string;
+  spanishContext: string;
+  comprehensionQuestion: string;
+  options: string[];
   correctAnswer: string;
   explanation: string;
-  safetyBeltHint?: string;
+}
+
+export interface WorkbookPrompt {
+  id: string;
+  category: 'routine' | 'social' | 'problem_solving' | 'asking_help' | 'opinion';
+  situationEs: string;
+  promptEn: string;
+  guidanceTipEs: string;
+  recommendedAnswers: string[];
+  pedagogicalNote: string;
 }
 
 export interface CourseLesson {
@@ -39,10 +63,12 @@ export interface CourseLesson {
   lessonNumber: number;
   title: string;
   tagline: string;
-  practicalGoal: string; // Lo que el alumno podrá decir/preguntar al terminar
+  practicalGoal: string;
+  grammarFocus?: string;
   theory: TheoryPoint;
+  vocabulary: VocabularyItem[];
   coreChunks: FunctionalChunk[];
-  clarificationTools: ClarificationQuestion[]; // "Cómo preguntar si no sé algo"
-  exercises: LessonExercise[];
+  clarificationTools: ClarificationQuestion[];
+  listening: MicroListeningItem;
+  workbook: WorkbookPrompt[];
 }
-

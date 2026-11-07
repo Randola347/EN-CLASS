@@ -56,8 +56,13 @@ export const App: React.FC = () => {
   });
 
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
+  const [savedAnswers, setSavedAnswers] = useState<Record<string, string>>({});
+  const [lastPosition, setLastPosition] = useState<{ lessonId: string; step: string }>({
+    lessonId: currentUser?.last_active_lesson_id || 'lesson-a1-1',
+    step: currentUser?.last_active_step || 'theory'
+  });
 
-  // Sync profile from backend if logged in
+  // Sync profile and workbook answers from backend if logged in
   useEffect(() => {
     if (!authToken) return;
 
@@ -76,6 +81,19 @@ export const App: React.FC = () => {
           if (data.profile.completed_lessons) {
             setCompletedLessons(data.profile.completed_lessons);
           }
+          if (data.profile.last_active_lesson_id) {
+            setLastPosition({
+              lessonId: data.profile.last_active_lesson_id,
+              step: data.profile.last_active_step || 'theory'
+            });
+          }
+        }
+        if (data.workbook_answers && Array.isArray(data.workbook_answers)) {
+          const map: Record<string, string> = {};
+          data.workbook_answers.forEach((ans: any) => {
+            map[ans.question_id] = ans.user_text;
+          });
+          setSavedAnswers(map);
         }
       })
       .catch(console.error);
@@ -103,7 +121,71 @@ export const App: React.FC = () => {
     });
   };
 
-  const handleCompleteDrill = (chunk: string, errorFeedback?: { error: string; correction: string }, lessonId?: string) => {
+  // Save exact position (last active lesson & step) to Neon DB
+  const handleSavePosition = (lessonId: string, step: string) => {
+    setLastPosition({ lessonId, step });
+    if (!authToken) return;
+
+    fetch('http://127.0.0.1:3001/api/student/position', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        last_active_lesson_id: lessonId,
+        last_active_step: step
+      })
+    }).catch(console.error);
+  };
+
+  // Save workbook answers to Neon DB
+  const handleSaveWorkbookAnswer = (lessonId: string, questionId: string, text: string) => {
+    setSavedAnswers(prev => ({ ...prev, [questionId]: text }));
+
+    if (!authToken) return;
+
+    fetch('http://127.0.0.1:3001/api/student/workbook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        lesson_id: lessonId,
+        question_id: questionId,
+        user_text: text
+      })
+    })
+      .then(res => res.json())
+      .then(() => {
+        setProfile(prev => ({ ...prev, drills_completed: prev.drills_completed + 1 }));
+      })
+      .catch(console.error);
+  };
+
+  const handleMarkLessonCompleted = (lessonId: string) => {
+    if (completedLessons.includes(lessonId)) return;
+    const updated = [...completedLessons, lessonId];
+    setCompletedLessons(updated);
+    triggerCelebration();
+
+    if (authToken) {
+      fetch('http://127.0.0.1:3001/api/student/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+          completed_lessons: updated,
+          session_summary: `Completada clase ${lessonId}`
+        })
+      }).catch(console.error);
+    }
+  };
+
+  const handleCompleteDrill = (chunk: string, errorFeedback?: { error: string; correction: string }) => {
     setProfile(prev => {
       const alreadyMastered = prev.mastered_chunks.includes(chunk);
       const newMastered = alreadyMastered ? prev.mastered_chunks : [...prev.mastered_chunks, chunk];
@@ -122,37 +204,12 @@ export const App: React.FC = () => {
         triggerCelebration();
       }
 
-      const updated = {
+      return {
         ...prev,
         mastered_chunks: newMastered,
         error_bank: newErrorBank,
         drills_completed: prev.drills_completed + 1
       };
-
-      // Persist to Neon DB backend if authenticated
-      if (authToken) {
-        let updatedCompleted = completedLessons;
-        if (lessonId && !completedLessons.includes(lessonId)) {
-          updatedCompleted = [...completedLessons, lessonId];
-          setCompletedLessons(updatedCompleted);
-        }
-
-        fetch('http://127.0.0.1:3001/api/student/profile', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${authToken}`
-          },
-          body: JSON.stringify({
-            mastered_chunks: updated.mastered_chunks,
-            error_bank: updated.error_bank,
-            session_summary: `Práctica completada con chunk: ${chunk}`,
-            completed_lessons: updatedCompleted
-          })
-        }).catch(console.error);
-      }
-
-      return updated;
     });
   };
 
@@ -161,56 +218,56 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       {/* If not logged in, show AuthModal */}
       {!authToken && <AuthModal onLoginSuccess={handleLoginSuccess} />}
 
-      {/* Top Navbar */}
-      <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+      {/* Top Navbar (Clean White & Blue Style) */}
+      <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-amber-500 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg shadow-indigo-500/20">
+            <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center font-black text-white text-lg shadow-sm shadow-blue-600/30">
               EN
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-bold text-white text-base tracking-tight">EN-Class Fluency</h1>
-                <span className="text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full">
+                <h1 className="font-bold text-slate-900 text-base tracking-tight">EN-Class Fluency</h1>
+                <span className="text-[10px] font-black uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full">
                   A1 ➔ B2
                 </span>
                 {currentUser?.role === 'admin' && (
-                  <span className="text-[10px] font-black uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/30 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full">
                     Admin
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-400">Zero Translation • Neon PostgreSQL Cloud</p>
+              <p className="text-xs text-slate-500">Test-English Method • Neon PostgreSQL</p>
             </div>
           </div>
 
           {/* Student Status Quick Widget */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 rounded-xl px-3 py-1.5 text-xs">
-              <Flame className="w-4 h-4 text-amber-400 fill-current" />
-              <span className="font-semibold text-slate-200">{profile.streak_days}d Racha</span>
+            <div className="hidden sm:flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs">
+              <Flame className="w-4 h-4 text-amber-500 fill-current" />
+              <span className="font-semibold text-slate-700">{profile.streak_days}d Racha</span>
             </div>
 
-            <div className="hidden sm:flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 rounded-xl px-3 py-1.5 text-xs">
-              <Award className="w-4 h-4 text-emerald-400" />
-              <span className="font-semibold text-slate-200">{profile.drills_completed} Prácticas</span>
+            <div className="hidden sm:flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs">
+              <Award className="w-4 h-4 text-emerald-600" />
+              <span className="font-semibold text-slate-700">{profile.drills_completed} Respuestas</span>
             </div>
 
             <button
               onClick={() => setActiveTab('profile')}
-              className="flex items-center gap-2 bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/40 rounded-xl px-3 py-1.5 text-xs font-semibold text-indigo-300 transition"
+              className="flex items-center gap-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-blue-700 transition"
             >
-              <UserCircle className="w-4 h-4 text-indigo-400" />
+              <UserCircle className="w-4 h-4 text-blue-600" />
               <span>{currentUser?.name || profile.student_name}</span>
             </button>
 
             <button
               onClick={handleLogout}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 transition border border-slate-700"
+              className="p-2 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition border border-slate-200"
               title="Cerrar Sesión"
             >
               <LogOut className="w-4 h-4" />
@@ -220,26 +277,26 @@ export const App: React.FC = () => {
       </header>
 
       {/* Navigation Sub-bar */}
-      <nav className="bg-slate-900 border-b border-slate-800 px-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-around sm:justify-center gap-1 sm:gap-3 py-2 overflow-x-auto">
+      <nav className="bg-white border-b border-slate-200 px-4">
+        <div className="max-w-4xl mx-auto flex items-center justify-around sm:justify-center gap-1 sm:gap-3 py-2.5 overflow-x-auto">
           <button
             onClick={() => setActiveTab('curriculum')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'curriculum'
-                ? 'bg-indigo-600 text-white shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <BookOpen className="w-4 h-4" />
-            <span>Clases A1-B2</span>
+            <span>Clases A1-B2 (20 Clases)</span>
           </button>
 
           <button
             onClick={() => setActiveTab('listening')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'listening'
-                ? 'bg-indigo-600 text-white shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <Headphones className="w-4 h-4" />
@@ -248,22 +305,22 @@ export const App: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('reflex')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'reflex'
-                ? 'bg-amber-500 text-slate-950 shadow-md font-black'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <Zap className="w-4 h-4 fill-current" />
-            <span>3s Reflex Drills</span>
+            <Zap className="w-4 h-4 fill-current text-amber-500" />
+            <span>Reflex Prompts</span>
           </button>
 
           <button
             onClick={() => setActiveTab('safety')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'safety'
-                ? 'bg-indigo-600 text-white shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <Shield className="w-4 h-4" />
@@ -272,10 +329,10 @@ export const App: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('profile')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'profile'
-                ? 'bg-indigo-600 text-white shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <UserCircle className="w-4 h-4" />
@@ -285,10 +342,10 @@ export const App: React.FC = () => {
           {currentUser?.role === 'admin' && (
             <button
               onClick={() => setActiveTab('admin')}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-black transition whitespace-nowrap ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-black transition whitespace-nowrap ${
                 activeTab === 'admin'
-                  ? 'bg-rose-600 text-white shadow-md'
-                  : 'text-rose-400 hover:text-white hover:bg-slate-800'
+                  ? 'bg-amber-600 text-white shadow-xs'
+                  : 'text-amber-700 hover:bg-amber-50'
               }`}
             >
               <ShieldCheck className="w-4 h-4" />
@@ -304,7 +361,12 @@ export const App: React.FC = () => {
           <CurriculumHub
             lessons={COMPREHENSIVE_CURRICULUM}
             completedLessons={completedLessons}
-            onCompleteExercise={(lessonId, chunk, err) => handleCompleteDrill(chunk, err, lessonId)}
+            savedAnswers={savedAnswers}
+            lastActiveLessonId={lastPosition.lessonId}
+            lastActiveStep={lastPosition.step}
+            onSavePosition={handleSavePosition}
+            onSaveWorkbookAnswer={handleSaveWorkbookAnswer}
+            onMarkLessonCompleted={handleMarkLessonCompleted}
           />
         )}
 
@@ -342,8 +404,8 @@ export const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-4 text-center text-xs text-slate-500">
-        <p>EN-Class • Full-Stack English Fluency Platform • Neon PostgreSQL Database • Conectado a Git</p>
+      <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+        <p>EN-Class • Plataforma de Fluidez Acelerada A1-B2 • Estilo Test-English • Base de Datos Neon PostgreSQL</p>
       </footer>
     </div>
   );
