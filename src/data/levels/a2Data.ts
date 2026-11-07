@@ -5,161 +5,133 @@ export const A2_LESSONS: CourseLesson[] = [
     "id": "lesson-a2-1",
     "level": "A2",
     "lessonNumber": 1,
-    "title": "Pasado Simple vs Pasado Continuo",
-    "tagline": "Domina el uso real de Past Simple vs Continuous en la vida diaria",
-    "grammarFocus": "Interrupciones en el pasado (was walking when I saw)",
-    "practicalGoal": "Explicar accidentes, retrasos o anécdotas con precisión",
+    "title": "Past Simple Irregular & Preguntas (did / didn't)",
+    "tagline": "Domina los 20 verbos irregulares más importantes para relatar anécdotas",
+    "grammarFocus": "Verbos irregulares de alta frecuencia (went, saw, got, took) y preguntas con Did",
+    "practicalGoal": "Narrar con fluidez qué hiciste el fin de semana, qué compraste y responder preguntas sobre tu pasado.",
     "theory": {
-      "title": "El uso práctico de Past Simple vs Continuous",
-      "explanationEs": "A nivel A2, Past Simple vs Continuous es clave para comunicarse con naturalidad. Evita reglas teóricas confusas: concéntrate en las fórmulas que los nativos usan todos los días.",
-      "practicalFormula": "Subject + [Verb structure] + Time marker",
-      "timeExpressions": [
-        "regularly",
-        "right now",
-        "usually",
+      "title": "Past Simple: Verbos Irregulares",
+      "overviewEs": "A diferencia de los verbos regulares que terminan en -ed, los verbos irregulares cambian de forma en oraciones afirmativas (go ➔ went, buy ➔ bought). Sin embargo, en oraciones negativas y preguntas, usamos 'didn't' y 'did', y el verbo vuelve a su forma base sin cambiar.",
+      "grammarChart": {
+        "title": "Past Simple Irregular",
+        "structureFormula": "Affirmative: Irregular form | Negative: didn't + base | Question: Did + subject + base?",
+        "rows": [
+          {
+            "subject": "Todos los sujetos (I, you, he, she, we, they)",
+            "affirmative": "I went to the store and bought groceries.",
+            "negative": "I didn't go to the party.",
+            "question": "Did you see that movie?",
+            "shortAnswer": "Yes, I did. / No, I didn't."
+          }
+        ],
+        "usageRules": [
+          {
+            "ruleTitle": "Momento Determinado en el Pasado",
+            "description": "Siempre que sepamos cuándo ocurrió la acción.",
+            "example": "I met Sarah two days ago."
+          },
+          {
+            "ruleTitle": "Secuencia de Acciones",
+            "description": "Narrar una lista de eventos consecutivos.",
+            "example": "I woke up, had coffee, and left the house."
+          }
+        ]
+      },
+      "signalWords": [
         "yesterday",
-        "soon"
+        "last weekend",
+        "an hour ago",
+        "in June",
+        "on my last trip"
       ],
-      "commonMistakeEs": "Traducir palabra por palabra del español en lugar de adoptar el bloque completo en inglés."
+      "commonMistakes": [
+        {
+          "wrong": "Did you went to the gym?",
+          "correct": "Did you go to the gym?",
+          "explanation": "En preguntas con 'Did', el verbo principal va en su forma base: 'Did you go'."
+        },
+        {
+          "wrong": "I didn't bought anything",
+          "correct": "I didn't buy anything",
+          "explanation": "Tras 'didn't' el verbo se mantiene en forma infinitiva: 'didn't buy'."
+        }
+      ]
     },
     "vocabulary": [
       {
-        "id": "lesson-a2-1-v-1",
-        "word": "commute",
-        "phonetic": "/kəˈmjuːt/",
-        "partOfSpeech": "verb",
-        "meaningEs": "trasladarse al trabajo",
-        "exampleEn": "I commute by subway every morning.",
-        "exampleEs": "Me traslado en metro cada mañana."
-      },
-      {
-        "id": "lesson-a2-1-v-2",
+        "id": "v-A2-1-1",
         "word": "schedule",
         "phonetic": "/ˈskɛdʒuːl/",
         "partOfSpeech": "noun",
         "meaningEs": "horario / agenda",
-        "exampleEn": "I have a tight schedule today.",
-        "exampleEs": "Tengo una agenda apretada hoy."
+        "exampleEn": "We need to adjust the schedule.",
+        "exampleEs": "Debemos ajustar la agenda."
       },
       {
-        "id": "lesson-a2-1-v-3",
+        "id": "v-A2-1-2",
         "word": "deadline",
         "phonetic": "/ˈdɛdlaɪn/",
         "partOfSpeech": "noun",
         "meaningEs": "fecha límite de entrega",
         "exampleEn": "The deadline is this Friday at 5 PM.",
-        "exampleEs": "La fecha límite es este viernes a las 5."
+        "exampleEs": "La fecha límite es el viernes."
       },
       {
-        "id": "lesson-a2-1-v-4",
-        "word": "update",
-        "phonetic": "/ʌpˈdeɪt/",
-        "partOfSpeech": "verb/noun",
-        "meaningEs": "actualizar / reporte reciente",
-        "exampleEn": "Could you send me an update?",
-        "exampleEs": "¿Podrías enviarme una actualización?"
-      },
-      {
-        "id": "lesson-a2-1-v-5",
-        "word": "feedback",
-        "phonetic": "/ˈfiːdbæk/",
-        "partOfSpeech": "noun",
-        "meaningEs": "retroalimentación constructiva",
-        "exampleEn": "I appreciate your honest feedback.",
-        "exampleEs": "Agradezco tus comentarios sinceros."
-      },
-      {
-        "id": "lesson-a2-1-v-6",
-        "word": "groceries",
-        "phonetic": "/ˈɡroʊsəriz/",
-        "partOfSpeech": "noun",
-        "meaningEs": "compras de comida",
-        "exampleEn": "I buy groceries every weekend.",
-        "exampleEs": "Compro víveres cada fin de semana."
-      },
-      {
-        "id": "lesson-a2-1-v-7",
-        "word": "unwind",
-        "phonetic": "/ʌnˈwaɪnd/",
-        "partOfSpeech": "verb",
-        "meaningEs": "desconectarse del estrés",
-        "exampleEn": "I listen to music to unwind.",
-        "exampleEs": "Escucho música para relajarme."
-      },
-      {
-        "id": "lesson-a2-1-v-8",
-        "word": "traffic jam",
-        "phonetic": "/ˈtræfɪk dʒæm/",
-        "partOfSpeech": "noun",
-        "meaningEs": "atasco de tráfico",
-        "exampleEn": "I got stuck in a traffic jam.",
-        "exampleEs": "Me quedé atrapado en el tráfico."
-      },
-      {
-        "id": "lesson-a2-1-v-9",
-        "word": "head out",
-        "phonetic": "/hɛd aʊt/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "salir / marcharse ya",
-        "exampleEn": "I am heading out right now.",
-        "exampleEs": "Estoy saliendo justo ahora."
-      },
-      {
-        "id": "lesson-a2-1-v-10",
-        "word": "wrap up",
-        "phonetic": "/ræp ʌp/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "concluir una tarea",
-        "exampleEn": "Let's wrap up this meeting.",
-        "exampleEs": "Concluyamos esta reunión."
-      },
-      {
-        "id": "lesson-a2-1-v-11",
+        "id": "v-A2-1-3",
         "word": "budget",
         "phonetic": "/ˈbʌdʒɪt/",
         "partOfSpeech": "noun",
-        "meaningEs": "presupuesto disponible",
-        "exampleEn": "We need to stay within our budget.",
-        "exampleEs": "Debemos mantenernos dentro del presupuesto."
+        "meaningEs": "presupuesto asignado",
+        "exampleEn": "We must respect the project budget.",
+        "exampleEs": "Debemos respetar el presupuesto."
       },
       {
-        "id": "lesson-a2-1-v-12",
-        "word": "available",
-        "phonetic": "/əˈveɪləbəl/",
-        "partOfSpeech": "adj",
-        "meaningEs": "disponible / libre",
-        "exampleEn": "Are you available this afternoon?",
-        "exampleEs": "¿Estás libre esta tarde?"
+        "id": "v-A2-1-4",
+        "word": "feedback",
+        "phonetic": "/ˈfiːdbæk/",
+        "partOfSpeech": "noun",
+        "meaningEs": "retroalimentación útil",
+        "exampleEn": "Thank you for the constructive feedback.",
+        "exampleEs": "Gracias por los comentarios."
       },
       {
-        "id": "lesson-a2-1-v-13",
-        "word": "convenient",
-        "phonetic": "/kənˈviːniənt/",
-        "partOfSpeech": "adj",
-        "meaningEs": "cómodo / oportuno de horario",
-        "exampleEn": "Is Tuesday convenient for you?",
-        "exampleEs": "¿Te resulta oportuno el martes?"
-      },
-      {
-        "id": "lesson-a2-1-v-14",
-        "word": "look forward to",
-        "phonetic": "/lʊk ˈfɔːrwərd/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "esperar algo con entusiasmo",
-        "exampleEn": "I look forward to our conversation.",
-        "exampleEs": "Espero con gusto nuestra conversación."
-      },
-      {
-        "id": "lesson-a2-1-v-15",
+        "id": "v-A2-1-5",
         "word": "issue",
         "phonetic": "/ˈɪʃuː/",
         "partOfSpeech": "noun",
-        "meaningEs": "inconveniente o problema",
-        "exampleEn": "We resolved the technical issue.",
-        "exampleEs": "Resolvimos el problema técnico."
+        "meaningEs": "problema o dificultad",
+        "exampleEn": "We are solving the technical issue.",
+        "exampleEs": "Resolvemos el problema técnico."
       },
       {
-        "id": "lesson-a2-1-v-16",
+        "id": "v-A2-1-6",
+        "word": "convenient",
+        "phonetic": "/kənˈviːniənt/",
+        "partOfSpeech": "adjective",
+        "meaningEs": "oportuno o cómodo",
+        "exampleEn": "Is 3 PM convenient for our call?",
+        "exampleEs": "¿Te queda cómodo a las 3 PM?"
+      },
+      {
+        "id": "v-A2-1-7",
+        "word": "follow up",
+        "phonetic": "/ˈfɒloʊ ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "dar seguimiento a algo",
+        "exampleEn": "I will follow up with the vendor.",
+        "exampleEs": "Daré seguimiento con el proveedor."
+      },
+      {
+        "id": "v-A2-1-8",
+        "word": "wrap up",
+        "phonetic": "/ræp ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "concluir una sesión",
+        "exampleEn": "Let's wrap up today's meeting.",
+        "exampleEs": "Concluyamos la reunión de hoy."
+      },
+      {
+        "id": "v-A2-1-9",
         "word": "workload",
         "phonetic": "/ˈwɜːrkloʊd/",
         "partOfSpeech": "noun",
@@ -168,108 +140,171 @@ export const A2_LESSONS: CourseLesson[] = [
         "exampleEs": "Mi carga de trabajo es pesada."
       },
       {
-        "id": "lesson-a2-1-v-17",
-        "word": "in advance",
-        "phonetic": "/ədˈvæns/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "por adelantado / con anticipación",
-        "exampleEn": "Thanks in advance for your help.",
-        "exampleEs": "Gracias por adelantado por tu ayuda."
+        "id": "v-A2-1-10",
+        "word": "proposal",
+        "phonetic": "/prəˈpoʊzəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "propuesta formal",
+        "exampleEn": "The client accepted our proposal.",
+        "exampleEs": "El cliente aceptó la propuesta."
       },
       {
-        "id": "lesson-a2-1-v-18",
+        "id": "v-A2-1-11",
+        "word": "deliverable",
+        "phonetic": "/dɪˈlɪvərəbəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "entregable de proyecto",
+        "exampleEn": "Here is the final deliverable.",
+        "exampleEs": "Aquí está el entregable final."
+      },
+      {
+        "id": "v-A2-1-12",
         "word": "priority",
         "phonetic": "/praɪˈɒrɪti/",
         "partOfSpeech": "noun",
         "meaningEs": "asunto prioritario",
-        "exampleEn": "Client satisfaction is our top priority.",
-        "exampleEs": "La satisfacción del cliente es prioridad."
+        "exampleEn": "Client support is our top priority.",
+        "exampleEs": "Soporte es nuestra prioridad."
       },
       {
-        "id": "lesson-a2-1-v-19",
+        "id": "v-A2-1-13",
+        "word": "clarify",
+        "phonetic": "/ˈklærɪfaɪ/",
+        "partOfSpeech": "verb",
+        "meaningEs": "aclarar un punto",
+        "exampleEn": "Could you clarify the third bullet?",
+        "exampleEs": "¿Podrías aclarar el tercer punto?"
+      },
+      {
+        "id": "v-A2-1-14",
+        "word": "confirm",
+        "phonetic": "/kənˈfɜːrm/",
+        "partOfSpeech": "verb",
+        "meaningEs": "confirmar asistencia o datos",
+        "exampleEn": "Please confirm your attendance.",
+        "exampleEs": "Por favor confirma tu asistencia."
+      },
+      {
+        "id": "v-A2-1-15",
+        "word": "update",
+        "phonetic": "/ʌpˈdeɪt/",
+        "partOfSpeech": "verb/noun",
+        "meaningEs": "actualización de estado",
+        "exampleEn": "Could you send a quick update?",
+        "exampleEs": "¿Podrías enviar una actualización?"
+      },
+      {
+        "id": "v-A2-1-16",
+        "word": "in advance",
+        "phonetic": "/ədˈvæns/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "con anticipación",
+        "exampleEn": "Thanks in advance for your support.",
+        "exampleEs": "Gracias de antemano por tu apoyo."
+      },
+      {
+        "id": "v-A2-1-17",
         "word": "asap",
         "phonetic": "/ˈeɪsæp/",
-        "partOfSpeech": "adv",
+        "partOfSpeech": "adverb",
         "meaningEs": "lo antes posible",
-        "exampleEn": "Please let me know asap.",
-        "exampleEs": "Por favor avísame lo antes posible."
+        "exampleEn": "Please review the document asap.",
+        "exampleEs": "Revisa el documento cuanto antes."
       },
       {
-        "id": "lesson-a2-1-v-20",
-        "word": "follow up",
-        "phonetic": "/ˈfɒloʊ ʌp/",
+        "id": "v-A2-1-18",
+        "word": "look forward to",
+        "phonetic": "/lʊk ˈfɔːrwərd/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "esperar con agrado",
+        "exampleEn": "I look forward to working with you.",
+        "exampleEs": "Espero con gusto trabajar contigo."
+      },
+      {
+        "id": "v-A2-1-19",
+        "word": "deal with",
+        "phonetic": "/diːl wɪð/",
         "partOfSpeech": "phrasal verb",
-        "meaningEs": "dar seguimiento a un asunto",
-        "exampleEn": "I will follow up with you tomorrow.",
-        "exampleEs": "Daré seguimiento contigo mañana."
+        "meaningEs": "gestionar un asunto",
+        "exampleEn": "I am dealing with customer requests.",
+        "exampleEs": "Gestiono solicitudes de clientes."
+      },
+      {
+        "id": "v-A2-1-20",
+        "word": "figure out",
+        "phonetic": "/ˈfɪɡjər aʊt/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "descifrar / resolver",
+        "exampleEn": "We need to figure out a better solution.",
+        "exampleEs": "Debemos descifrar una mejor solución."
       }
     ],
     "coreChunks": [
       {
-        "id": "lesson-a2-1-c-1",
+        "id": "c-A2-1-1",
         "chunk": "Could I get a...",
         "meaningEs": "Me podrías dar / poner un...",
         "usageContext": "Restaurantes y cafés",
         "exampleSentence": "Could I get a black coffee to go, please?"
       },
       {
-        "id": "lesson-a2-1-c-2",
+        "id": "c-A2-1-2",
         "chunk": "I'm in the middle of something",
         "meaningEs": "Estoy en medio de algo ahora",
         "usageContext": "Cuando te interrumpen",
         "exampleSentence": "Can you give me five minutes? I'm in the middle of something."
       },
       {
-        "id": "lesson-a2-1-c-3",
+        "id": "c-A2-1-3",
         "chunk": "I'll get back to you soon",
         "meaningEs": "Te respondo pronto",
         "usageContext": "Consultas y correos",
         "exampleSentence": "Let me check the numbers and I'll get back to you soon."
       },
       {
-        "id": "lesson-a2-1-c-4",
+        "id": "c-A2-1-4",
         "chunk": "Let me think for a second...",
         "meaningEs": "Déjame pensar un segundo...",
         "usageContext": "Ganar tiempo natural",
         "exampleSentence": "That's a good question, let me think for a second..."
       },
       {
-        "id": "lesson-a2-1-c-5",
+        "id": "c-A2-1-5",
         "chunk": "What I mean is...",
         "meaningEs": "Lo que quiero decir es...",
         "usageContext": "Reencauzar la idea",
         "exampleSentence": "What I mean is that we should start with a small pilot."
       },
       {
-        "id": "lesson-a2-1-c-6",
+        "id": "c-A2-1-6",
         "chunk": "It depends on the day",
         "meaningEs": "Depende del día (nunca depend of)",
         "usageContext": "Hábitos con variación",
         "exampleSentence": "Sometimes I cook, but it depends on the day."
       },
       {
-        "id": "lesson-a2-1-c-7",
+        "id": "c-A2-1-7",
         "chunk": "Can I take a rain check?",
         "meaningEs": "¿Lo dejamos para otra ocasión?",
         "usageContext": "Posponer un plan con cortesía",
         "exampleSentence": "I have an exam tomorrow; can I take a rain check?"
       },
       {
-        "id": "lesson-a2-1-c-8",
+        "id": "c-A2-1-8",
         "chunk": "Would it be possible to...",
         "meaningEs": "¿Sería posible...",
         "usageContext": "Negociar plazos",
         "exampleSentence": "Would it be possible to extend the deadline until Monday?"
       },
       {
-        "id": "lesson-a2-1-c-9",
+        "id": "c-A2-1-9",
         "chunk": "To be honest with you...",
         "meaningEs": "Para ser sincero contigo...",
         "usageContext": "Dar opiniones francas",
         "exampleSentence": "To be honest with you, I think we need more time."
       },
       {
-        "id": "lesson-a2-1-c-10",
+        "id": "c-A2-1-10",
         "chunk": "As far as I know...",
         "meaningEs": "Hasta donde yo sé...",
         "usageContext": "Compartir información sin ser tajante",
@@ -278,7 +313,7 @@ export const A2_LESSONS: CourseLesson[] = [
     ],
     "clarificationTools": [
       {
-        "id": "lesson-a2-1-cf-1",
+        "id": "cf-A2-1-1",
         "triggerSituation": "No escuchaste bien una frase rápida",
         "phrase": "Could you say that one more time, please?",
         "meaningEs": "Podrías decir eso una vez más, por favor?",
@@ -286,39 +321,39 @@ export const A2_LESSONS: CourseLesson[] = [
         "whyItWorks": "Es la fórmula estándar más educada en inglés."
       },
       {
-        "id": "lesson-a2-1-cf-2",
+        "id": "cf-A2-1-2",
         "triggerSituation": "La persona habla muy acelerada",
         "phrase": "Could you speak a little slower, please?",
         "meaningEs": "Podrías hablar un poco más despacio, por favor?",
         "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide calma de forma asertiva sin disculpas excesivas."
+        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
       },
       {
-        "id": "lesson-a2-1-cf-3",
+        "id": "cf-A2-1-3",
         "triggerSituation": "No entendiste una palabra técnica o sigla",
         "phrase": "What does that acronym stand for?",
         "meaningEs": "Qué significan esas siglas?",
         "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para no quedarte con la duda."
+        "whyItWorks": "Pregunta directa para aclarar términos."
       },
       {
-        "id": "lesson-a2-1-cf-4",
+        "id": "cf-A2-1-4",
         "triggerSituation": "Quieres saber cómo se dice algo en inglés",
         "phrase": "How do you say that in English?",
         "meaningEs": "Cómo se dice eso en inglés?",
         "audioSample": "How do you say that in English?",
-        "whyItWorks": "Te permite preguntar apoyándote en gestos u objetos."
+        "whyItWorks": "Permite aprender señalando objetos o gestos."
       },
       {
-        "id": "lesson-a2-1-cf-5",
+        "id": "cf-A2-1-5",
         "triggerSituation": "Quieres verificar si entendiste bien",
         "phrase": "Just to make sure we're on the same page, did you mean...?",
         "meaningEs": "Solo para estar en sintonía, querías decir...?",
         "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones o encargos."
+        "whyItWorks": "Sincroniza acuerdos en reuniones."
       },
       {
-        "id": "lesson-a2-1-cf-6",
+        "id": "cf-A2-1-6",
         "triggerSituation": "Te perdiste en una explicación larga",
         "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
         "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
@@ -327,278 +362,278 @@ export const A2_LESSONS: CourseLesson[] = [
       }
     ],
     "listening": {
-      "id": "lesson-a2-1-ml",
-      "audioScript": "Hey! Quick update on the schedule: we're wrapping up the morning review, and we'll head out for lunch around one. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para coordinar la hora de almuerzo y el avance del día.",
-      "comprehensionQuestion": "¿Qué está terminando el equipo y a qué hora planean salir a almorzar?",
+      "id": "ml-A2-1",
+      "audioScript": "Hello! Quick update on our past simple irregular & preguntas (did / didn't): we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
+      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre past simple irregular & preguntas (did / didn't).",
+      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
       "options": [
-        "Están almorzando ya y regresan a la una",
-        "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-        "Cancelaron el almuerzo por exceso de trabajo"
+        "Cancelaron el proyecto por falta de tiempo",
+        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+        "Piden reprogramar todo para el próximo mes"
       ],
-      "correctAnswer": "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-      "explanation": "El chunk clave es 'wrapping up the morning review' y 'head out for lunch around one'."
+      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
     },
     "workbook": [
       {
-        "id": "lesson-a2-1-wb-1",
+        "id": "wb-A2-1-1",
         "category": "routine",
-        "situationEs": "Situación #1: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #1 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-2",
+        "id": "wb-A2-1-2",
         "category": "social",
-        "situationEs": "Situación #2: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #2 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-3",
+        "id": "wb-A2-1-3",
         "category": "problem_solving",
-        "situationEs": "Situación #3: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #3 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-4",
+        "id": "wb-A2-1-4",
         "category": "asking_help",
-        "situationEs": "Situación #4: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #4 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-5",
+        "id": "wb-A2-1-5",
         "category": "opinion",
-        "situationEs": "Situación #5: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #5 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-6",
+        "id": "wb-A2-1-6",
         "category": "routine",
-        "situationEs": "Situación #6: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #6 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-7",
+        "id": "wb-A2-1-7",
         "category": "social",
-        "situationEs": "Situación #7: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #7 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-8",
+        "id": "wb-A2-1-8",
         "category": "problem_solving",
-        "situationEs": "Situación #8: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #8 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-9",
+        "id": "wb-A2-1-9",
         "category": "asking_help",
-        "situationEs": "Situación #9: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #9 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-10",
+        "id": "wb-A2-1-10",
         "category": "opinion",
-        "situationEs": "Situación #10: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #10 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-11",
+        "id": "wb-A2-1-11",
         "category": "routine",
-        "situationEs": "Situación #11: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #11 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-12",
+        "id": "wb-A2-1-12",
         "category": "social",
-        "situationEs": "Situación #12: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #12 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-13",
+        "id": "wb-A2-1-13",
         "category": "problem_solving",
-        "situationEs": "Situación #13: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #13 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-14",
+        "id": "wb-A2-1-14",
         "category": "asking_help",
-        "situationEs": "Situación #14: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #14 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-15",
+        "id": "wb-A2-1-15",
         "category": "opinion",
-        "situationEs": "Situación #15: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #15 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-16",
+        "id": "wb-A2-1-16",
         "category": "routine",
-        "situationEs": "Situación #16: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #16 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-17",
+        "id": "wb-A2-1-17",
         "category": "social",
-        "situationEs": "Situación #17: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #17 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-18",
+        "id": "wb-A2-1-18",
         "category": "problem_solving",
-        "situationEs": "Situación #18: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #18 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-19",
+        "id": "wb-A2-1-19",
         "category": "asking_help",
-        "situationEs": "Situación #19: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #19 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-1-wb-20",
+        "id": "wb-A2-1-20",
         "category": "opinion",
-        "situationEs": "Situación #20: Estás en un contexto cotidiano relacionado con Pasado Simple vs Pasado Continuo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #20 de Past Simple Irregular & Preguntas (did / didn't): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Simple Irregular & Preguntas (did / didn't) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       }
     ]
   },
@@ -606,161 +641,134 @@ export const A2_LESSONS: CourseLesson[] = [
     "id": "lesson-a2-2",
     "level": "A2",
     "lessonNumber": 2,
-    "title": "Planes a Futuro Sin Confusión",
-    "tagline": "Domina el uso real de Going to vs Will vs Continuous en la vida diaria",
-    "grammarFocus": "Planes fijados vs Decisiones espontáneas",
-    "practicalGoal": "Agendar reuniones, viajes y planes de fin de semana",
+    "title": "Past Continuous & Interrupciones (was/were + verb-ing)",
+    "tagline": "Cómo describir qué estaba pasando cuando algo repentino ocurrió",
+    "grammarFocus": "Past Continuous y su combinación con Past Simple usando when y while",
+    "practicalGoal": "Explicar anécdotas, justificar retrasos y describir el ambiente de una situación pasada.",
     "theory": {
-      "title": "El uso práctico de Going to vs Will vs Continuous",
-      "explanationEs": "A nivel A2, Going to vs Will vs Continuous es clave para comunicarse con naturalidad. Evita reglas teóricas confusas: concéntrate en las fórmulas que los nativos usan todos los días.",
-      "practicalFormula": "Subject + [Verb structure] + Time marker",
-      "timeExpressions": [
-        "regularly",
-        "right now",
-        "usually",
-        "yesterday",
-        "soon"
+      "title": "Past Continuous (was/were + -ing)",
+      "overviewEs": "El Past Continuous describe una acción que estaba en pleno desarrollo en un punto específico del pasado. Muy a menudo, esa acción larga en progreso es interrumpida por una acción corta y puntual en Past Simple conectada por 'when' o 'while'.",
+      "grammarChart": {
+        "title": "Past Continuous & Interrupciones",
+        "structureFormula": "was / were + verb-ing [while / when] past simple",
+        "rows": [
+          {
+            "subject": "I / He / She / It",
+            "affirmative": "I was walking home when it started raining.",
+            "negative": "She wasn't driving fast.",
+            "question": "Were you sleeping when I called?",
+            "shortAnswer": "Yes, I was. / No, I wasn't."
+          },
+          {
+            "subject": "You / We / They",
+            "affirmative": "They were having dinner when the lights went out.",
+            "negative": "We weren't paying attention.",
+            "question": "What were you doing at 8 PM?",
+            "shortAnswer": "I was reading."
+          }
+        ],
+        "usageRules": [
+          {
+            "ruleTitle": "Acción Larga Interrumpida",
+            "description": "Acción en progreso (continuous) interrumpida por acción corta (simple).",
+            "example": "I was cooking when the phone rang."
+          },
+          {
+            "ruleTitle": "Dos Acciones Simultáneas en el Pasado",
+            "description": "Usando 'while' para dos acciones paralelas.",
+            "example": "While I was studying, my brother was playing guitar."
+          }
+        ]
+      },
+      "signalWords": [
+        "when",
+        "while",
+        "at that exact moment",
+        "all afternoon yesterday"
       ],
-      "commonMistakeEs": "Traducir palabra por palabra del español en lugar de adoptar el bloque completo en inglés."
+      "commonMistakes": [
+        {
+          "wrong": "I walked home when it was starting to rain",
+          "correct": "I was walking home when it started to rain",
+          "explanation": "La acción continua larga lleva -ing; la acción repentina que interrumpe va en Past Simple."
+        }
+      ]
     },
     "vocabulary": [
       {
-        "id": "lesson-a2-2-v-1",
-        "word": "commute",
-        "phonetic": "/kəˈmjuːt/",
-        "partOfSpeech": "verb",
-        "meaningEs": "trasladarse al trabajo",
-        "exampleEn": "I commute by subway every morning.",
-        "exampleEs": "Me traslado en metro cada mañana."
-      },
-      {
-        "id": "lesson-a2-2-v-2",
+        "id": "v-A2-2-1",
         "word": "schedule",
         "phonetic": "/ˈskɛdʒuːl/",
         "partOfSpeech": "noun",
         "meaningEs": "horario / agenda",
-        "exampleEn": "I have a tight schedule today.",
-        "exampleEs": "Tengo una agenda apretada hoy."
+        "exampleEn": "We need to adjust the schedule.",
+        "exampleEs": "Debemos ajustar la agenda."
       },
       {
-        "id": "lesson-a2-2-v-3",
+        "id": "v-A2-2-2",
         "word": "deadline",
         "phonetic": "/ˈdɛdlaɪn/",
         "partOfSpeech": "noun",
         "meaningEs": "fecha límite de entrega",
         "exampleEn": "The deadline is this Friday at 5 PM.",
-        "exampleEs": "La fecha límite es este viernes a las 5."
+        "exampleEs": "La fecha límite es el viernes."
       },
       {
-        "id": "lesson-a2-2-v-4",
-        "word": "update",
-        "phonetic": "/ʌpˈdeɪt/",
-        "partOfSpeech": "verb/noun",
-        "meaningEs": "actualizar / reporte reciente",
-        "exampleEn": "Could you send me an update?",
-        "exampleEs": "¿Podrías enviarme una actualización?"
-      },
-      {
-        "id": "lesson-a2-2-v-5",
-        "word": "feedback",
-        "phonetic": "/ˈfiːdbæk/",
-        "partOfSpeech": "noun",
-        "meaningEs": "retroalimentación constructiva",
-        "exampleEn": "I appreciate your honest feedback.",
-        "exampleEs": "Agradezco tus comentarios sinceros."
-      },
-      {
-        "id": "lesson-a2-2-v-6",
-        "word": "groceries",
-        "phonetic": "/ˈɡroʊsəriz/",
-        "partOfSpeech": "noun",
-        "meaningEs": "compras de comida",
-        "exampleEn": "I buy groceries every weekend.",
-        "exampleEs": "Compro víveres cada fin de semana."
-      },
-      {
-        "id": "lesson-a2-2-v-7",
-        "word": "unwind",
-        "phonetic": "/ʌnˈwaɪnd/",
-        "partOfSpeech": "verb",
-        "meaningEs": "desconectarse del estrés",
-        "exampleEn": "I listen to music to unwind.",
-        "exampleEs": "Escucho música para relajarme."
-      },
-      {
-        "id": "lesson-a2-2-v-8",
-        "word": "traffic jam",
-        "phonetic": "/ˈtræfɪk dʒæm/",
-        "partOfSpeech": "noun",
-        "meaningEs": "atasco de tráfico",
-        "exampleEn": "I got stuck in a traffic jam.",
-        "exampleEs": "Me quedé atrapado en el tráfico."
-      },
-      {
-        "id": "lesson-a2-2-v-9",
-        "word": "head out",
-        "phonetic": "/hɛd aʊt/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "salir / marcharse ya",
-        "exampleEn": "I am heading out right now.",
-        "exampleEs": "Estoy saliendo justo ahora."
-      },
-      {
-        "id": "lesson-a2-2-v-10",
-        "word": "wrap up",
-        "phonetic": "/ræp ʌp/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "concluir una tarea",
-        "exampleEn": "Let's wrap up this meeting.",
-        "exampleEs": "Concluyamos esta reunión."
-      },
-      {
-        "id": "lesson-a2-2-v-11",
+        "id": "v-A2-2-3",
         "word": "budget",
         "phonetic": "/ˈbʌdʒɪt/",
         "partOfSpeech": "noun",
-        "meaningEs": "presupuesto disponible",
-        "exampleEn": "We need to stay within our budget.",
-        "exampleEs": "Debemos mantenernos dentro del presupuesto."
+        "meaningEs": "presupuesto asignado",
+        "exampleEn": "We must respect the project budget.",
+        "exampleEs": "Debemos respetar el presupuesto."
       },
       {
-        "id": "lesson-a2-2-v-12",
-        "word": "available",
-        "phonetic": "/əˈveɪləbəl/",
-        "partOfSpeech": "adj",
-        "meaningEs": "disponible / libre",
-        "exampleEn": "Are you available this afternoon?",
-        "exampleEs": "¿Estás libre esta tarde?"
+        "id": "v-A2-2-4",
+        "word": "feedback",
+        "phonetic": "/ˈfiːdbæk/",
+        "partOfSpeech": "noun",
+        "meaningEs": "retroalimentación útil",
+        "exampleEn": "Thank you for the constructive feedback.",
+        "exampleEs": "Gracias por los comentarios."
       },
       {
-        "id": "lesson-a2-2-v-13",
-        "word": "convenient",
-        "phonetic": "/kənˈviːniənt/",
-        "partOfSpeech": "adj",
-        "meaningEs": "cómodo / oportuno de horario",
-        "exampleEn": "Is Tuesday convenient for you?",
-        "exampleEs": "¿Te resulta oportuno el martes?"
-      },
-      {
-        "id": "lesson-a2-2-v-14",
-        "word": "look forward to",
-        "phonetic": "/lʊk ˈfɔːrwərd/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "esperar algo con entusiasmo",
-        "exampleEn": "I look forward to our conversation.",
-        "exampleEs": "Espero con gusto nuestra conversación."
-      },
-      {
-        "id": "lesson-a2-2-v-15",
+        "id": "v-A2-2-5",
         "word": "issue",
         "phonetic": "/ˈɪʃuː/",
         "partOfSpeech": "noun",
-        "meaningEs": "inconveniente o problema",
-        "exampleEn": "We resolved the technical issue.",
-        "exampleEs": "Resolvimos el problema técnico."
+        "meaningEs": "problema o dificultad",
+        "exampleEn": "We are solving the technical issue.",
+        "exampleEs": "Resolvemos el problema técnico."
       },
       {
-        "id": "lesson-a2-2-v-16",
+        "id": "v-A2-2-6",
+        "word": "convenient",
+        "phonetic": "/kənˈviːniənt/",
+        "partOfSpeech": "adjective",
+        "meaningEs": "oportuno o cómodo",
+        "exampleEn": "Is 3 PM convenient for our call?",
+        "exampleEs": "¿Te queda cómodo a las 3 PM?"
+      },
+      {
+        "id": "v-A2-2-7",
+        "word": "follow up",
+        "phonetic": "/ˈfɒloʊ ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "dar seguimiento a algo",
+        "exampleEn": "I will follow up with the vendor.",
+        "exampleEs": "Daré seguimiento con el proveedor."
+      },
+      {
+        "id": "v-A2-2-8",
+        "word": "wrap up",
+        "phonetic": "/ræp ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "concluir una sesión",
+        "exampleEn": "Let's wrap up today's meeting.",
+        "exampleEs": "Concluyamos la reunión de hoy."
+      },
+      {
+        "id": "v-A2-2-9",
         "word": "workload",
         "phonetic": "/ˈwɜːrkloʊd/",
         "partOfSpeech": "noun",
@@ -769,108 +777,171 @@ export const A2_LESSONS: CourseLesson[] = [
         "exampleEs": "Mi carga de trabajo es pesada."
       },
       {
-        "id": "lesson-a2-2-v-17",
-        "word": "in advance",
-        "phonetic": "/ədˈvæns/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "por adelantado / con anticipación",
-        "exampleEn": "Thanks in advance for your help.",
-        "exampleEs": "Gracias por adelantado por tu ayuda."
+        "id": "v-A2-2-10",
+        "word": "proposal",
+        "phonetic": "/prəˈpoʊzəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "propuesta formal",
+        "exampleEn": "The client accepted our proposal.",
+        "exampleEs": "El cliente aceptó la propuesta."
       },
       {
-        "id": "lesson-a2-2-v-18",
+        "id": "v-A2-2-11",
+        "word": "deliverable",
+        "phonetic": "/dɪˈlɪvərəbəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "entregable de proyecto",
+        "exampleEn": "Here is the final deliverable.",
+        "exampleEs": "Aquí está el entregable final."
+      },
+      {
+        "id": "v-A2-2-12",
         "word": "priority",
         "phonetic": "/praɪˈɒrɪti/",
         "partOfSpeech": "noun",
         "meaningEs": "asunto prioritario",
-        "exampleEn": "Client satisfaction is our top priority.",
-        "exampleEs": "La satisfacción del cliente es prioridad."
+        "exampleEn": "Client support is our top priority.",
+        "exampleEs": "Soporte es nuestra prioridad."
       },
       {
-        "id": "lesson-a2-2-v-19",
+        "id": "v-A2-2-13",
+        "word": "clarify",
+        "phonetic": "/ˈklærɪfaɪ/",
+        "partOfSpeech": "verb",
+        "meaningEs": "aclarar un punto",
+        "exampleEn": "Could you clarify the third bullet?",
+        "exampleEs": "¿Podrías aclarar el tercer punto?"
+      },
+      {
+        "id": "v-A2-2-14",
+        "word": "confirm",
+        "phonetic": "/kənˈfɜːrm/",
+        "partOfSpeech": "verb",
+        "meaningEs": "confirmar asistencia o datos",
+        "exampleEn": "Please confirm your attendance.",
+        "exampleEs": "Por favor confirma tu asistencia."
+      },
+      {
+        "id": "v-A2-2-15",
+        "word": "update",
+        "phonetic": "/ʌpˈdeɪt/",
+        "partOfSpeech": "verb/noun",
+        "meaningEs": "actualización de estado",
+        "exampleEn": "Could you send a quick update?",
+        "exampleEs": "¿Podrías enviar una actualización?"
+      },
+      {
+        "id": "v-A2-2-16",
+        "word": "in advance",
+        "phonetic": "/ədˈvæns/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "con anticipación",
+        "exampleEn": "Thanks in advance for your support.",
+        "exampleEs": "Gracias de antemano por tu apoyo."
+      },
+      {
+        "id": "v-A2-2-17",
         "word": "asap",
         "phonetic": "/ˈeɪsæp/",
-        "partOfSpeech": "adv",
+        "partOfSpeech": "adverb",
         "meaningEs": "lo antes posible",
-        "exampleEn": "Please let me know asap.",
-        "exampleEs": "Por favor avísame lo antes posible."
+        "exampleEn": "Please review the document asap.",
+        "exampleEs": "Revisa el documento cuanto antes."
       },
       {
-        "id": "lesson-a2-2-v-20",
-        "word": "follow up",
-        "phonetic": "/ˈfɒloʊ ʌp/",
+        "id": "v-A2-2-18",
+        "word": "look forward to",
+        "phonetic": "/lʊk ˈfɔːrwərd/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "esperar con agrado",
+        "exampleEn": "I look forward to working with you.",
+        "exampleEs": "Espero con gusto trabajar contigo."
+      },
+      {
+        "id": "v-A2-2-19",
+        "word": "deal with",
+        "phonetic": "/diːl wɪð/",
         "partOfSpeech": "phrasal verb",
-        "meaningEs": "dar seguimiento a un asunto",
-        "exampleEn": "I will follow up with you tomorrow.",
-        "exampleEs": "Daré seguimiento contigo mañana."
+        "meaningEs": "gestionar un asunto",
+        "exampleEn": "I am dealing with customer requests.",
+        "exampleEs": "Gestiono solicitudes de clientes."
+      },
+      {
+        "id": "v-A2-2-20",
+        "word": "figure out",
+        "phonetic": "/ˈfɪɡjər aʊt/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "descifrar / resolver",
+        "exampleEn": "We need to figure out a better solution.",
+        "exampleEs": "Debemos descifrar una mejor solución."
       }
     ],
     "coreChunks": [
       {
-        "id": "lesson-a2-2-c-1",
+        "id": "c-A2-2-1",
         "chunk": "Could I get a...",
         "meaningEs": "Me podrías dar / poner un...",
         "usageContext": "Restaurantes y cafés",
         "exampleSentence": "Could I get a black coffee to go, please?"
       },
       {
-        "id": "lesson-a2-2-c-2",
+        "id": "c-A2-2-2",
         "chunk": "I'm in the middle of something",
         "meaningEs": "Estoy en medio de algo ahora",
         "usageContext": "Cuando te interrumpen",
         "exampleSentence": "Can you give me five minutes? I'm in the middle of something."
       },
       {
-        "id": "lesson-a2-2-c-3",
+        "id": "c-A2-2-3",
         "chunk": "I'll get back to you soon",
         "meaningEs": "Te respondo pronto",
         "usageContext": "Consultas y correos",
         "exampleSentence": "Let me check the numbers and I'll get back to you soon."
       },
       {
-        "id": "lesson-a2-2-c-4",
+        "id": "c-A2-2-4",
         "chunk": "Let me think for a second...",
         "meaningEs": "Déjame pensar un segundo...",
         "usageContext": "Ganar tiempo natural",
         "exampleSentence": "That's a good question, let me think for a second..."
       },
       {
-        "id": "lesson-a2-2-c-5",
+        "id": "c-A2-2-5",
         "chunk": "What I mean is...",
         "meaningEs": "Lo que quiero decir es...",
         "usageContext": "Reencauzar la idea",
         "exampleSentence": "What I mean is that we should start with a small pilot."
       },
       {
-        "id": "lesson-a2-2-c-6",
+        "id": "c-A2-2-6",
         "chunk": "It depends on the day",
         "meaningEs": "Depende del día (nunca depend of)",
         "usageContext": "Hábitos con variación",
         "exampleSentence": "Sometimes I cook, but it depends on the day."
       },
       {
-        "id": "lesson-a2-2-c-7",
+        "id": "c-A2-2-7",
         "chunk": "Can I take a rain check?",
         "meaningEs": "¿Lo dejamos para otra ocasión?",
         "usageContext": "Posponer un plan con cortesía",
         "exampleSentence": "I have an exam tomorrow; can I take a rain check?"
       },
       {
-        "id": "lesson-a2-2-c-8",
+        "id": "c-A2-2-8",
         "chunk": "Would it be possible to...",
         "meaningEs": "¿Sería posible...",
         "usageContext": "Negociar plazos",
         "exampleSentence": "Would it be possible to extend the deadline until Monday?"
       },
       {
-        "id": "lesson-a2-2-c-9",
+        "id": "c-A2-2-9",
         "chunk": "To be honest with you...",
         "meaningEs": "Para ser sincero contigo...",
         "usageContext": "Dar opiniones francas",
         "exampleSentence": "To be honest with you, I think we need more time."
       },
       {
-        "id": "lesson-a2-2-c-10",
+        "id": "c-A2-2-10",
         "chunk": "As far as I know...",
         "meaningEs": "Hasta donde yo sé...",
         "usageContext": "Compartir información sin ser tajante",
@@ -879,7 +950,7 @@ export const A2_LESSONS: CourseLesson[] = [
     ],
     "clarificationTools": [
       {
-        "id": "lesson-a2-2-cf-1",
+        "id": "cf-A2-2-1",
         "triggerSituation": "No escuchaste bien una frase rápida",
         "phrase": "Could you say that one more time, please?",
         "meaningEs": "Podrías decir eso una vez más, por favor?",
@@ -887,39 +958,39 @@ export const A2_LESSONS: CourseLesson[] = [
         "whyItWorks": "Es la fórmula estándar más educada en inglés."
       },
       {
-        "id": "lesson-a2-2-cf-2",
+        "id": "cf-A2-2-2",
         "triggerSituation": "La persona habla muy acelerada",
         "phrase": "Could you speak a little slower, please?",
         "meaningEs": "Podrías hablar un poco más despacio, por favor?",
         "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide calma de forma asertiva sin disculpas excesivas."
+        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
       },
       {
-        "id": "lesson-a2-2-cf-3",
+        "id": "cf-A2-2-3",
         "triggerSituation": "No entendiste una palabra técnica o sigla",
         "phrase": "What does that acronym stand for?",
         "meaningEs": "Qué significan esas siglas?",
         "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para no quedarte con la duda."
+        "whyItWorks": "Pregunta directa para aclarar términos."
       },
       {
-        "id": "lesson-a2-2-cf-4",
+        "id": "cf-A2-2-4",
         "triggerSituation": "Quieres saber cómo se dice algo en inglés",
         "phrase": "How do you say that in English?",
         "meaningEs": "Cómo se dice eso en inglés?",
         "audioSample": "How do you say that in English?",
-        "whyItWorks": "Te permite preguntar apoyándote en gestos u objetos."
+        "whyItWorks": "Permite aprender señalando objetos o gestos."
       },
       {
-        "id": "lesson-a2-2-cf-5",
+        "id": "cf-A2-2-5",
         "triggerSituation": "Quieres verificar si entendiste bien",
         "phrase": "Just to make sure we're on the same page, did you mean...?",
         "meaningEs": "Solo para estar en sintonía, querías decir...?",
         "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones o encargos."
+        "whyItWorks": "Sincroniza acuerdos en reuniones."
       },
       {
-        "id": "lesson-a2-2-cf-6",
+        "id": "cf-A2-2-6",
         "triggerSituation": "Te perdiste en una explicación larga",
         "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
         "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
@@ -928,278 +999,278 @@ export const A2_LESSONS: CourseLesson[] = [
       }
     ],
     "listening": {
-      "id": "lesson-a2-2-ml",
-      "audioScript": "Hey! Quick update on the schedule: we're wrapping up the morning review, and we'll head out for lunch around one. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para coordinar la hora de almuerzo y el avance del día.",
-      "comprehensionQuestion": "¿Qué está terminando el equipo y a qué hora planean salir a almorzar?",
+      "id": "ml-A2-2",
+      "audioScript": "Hello! Quick update on our past continuous & interrupciones (was/were + verb-ing): we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
+      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre past continuous & interrupciones (was/were + verb-ing).",
+      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
       "options": [
-        "Están almorzando ya y regresan a la una",
-        "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-        "Cancelaron el almuerzo por exceso de trabajo"
+        "Cancelaron el proyecto por falta de tiempo",
+        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+        "Piden reprogramar todo para el próximo mes"
       ],
-      "correctAnswer": "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-      "explanation": "El chunk clave es 'wrapping up the morning review' y 'head out for lunch around one'."
+      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
     },
     "workbook": [
       {
-        "id": "lesson-a2-2-wb-1",
+        "id": "wb-A2-2-1",
         "category": "routine",
-        "situationEs": "Situación #1: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #1 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-2",
+        "id": "wb-A2-2-2",
         "category": "social",
-        "situationEs": "Situación #2: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #2 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-3",
+        "id": "wb-A2-2-3",
         "category": "problem_solving",
-        "situationEs": "Situación #3: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #3 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-4",
+        "id": "wb-A2-2-4",
         "category": "asking_help",
-        "situationEs": "Situación #4: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #4 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-5",
+        "id": "wb-A2-2-5",
         "category": "opinion",
-        "situationEs": "Situación #5: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #5 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-6",
+        "id": "wb-A2-2-6",
         "category": "routine",
-        "situationEs": "Situación #6: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #6 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-7",
+        "id": "wb-A2-2-7",
         "category": "social",
-        "situationEs": "Situación #7: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #7 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-8",
+        "id": "wb-A2-2-8",
         "category": "problem_solving",
-        "situationEs": "Situación #8: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #8 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-9",
+        "id": "wb-A2-2-9",
         "category": "asking_help",
-        "situationEs": "Situación #9: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #9 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-10",
+        "id": "wb-A2-2-10",
         "category": "opinion",
-        "situationEs": "Situación #10: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #10 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-11",
+        "id": "wb-A2-2-11",
         "category": "routine",
-        "situationEs": "Situación #11: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #11 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-12",
+        "id": "wb-A2-2-12",
         "category": "social",
-        "situationEs": "Situación #12: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #12 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-13",
+        "id": "wb-A2-2-13",
         "category": "problem_solving",
-        "situationEs": "Situación #13: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #13 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-14",
+        "id": "wb-A2-2-14",
         "category": "asking_help",
-        "situationEs": "Situación #14: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #14 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-15",
+        "id": "wb-A2-2-15",
         "category": "opinion",
-        "situationEs": "Situación #15: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #15 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-16",
+        "id": "wb-A2-2-16",
         "category": "routine",
-        "situationEs": "Situación #16: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #16 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-17",
+        "id": "wb-A2-2-17",
         "category": "social",
-        "situationEs": "Situación #17: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #17 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-18",
+        "id": "wb-A2-2-18",
         "category": "problem_solving",
-        "situationEs": "Situación #18: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #18 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-19",
+        "id": "wb-A2-2-19",
         "category": "asking_help",
-        "situationEs": "Situación #19: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #19 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-2-wb-20",
+        "id": "wb-A2-2-20",
         "category": "opinion",
-        "situationEs": "Situación #20: Estás en un contexto cotidiano relacionado con Planes a Futuro Sin Confusión y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #20 de Past Continuous & Interrupciones (was/were + verb-ing): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Past Continuous & Interrupciones (was/were + verb-ing) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       }
     ]
   },
@@ -1207,161 +1278,142 @@ export const A2_LESSONS: CourseLesson[] = [
     "id": "lesson-a2-3",
     "level": "A2",
     "lessonNumber": 3,
-    "title": "Verbos Modales de Posibilidad",
-    "tagline": "Domina el uso real de Can, Could, Should, Might en la vida diaria",
-    "grammarFocus": "Consejos y probabilidades en la vida real",
-    "practicalGoal": "Dar recomendaciones amables y sopesar posibilidades",
+    "title": "Planes a Futuro: Be going to vs Will vs Present Continuous",
+    "tagline": "Elimina la confusión del futuro: aprende a agendar citas y hacer promesas",
+    "grammarFocus": "Diferencia entre intenciones planeadas (going to), decisiones espontáneas (will) y citas fijas (present continuous)",
+    "practicalGoal": "Hablar de tus próximas vacaciones, agendar reuniones con colegas y ofrecer ayuda espontánea.",
     "theory": {
-      "title": "El uso práctico de Can, Could, Should, Might",
-      "explanationEs": "A nivel A2, Can, Could, Should, Might es clave para comunicarse con naturalidad. Evita reglas teóricas confusas: concéntrate en las fórmulas que los nativos usan todos los días.",
-      "practicalFormula": "Subject + [Verb structure] + Time marker",
-      "timeExpressions": [
-        "regularly",
-        "right now",
-        "usually",
-        "yesterday",
-        "soon"
+      "title": "Las Tres Formas del Futuro",
+      "overviewEs": "En inglés no hay una sola forma de futuro. Usamos 'be going to' para planes e intenciones ya pensadas con anticipación; usamos 'will' para decisiones espontáneas en el momento de hablar o promesas; y usamos el Present Continuous con marcador temporal para citas ya confirmadas en el calendario.",
+      "grammarChart": {
+        "title": "Futuro: Going to vs Will vs Continuous",
+        "structureFormula": "Plan: am/is/are going to + verb | Espontáneo: will + verb | Cita: am/is/are + -ing",
+        "rows": [
+          {
+            "subject": "Plan previo / Intención",
+            "affirmative": "I am going to visit my parents this weekend.",
+            "negative": "I'm not going to buy that car.",
+            "question": "Are you going to move abroad?",
+            "shortAnswer": "Yes, I am."
+          },
+          {
+            "subject": "Decisión espontánea / Promesa",
+            "affirmative": "The phone is ringing; I'll get it!",
+            "negative": "I won't tell anyone, I promise.",
+            "question": "Will you help me with this?",
+            "shortAnswer": "Yes, I will."
+          },
+          {
+            "subject": "Cita fija en calendario",
+            "affirmative": "I am meeting the dentist tomorrow at 4 PM.",
+            "negative": "We aren't working next Monday.",
+            "question": "Are you leaving on Friday?",
+            "shortAnswer": "Yes, I am."
+          }
+        ],
+        "usageRules": [
+          {
+            "ruleTitle": "Decisión en el Acto (Will)",
+            "description": "Cuando decides en el mismo segundo en que hablas.",
+            "example": "It's cold in here. I will close the window."
+          },
+          {
+            "ruleTitle": "Plan Previo (Going to)",
+            "description": "Ya lo habías decidido antes de este momento.",
+            "example": "I'm going to start a master's degree in September."
+          }
+        ]
+      },
+      "signalWords": [
+        "tomorrow",
+        "next week",
+        "in two days",
+        "soon",
+        "later today"
       ],
-      "commonMistakeEs": "Traducir palabra por palabra del español en lugar de adoptar el bloque completo en inglés."
+      "commonMistakes": [
+        {
+          "wrong": "Wait, I am going to help you with that bag",
+          "correct": "Wait, I will help you with that bag!",
+          "explanation": "Ofrecimientos inmediatos y espontáneos usan 'will / I'll'."
+        }
+      ]
     },
     "vocabulary": [
       {
-        "id": "lesson-a2-3-v-1",
-        "word": "commute",
-        "phonetic": "/kəˈmjuːt/",
-        "partOfSpeech": "verb",
-        "meaningEs": "trasladarse al trabajo",
-        "exampleEn": "I commute by subway every morning.",
-        "exampleEs": "Me traslado en metro cada mañana."
-      },
-      {
-        "id": "lesson-a2-3-v-2",
+        "id": "v-A2-3-1",
         "word": "schedule",
         "phonetic": "/ˈskɛdʒuːl/",
         "partOfSpeech": "noun",
         "meaningEs": "horario / agenda",
-        "exampleEn": "I have a tight schedule today.",
-        "exampleEs": "Tengo una agenda apretada hoy."
+        "exampleEn": "We need to adjust the schedule.",
+        "exampleEs": "Debemos ajustar la agenda."
       },
       {
-        "id": "lesson-a2-3-v-3",
+        "id": "v-A2-3-2",
         "word": "deadline",
         "phonetic": "/ˈdɛdlaɪn/",
         "partOfSpeech": "noun",
         "meaningEs": "fecha límite de entrega",
         "exampleEn": "The deadline is this Friday at 5 PM.",
-        "exampleEs": "La fecha límite es este viernes a las 5."
+        "exampleEs": "La fecha límite es el viernes."
       },
       {
-        "id": "lesson-a2-3-v-4",
-        "word": "update",
-        "phonetic": "/ʌpˈdeɪt/",
-        "partOfSpeech": "verb/noun",
-        "meaningEs": "actualizar / reporte reciente",
-        "exampleEn": "Could you send me an update?",
-        "exampleEs": "¿Podrías enviarme una actualización?"
-      },
-      {
-        "id": "lesson-a2-3-v-5",
-        "word": "feedback",
-        "phonetic": "/ˈfiːdbæk/",
-        "partOfSpeech": "noun",
-        "meaningEs": "retroalimentación constructiva",
-        "exampleEn": "I appreciate your honest feedback.",
-        "exampleEs": "Agradezco tus comentarios sinceros."
-      },
-      {
-        "id": "lesson-a2-3-v-6",
-        "word": "groceries",
-        "phonetic": "/ˈɡroʊsəriz/",
-        "partOfSpeech": "noun",
-        "meaningEs": "compras de comida",
-        "exampleEn": "I buy groceries every weekend.",
-        "exampleEs": "Compro víveres cada fin de semana."
-      },
-      {
-        "id": "lesson-a2-3-v-7",
-        "word": "unwind",
-        "phonetic": "/ʌnˈwaɪnd/",
-        "partOfSpeech": "verb",
-        "meaningEs": "desconectarse del estrés",
-        "exampleEn": "I listen to music to unwind.",
-        "exampleEs": "Escucho música para relajarme."
-      },
-      {
-        "id": "lesson-a2-3-v-8",
-        "word": "traffic jam",
-        "phonetic": "/ˈtræfɪk dʒæm/",
-        "partOfSpeech": "noun",
-        "meaningEs": "atasco de tráfico",
-        "exampleEn": "I got stuck in a traffic jam.",
-        "exampleEs": "Me quedé atrapado en el tráfico."
-      },
-      {
-        "id": "lesson-a2-3-v-9",
-        "word": "head out",
-        "phonetic": "/hɛd aʊt/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "salir / marcharse ya",
-        "exampleEn": "I am heading out right now.",
-        "exampleEs": "Estoy saliendo justo ahora."
-      },
-      {
-        "id": "lesson-a2-3-v-10",
-        "word": "wrap up",
-        "phonetic": "/ræp ʌp/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "concluir una tarea",
-        "exampleEn": "Let's wrap up this meeting.",
-        "exampleEs": "Concluyamos esta reunión."
-      },
-      {
-        "id": "lesson-a2-3-v-11",
+        "id": "v-A2-3-3",
         "word": "budget",
         "phonetic": "/ˈbʌdʒɪt/",
         "partOfSpeech": "noun",
-        "meaningEs": "presupuesto disponible",
-        "exampleEn": "We need to stay within our budget.",
-        "exampleEs": "Debemos mantenernos dentro del presupuesto."
+        "meaningEs": "presupuesto asignado",
+        "exampleEn": "We must respect the project budget.",
+        "exampleEs": "Debemos respetar el presupuesto."
       },
       {
-        "id": "lesson-a2-3-v-12",
-        "word": "available",
-        "phonetic": "/əˈveɪləbəl/",
-        "partOfSpeech": "adj",
-        "meaningEs": "disponible / libre",
-        "exampleEn": "Are you available this afternoon?",
-        "exampleEs": "¿Estás libre esta tarde?"
+        "id": "v-A2-3-4",
+        "word": "feedback",
+        "phonetic": "/ˈfiːdbæk/",
+        "partOfSpeech": "noun",
+        "meaningEs": "retroalimentación útil",
+        "exampleEn": "Thank you for the constructive feedback.",
+        "exampleEs": "Gracias por los comentarios."
       },
       {
-        "id": "lesson-a2-3-v-13",
-        "word": "convenient",
-        "phonetic": "/kənˈviːniənt/",
-        "partOfSpeech": "adj",
-        "meaningEs": "cómodo / oportuno de horario",
-        "exampleEn": "Is Tuesday convenient for you?",
-        "exampleEs": "¿Te resulta oportuno el martes?"
-      },
-      {
-        "id": "lesson-a2-3-v-14",
-        "word": "look forward to",
-        "phonetic": "/lʊk ˈfɔːrwərd/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "esperar algo con entusiasmo",
-        "exampleEn": "I look forward to our conversation.",
-        "exampleEs": "Espero con gusto nuestra conversación."
-      },
-      {
-        "id": "lesson-a2-3-v-15",
+        "id": "v-A2-3-5",
         "word": "issue",
         "phonetic": "/ˈɪʃuː/",
         "partOfSpeech": "noun",
-        "meaningEs": "inconveniente o problema",
-        "exampleEn": "We resolved the technical issue.",
-        "exampleEs": "Resolvimos el problema técnico."
+        "meaningEs": "problema o dificultad",
+        "exampleEn": "We are solving the technical issue.",
+        "exampleEs": "Resolvemos el problema técnico."
       },
       {
-        "id": "lesson-a2-3-v-16",
+        "id": "v-A2-3-6",
+        "word": "convenient",
+        "phonetic": "/kənˈviːniənt/",
+        "partOfSpeech": "adjective",
+        "meaningEs": "oportuno o cómodo",
+        "exampleEn": "Is 3 PM convenient for our call?",
+        "exampleEs": "¿Te queda cómodo a las 3 PM?"
+      },
+      {
+        "id": "v-A2-3-7",
+        "word": "follow up",
+        "phonetic": "/ˈfɒloʊ ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "dar seguimiento a algo",
+        "exampleEn": "I will follow up with the vendor.",
+        "exampleEs": "Daré seguimiento con el proveedor."
+      },
+      {
+        "id": "v-A2-3-8",
+        "word": "wrap up",
+        "phonetic": "/ræp ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "concluir una sesión",
+        "exampleEn": "Let's wrap up today's meeting.",
+        "exampleEs": "Concluyamos la reunión de hoy."
+      },
+      {
+        "id": "v-A2-3-9",
         "word": "workload",
         "phonetic": "/ˈwɜːrkloʊd/",
         "partOfSpeech": "noun",
@@ -1370,108 +1422,171 @@ export const A2_LESSONS: CourseLesson[] = [
         "exampleEs": "Mi carga de trabajo es pesada."
       },
       {
-        "id": "lesson-a2-3-v-17",
-        "word": "in advance",
-        "phonetic": "/ədˈvæns/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "por adelantado / con anticipación",
-        "exampleEn": "Thanks in advance for your help.",
-        "exampleEs": "Gracias por adelantado por tu ayuda."
+        "id": "v-A2-3-10",
+        "word": "proposal",
+        "phonetic": "/prəˈpoʊzəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "propuesta formal",
+        "exampleEn": "The client accepted our proposal.",
+        "exampleEs": "El cliente aceptó la propuesta."
       },
       {
-        "id": "lesson-a2-3-v-18",
+        "id": "v-A2-3-11",
+        "word": "deliverable",
+        "phonetic": "/dɪˈlɪvərəbəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "entregable de proyecto",
+        "exampleEn": "Here is the final deliverable.",
+        "exampleEs": "Aquí está el entregable final."
+      },
+      {
+        "id": "v-A2-3-12",
         "word": "priority",
         "phonetic": "/praɪˈɒrɪti/",
         "partOfSpeech": "noun",
         "meaningEs": "asunto prioritario",
-        "exampleEn": "Client satisfaction is our top priority.",
-        "exampleEs": "La satisfacción del cliente es prioridad."
+        "exampleEn": "Client support is our top priority.",
+        "exampleEs": "Soporte es nuestra prioridad."
       },
       {
-        "id": "lesson-a2-3-v-19",
+        "id": "v-A2-3-13",
+        "word": "clarify",
+        "phonetic": "/ˈklærɪfaɪ/",
+        "partOfSpeech": "verb",
+        "meaningEs": "aclarar un punto",
+        "exampleEn": "Could you clarify the third bullet?",
+        "exampleEs": "¿Podrías aclarar el tercer punto?"
+      },
+      {
+        "id": "v-A2-3-14",
+        "word": "confirm",
+        "phonetic": "/kənˈfɜːrm/",
+        "partOfSpeech": "verb",
+        "meaningEs": "confirmar asistencia o datos",
+        "exampleEn": "Please confirm your attendance.",
+        "exampleEs": "Por favor confirma tu asistencia."
+      },
+      {
+        "id": "v-A2-3-15",
+        "word": "update",
+        "phonetic": "/ʌpˈdeɪt/",
+        "partOfSpeech": "verb/noun",
+        "meaningEs": "actualización de estado",
+        "exampleEn": "Could you send a quick update?",
+        "exampleEs": "¿Podrías enviar una actualización?"
+      },
+      {
+        "id": "v-A2-3-16",
+        "word": "in advance",
+        "phonetic": "/ədˈvæns/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "con anticipación",
+        "exampleEn": "Thanks in advance for your support.",
+        "exampleEs": "Gracias de antemano por tu apoyo."
+      },
+      {
+        "id": "v-A2-3-17",
         "word": "asap",
         "phonetic": "/ˈeɪsæp/",
-        "partOfSpeech": "adv",
+        "partOfSpeech": "adverb",
         "meaningEs": "lo antes posible",
-        "exampleEn": "Please let me know asap.",
-        "exampleEs": "Por favor avísame lo antes posible."
+        "exampleEn": "Please review the document asap.",
+        "exampleEs": "Revisa el documento cuanto antes."
       },
       {
-        "id": "lesson-a2-3-v-20",
-        "word": "follow up",
-        "phonetic": "/ˈfɒloʊ ʌp/",
+        "id": "v-A2-3-18",
+        "word": "look forward to",
+        "phonetic": "/lʊk ˈfɔːrwərd/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "esperar con agrado",
+        "exampleEn": "I look forward to working with you.",
+        "exampleEs": "Espero con gusto trabajar contigo."
+      },
+      {
+        "id": "v-A2-3-19",
+        "word": "deal with",
+        "phonetic": "/diːl wɪð/",
         "partOfSpeech": "phrasal verb",
-        "meaningEs": "dar seguimiento a un asunto",
-        "exampleEn": "I will follow up with you tomorrow.",
-        "exampleEs": "Daré seguimiento contigo mañana."
+        "meaningEs": "gestionar un asunto",
+        "exampleEn": "I am dealing with customer requests.",
+        "exampleEs": "Gestiono solicitudes de clientes."
+      },
+      {
+        "id": "v-A2-3-20",
+        "word": "figure out",
+        "phonetic": "/ˈfɪɡjər aʊt/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "descifrar / resolver",
+        "exampleEn": "We need to figure out a better solution.",
+        "exampleEs": "Debemos descifrar una mejor solución."
       }
     ],
     "coreChunks": [
       {
-        "id": "lesson-a2-3-c-1",
+        "id": "c-A2-3-1",
         "chunk": "Could I get a...",
         "meaningEs": "Me podrías dar / poner un...",
         "usageContext": "Restaurantes y cafés",
         "exampleSentence": "Could I get a black coffee to go, please?"
       },
       {
-        "id": "lesson-a2-3-c-2",
+        "id": "c-A2-3-2",
         "chunk": "I'm in the middle of something",
         "meaningEs": "Estoy en medio de algo ahora",
         "usageContext": "Cuando te interrumpen",
         "exampleSentence": "Can you give me five minutes? I'm in the middle of something."
       },
       {
-        "id": "lesson-a2-3-c-3",
+        "id": "c-A2-3-3",
         "chunk": "I'll get back to you soon",
         "meaningEs": "Te respondo pronto",
         "usageContext": "Consultas y correos",
         "exampleSentence": "Let me check the numbers and I'll get back to you soon."
       },
       {
-        "id": "lesson-a2-3-c-4",
+        "id": "c-A2-3-4",
         "chunk": "Let me think for a second...",
         "meaningEs": "Déjame pensar un segundo...",
         "usageContext": "Ganar tiempo natural",
         "exampleSentence": "That's a good question, let me think for a second..."
       },
       {
-        "id": "lesson-a2-3-c-5",
+        "id": "c-A2-3-5",
         "chunk": "What I mean is...",
         "meaningEs": "Lo que quiero decir es...",
         "usageContext": "Reencauzar la idea",
         "exampleSentence": "What I mean is that we should start with a small pilot."
       },
       {
-        "id": "lesson-a2-3-c-6",
+        "id": "c-A2-3-6",
         "chunk": "It depends on the day",
         "meaningEs": "Depende del día (nunca depend of)",
         "usageContext": "Hábitos con variación",
         "exampleSentence": "Sometimes I cook, but it depends on the day."
       },
       {
-        "id": "lesson-a2-3-c-7",
+        "id": "c-A2-3-7",
         "chunk": "Can I take a rain check?",
         "meaningEs": "¿Lo dejamos para otra ocasión?",
         "usageContext": "Posponer un plan con cortesía",
         "exampleSentence": "I have an exam tomorrow; can I take a rain check?"
       },
       {
-        "id": "lesson-a2-3-c-8",
+        "id": "c-A2-3-8",
         "chunk": "Would it be possible to...",
         "meaningEs": "¿Sería posible...",
         "usageContext": "Negociar plazos",
         "exampleSentence": "Would it be possible to extend the deadline until Monday?"
       },
       {
-        "id": "lesson-a2-3-c-9",
+        "id": "c-A2-3-9",
         "chunk": "To be honest with you...",
         "meaningEs": "Para ser sincero contigo...",
         "usageContext": "Dar opiniones francas",
         "exampleSentence": "To be honest with you, I think we need more time."
       },
       {
-        "id": "lesson-a2-3-c-10",
+        "id": "c-A2-3-10",
         "chunk": "As far as I know...",
         "meaningEs": "Hasta donde yo sé...",
         "usageContext": "Compartir información sin ser tajante",
@@ -1480,7 +1595,7 @@ export const A2_LESSONS: CourseLesson[] = [
     ],
     "clarificationTools": [
       {
-        "id": "lesson-a2-3-cf-1",
+        "id": "cf-A2-3-1",
         "triggerSituation": "No escuchaste bien una frase rápida",
         "phrase": "Could you say that one more time, please?",
         "meaningEs": "Podrías decir eso una vez más, por favor?",
@@ -1488,39 +1603,39 @@ export const A2_LESSONS: CourseLesson[] = [
         "whyItWorks": "Es la fórmula estándar más educada en inglés."
       },
       {
-        "id": "lesson-a2-3-cf-2",
+        "id": "cf-A2-3-2",
         "triggerSituation": "La persona habla muy acelerada",
         "phrase": "Could you speak a little slower, please?",
         "meaningEs": "Podrías hablar un poco más despacio, por favor?",
         "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide calma de forma asertiva sin disculpas excesivas."
+        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
       },
       {
-        "id": "lesson-a2-3-cf-3",
+        "id": "cf-A2-3-3",
         "triggerSituation": "No entendiste una palabra técnica o sigla",
         "phrase": "What does that acronym stand for?",
         "meaningEs": "Qué significan esas siglas?",
         "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para no quedarte con la duda."
+        "whyItWorks": "Pregunta directa para aclarar términos."
       },
       {
-        "id": "lesson-a2-3-cf-4",
+        "id": "cf-A2-3-4",
         "triggerSituation": "Quieres saber cómo se dice algo en inglés",
         "phrase": "How do you say that in English?",
         "meaningEs": "Cómo se dice eso en inglés?",
         "audioSample": "How do you say that in English?",
-        "whyItWorks": "Te permite preguntar apoyándote en gestos u objetos."
+        "whyItWorks": "Permite aprender señalando objetos o gestos."
       },
       {
-        "id": "lesson-a2-3-cf-5",
+        "id": "cf-A2-3-5",
         "triggerSituation": "Quieres verificar si entendiste bien",
         "phrase": "Just to make sure we're on the same page, did you mean...?",
         "meaningEs": "Solo para estar en sintonía, querías decir...?",
         "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones o encargos."
+        "whyItWorks": "Sincroniza acuerdos en reuniones."
       },
       {
-        "id": "lesson-a2-3-cf-6",
+        "id": "cf-A2-3-6",
         "triggerSituation": "Te perdiste en una explicación larga",
         "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
         "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
@@ -1529,278 +1644,278 @@ export const A2_LESSONS: CourseLesson[] = [
       }
     ],
     "listening": {
-      "id": "lesson-a2-3-ml",
-      "audioScript": "Hey! Quick update on the schedule: we're wrapping up the morning review, and we'll head out for lunch around one. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para coordinar la hora de almuerzo y el avance del día.",
-      "comprehensionQuestion": "¿Qué está terminando el equipo y a qué hora planean salir a almorzar?",
+      "id": "ml-A2-3",
+      "audioScript": "Hello! Quick update on our planes a futuro: be going to vs will vs present continuous: we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
+      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre planes a futuro: be going to vs will vs present continuous.",
+      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
       "options": [
-        "Están almorzando ya y regresan a la una",
-        "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-        "Cancelaron el almuerzo por exceso de trabajo"
+        "Cancelaron el proyecto por falta de tiempo",
+        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+        "Piden reprogramar todo para el próximo mes"
       ],
-      "correctAnswer": "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-      "explanation": "El chunk clave es 'wrapping up the morning review' y 'head out for lunch around one'."
+      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
     },
     "workbook": [
       {
-        "id": "lesson-a2-3-wb-1",
+        "id": "wb-A2-3-1",
         "category": "routine",
-        "situationEs": "Situación #1: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #1 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-2",
+        "id": "wb-A2-3-2",
         "category": "social",
-        "situationEs": "Situación #2: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #2 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-3",
+        "id": "wb-A2-3-3",
         "category": "problem_solving",
-        "situationEs": "Situación #3: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #3 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-4",
+        "id": "wb-A2-3-4",
         "category": "asking_help",
-        "situationEs": "Situación #4: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #4 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-5",
+        "id": "wb-A2-3-5",
         "category": "opinion",
-        "situationEs": "Situación #5: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #5 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-6",
+        "id": "wb-A2-3-6",
         "category": "routine",
-        "situationEs": "Situación #6: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #6 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-7",
+        "id": "wb-A2-3-7",
         "category": "social",
-        "situationEs": "Situación #7: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #7 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-8",
+        "id": "wb-A2-3-8",
         "category": "problem_solving",
-        "situationEs": "Situación #8: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #8 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-9",
+        "id": "wb-A2-3-9",
         "category": "asking_help",
-        "situationEs": "Situación #9: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #9 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-10",
+        "id": "wb-A2-3-10",
         "category": "opinion",
-        "situationEs": "Situación #10: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #10 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-11",
+        "id": "wb-A2-3-11",
         "category": "routine",
-        "situationEs": "Situación #11: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #11 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-12",
+        "id": "wb-A2-3-12",
         "category": "social",
-        "situationEs": "Situación #12: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #12 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-13",
+        "id": "wb-A2-3-13",
         "category": "problem_solving",
-        "situationEs": "Situación #13: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #13 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-14",
+        "id": "wb-A2-3-14",
         "category": "asking_help",
-        "situationEs": "Situación #14: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #14 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-15",
+        "id": "wb-A2-3-15",
         "category": "opinion",
-        "situationEs": "Situación #15: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #15 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-16",
+        "id": "wb-A2-3-16",
         "category": "routine",
-        "situationEs": "Situación #16: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #16 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-17",
+        "id": "wb-A2-3-17",
         "category": "social",
-        "situationEs": "Situación #17: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #17 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-18",
+        "id": "wb-A2-3-18",
         "category": "problem_solving",
-        "situationEs": "Situación #18: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #18 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-19",
+        "id": "wb-A2-3-19",
         "category": "asking_help",
-        "situationEs": "Situación #19: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #19 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-3-wb-20",
+        "id": "wb-A2-3-20",
         "category": "opinion",
-        "situationEs": "Situación #20: Estás en un contexto cotidiano relacionado con Verbos Modales de Posibilidad y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #20 de Planes a Futuro: Be going to vs Will vs Present Continuous: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Planes a Futuro when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       }
     ]
   },
@@ -1808,161 +1923,140 @@ export const A2_LESSONS: CourseLesson[] = [
     "id": "lesson-a2-4",
     "level": "A2",
     "lessonNumber": 4,
-    "title": "El Verbo Comodín: GET a Fondo",
-    "tagline": "Domina el uso real de The Verb GET en la vida diaria",
-    "grammarFocus": "Llegar, conseguir, entender, volverse (get back, get along)",
-    "practicalGoal": "Sustituir decenas de verbos complicados con fórmulas de GET",
+    "title": "Verbos Modales de Habilidad y Obligación (can, could, have to, must)",
+    "tagline": "Aprende a expresar lo que sabes hacer, lo que debes hacer y las reglas comunes",
+    "grammarFocus": "Modales Can/Could (habilidad/permiso) vs Have to/Must (obligación)",
+    "practicalGoal": "Pedir permiso, dar consejos de reglas en el trabajo y expresar tus habilidades con naturalidad.",
     "theory": {
-      "title": "El uso práctico de The Verb GET",
-      "explanationEs": "A nivel A2, The Verb GET es clave para comunicarse con naturalidad. Evita reglas teóricas confusas: concéntrate en las fórmulas que los nativos usan todos los días.",
-      "practicalFormula": "Subject + [Verb structure] + Time marker",
-      "timeExpressions": [
-        "regularly",
-        "right now",
-        "usually",
-        "yesterday",
-        "soon"
+      "title": "Modals: Can, Could, Have to, Must",
+      "overviewEs": "Los verbos modales modifican el significado del verbo principal. 'Can' expresa habilidad presente o permiso informal; 'Could' es más educado y formal; 'Have to' expresa obligación cotidiana o impuesta por reglas externas; y 'Don't have to' significa que no es necesario (ausencia de obligación).",
+      "grammarChart": {
+        "title": "Verbos Modales Esenciales",
+        "structureFormula": "Subject + Modal + Verb (base form)",
+        "rows": [
+          {
+            "subject": "Habilidad / Permiso",
+            "affirmative": "I can speak two languages.",
+            "negative": "I can't swim very well.",
+            "question": "Could you help me, please?",
+            "shortAnswer": "Yes, I can."
+          },
+          {
+            "subject": "Obligación / Regla",
+            "affirmative": "I have to wake up early on weekdays.",
+            "negative": "You don't have to pay now (opcional).",
+            "question": "Do you have to wear a suit?",
+            "shortAnswer": "Yes, I do."
+          }
+        ],
+        "usageRules": [
+          {
+            "ruleTitle": "Los modales no llevan -s",
+            "description": "Nunca agregues -s a can, could o must con he/she.",
+            "example": "She can play piano (NO: She cans)."
+          },
+          {
+            "ruleTitle": "Don't have to vs Mustn't",
+            "description": "'Don't have to' = no es obligatorio (tú decides). 'Mustn't' = está terminantemente prohibido.",
+            "example": "You don't have to come, but you mustn't park here."
+          }
+        ]
+      },
+      "signalWords": [
+        "necessary",
+        "allowed",
+        "prohibited",
+        "possible",
+        "polite"
       ],
-      "commonMistakeEs": "Traducir palabra por palabra del español en lugar de adoptar el bloque completo en inglés."
+      "commonMistakes": [
+        {
+          "wrong": "I can to speak English",
+          "correct": "I can speak English",
+          "explanation": "Los modales NUNCA van seguidos de 'to'. Siempre van con el verbo base directo."
+        },
+        {
+          "wrong": "You must not pay (cuando querías decir que es gratis)",
+          "correct": "You don't have to pay",
+          "explanation": "'Must not' significa prohibición estricta; 'don't have to' significa que no es necesario."
+        }
+      ]
     },
     "vocabulary": [
       {
-        "id": "lesson-a2-4-v-1",
-        "word": "commute",
-        "phonetic": "/kəˈmjuːt/",
-        "partOfSpeech": "verb",
-        "meaningEs": "trasladarse al trabajo",
-        "exampleEn": "I commute by subway every morning.",
-        "exampleEs": "Me traslado en metro cada mañana."
-      },
-      {
-        "id": "lesson-a2-4-v-2",
+        "id": "v-A2-4-1",
         "word": "schedule",
         "phonetic": "/ˈskɛdʒuːl/",
         "partOfSpeech": "noun",
         "meaningEs": "horario / agenda",
-        "exampleEn": "I have a tight schedule today.",
-        "exampleEs": "Tengo una agenda apretada hoy."
+        "exampleEn": "We need to adjust the schedule.",
+        "exampleEs": "Debemos ajustar la agenda."
       },
       {
-        "id": "lesson-a2-4-v-3",
+        "id": "v-A2-4-2",
         "word": "deadline",
         "phonetic": "/ˈdɛdlaɪn/",
         "partOfSpeech": "noun",
         "meaningEs": "fecha límite de entrega",
         "exampleEn": "The deadline is this Friday at 5 PM.",
-        "exampleEs": "La fecha límite es este viernes a las 5."
+        "exampleEs": "La fecha límite es el viernes."
       },
       {
-        "id": "lesson-a2-4-v-4",
-        "word": "update",
-        "phonetic": "/ʌpˈdeɪt/",
-        "partOfSpeech": "verb/noun",
-        "meaningEs": "actualizar / reporte reciente",
-        "exampleEn": "Could you send me an update?",
-        "exampleEs": "¿Podrías enviarme una actualización?"
-      },
-      {
-        "id": "lesson-a2-4-v-5",
-        "word": "feedback",
-        "phonetic": "/ˈfiːdbæk/",
-        "partOfSpeech": "noun",
-        "meaningEs": "retroalimentación constructiva",
-        "exampleEn": "I appreciate your honest feedback.",
-        "exampleEs": "Agradezco tus comentarios sinceros."
-      },
-      {
-        "id": "lesson-a2-4-v-6",
-        "word": "groceries",
-        "phonetic": "/ˈɡroʊsəriz/",
-        "partOfSpeech": "noun",
-        "meaningEs": "compras de comida",
-        "exampleEn": "I buy groceries every weekend.",
-        "exampleEs": "Compro víveres cada fin de semana."
-      },
-      {
-        "id": "lesson-a2-4-v-7",
-        "word": "unwind",
-        "phonetic": "/ʌnˈwaɪnd/",
-        "partOfSpeech": "verb",
-        "meaningEs": "desconectarse del estrés",
-        "exampleEn": "I listen to music to unwind.",
-        "exampleEs": "Escucho música para relajarme."
-      },
-      {
-        "id": "lesson-a2-4-v-8",
-        "word": "traffic jam",
-        "phonetic": "/ˈtræfɪk dʒæm/",
-        "partOfSpeech": "noun",
-        "meaningEs": "atasco de tráfico",
-        "exampleEn": "I got stuck in a traffic jam.",
-        "exampleEs": "Me quedé atrapado en el tráfico."
-      },
-      {
-        "id": "lesson-a2-4-v-9",
-        "word": "head out",
-        "phonetic": "/hɛd aʊt/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "salir / marcharse ya",
-        "exampleEn": "I am heading out right now.",
-        "exampleEs": "Estoy saliendo justo ahora."
-      },
-      {
-        "id": "lesson-a2-4-v-10",
-        "word": "wrap up",
-        "phonetic": "/ræp ʌp/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "concluir una tarea",
-        "exampleEn": "Let's wrap up this meeting.",
-        "exampleEs": "Concluyamos esta reunión."
-      },
-      {
-        "id": "lesson-a2-4-v-11",
+        "id": "v-A2-4-3",
         "word": "budget",
         "phonetic": "/ˈbʌdʒɪt/",
         "partOfSpeech": "noun",
-        "meaningEs": "presupuesto disponible",
-        "exampleEn": "We need to stay within our budget.",
-        "exampleEs": "Debemos mantenernos dentro del presupuesto."
+        "meaningEs": "presupuesto asignado",
+        "exampleEn": "We must respect the project budget.",
+        "exampleEs": "Debemos respetar el presupuesto."
       },
       {
-        "id": "lesson-a2-4-v-12",
-        "word": "available",
-        "phonetic": "/əˈveɪləbəl/",
-        "partOfSpeech": "adj",
-        "meaningEs": "disponible / libre",
-        "exampleEn": "Are you available this afternoon?",
-        "exampleEs": "¿Estás libre esta tarde?"
+        "id": "v-A2-4-4",
+        "word": "feedback",
+        "phonetic": "/ˈfiːdbæk/",
+        "partOfSpeech": "noun",
+        "meaningEs": "retroalimentación útil",
+        "exampleEn": "Thank you for the constructive feedback.",
+        "exampleEs": "Gracias por los comentarios."
       },
       {
-        "id": "lesson-a2-4-v-13",
-        "word": "convenient",
-        "phonetic": "/kənˈviːniənt/",
-        "partOfSpeech": "adj",
-        "meaningEs": "cómodo / oportuno de horario",
-        "exampleEn": "Is Tuesday convenient for you?",
-        "exampleEs": "¿Te resulta oportuno el martes?"
-      },
-      {
-        "id": "lesson-a2-4-v-14",
-        "word": "look forward to",
-        "phonetic": "/lʊk ˈfɔːrwərd/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "esperar algo con entusiasmo",
-        "exampleEn": "I look forward to our conversation.",
-        "exampleEs": "Espero con gusto nuestra conversación."
-      },
-      {
-        "id": "lesson-a2-4-v-15",
+        "id": "v-A2-4-5",
         "word": "issue",
         "phonetic": "/ˈɪʃuː/",
         "partOfSpeech": "noun",
-        "meaningEs": "inconveniente o problema",
-        "exampleEn": "We resolved the technical issue.",
-        "exampleEs": "Resolvimos el problema técnico."
+        "meaningEs": "problema o dificultad",
+        "exampleEn": "We are solving the technical issue.",
+        "exampleEs": "Resolvemos el problema técnico."
       },
       {
-        "id": "lesson-a2-4-v-16",
+        "id": "v-A2-4-6",
+        "word": "convenient",
+        "phonetic": "/kənˈviːniənt/",
+        "partOfSpeech": "adjective",
+        "meaningEs": "oportuno o cómodo",
+        "exampleEn": "Is 3 PM convenient for our call?",
+        "exampleEs": "¿Te queda cómodo a las 3 PM?"
+      },
+      {
+        "id": "v-A2-4-7",
+        "word": "follow up",
+        "phonetic": "/ˈfɒloʊ ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "dar seguimiento a algo",
+        "exampleEn": "I will follow up with the vendor.",
+        "exampleEs": "Daré seguimiento con el proveedor."
+      },
+      {
+        "id": "v-A2-4-8",
+        "word": "wrap up",
+        "phonetic": "/ræp ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "concluir una sesión",
+        "exampleEn": "Let's wrap up today's meeting.",
+        "exampleEs": "Concluyamos la reunión de hoy."
+      },
+      {
+        "id": "v-A2-4-9",
         "word": "workload",
         "phonetic": "/ˈwɜːrkloʊd/",
         "partOfSpeech": "noun",
@@ -1971,108 +2065,171 @@ export const A2_LESSONS: CourseLesson[] = [
         "exampleEs": "Mi carga de trabajo es pesada."
       },
       {
-        "id": "lesson-a2-4-v-17",
-        "word": "in advance",
-        "phonetic": "/ədˈvæns/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "por adelantado / con anticipación",
-        "exampleEn": "Thanks in advance for your help.",
-        "exampleEs": "Gracias por adelantado por tu ayuda."
+        "id": "v-A2-4-10",
+        "word": "proposal",
+        "phonetic": "/prəˈpoʊzəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "propuesta formal",
+        "exampleEn": "The client accepted our proposal.",
+        "exampleEs": "El cliente aceptó la propuesta."
       },
       {
-        "id": "lesson-a2-4-v-18",
+        "id": "v-A2-4-11",
+        "word": "deliverable",
+        "phonetic": "/dɪˈlɪvərəbəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "entregable de proyecto",
+        "exampleEn": "Here is the final deliverable.",
+        "exampleEs": "Aquí está el entregable final."
+      },
+      {
+        "id": "v-A2-4-12",
         "word": "priority",
         "phonetic": "/praɪˈɒrɪti/",
         "partOfSpeech": "noun",
         "meaningEs": "asunto prioritario",
-        "exampleEn": "Client satisfaction is our top priority.",
-        "exampleEs": "La satisfacción del cliente es prioridad."
+        "exampleEn": "Client support is our top priority.",
+        "exampleEs": "Soporte es nuestra prioridad."
       },
       {
-        "id": "lesson-a2-4-v-19",
+        "id": "v-A2-4-13",
+        "word": "clarify",
+        "phonetic": "/ˈklærɪfaɪ/",
+        "partOfSpeech": "verb",
+        "meaningEs": "aclarar un punto",
+        "exampleEn": "Could you clarify the third bullet?",
+        "exampleEs": "¿Podrías aclarar el tercer punto?"
+      },
+      {
+        "id": "v-A2-4-14",
+        "word": "confirm",
+        "phonetic": "/kənˈfɜːrm/",
+        "partOfSpeech": "verb",
+        "meaningEs": "confirmar asistencia o datos",
+        "exampleEn": "Please confirm your attendance.",
+        "exampleEs": "Por favor confirma tu asistencia."
+      },
+      {
+        "id": "v-A2-4-15",
+        "word": "update",
+        "phonetic": "/ʌpˈdeɪt/",
+        "partOfSpeech": "verb/noun",
+        "meaningEs": "actualización de estado",
+        "exampleEn": "Could you send a quick update?",
+        "exampleEs": "¿Podrías enviar una actualización?"
+      },
+      {
+        "id": "v-A2-4-16",
+        "word": "in advance",
+        "phonetic": "/ədˈvæns/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "con anticipación",
+        "exampleEn": "Thanks in advance for your support.",
+        "exampleEs": "Gracias de antemano por tu apoyo."
+      },
+      {
+        "id": "v-A2-4-17",
         "word": "asap",
         "phonetic": "/ˈeɪsæp/",
-        "partOfSpeech": "adv",
+        "partOfSpeech": "adverb",
         "meaningEs": "lo antes posible",
-        "exampleEn": "Please let me know asap.",
-        "exampleEs": "Por favor avísame lo antes posible."
+        "exampleEn": "Please review the document asap.",
+        "exampleEs": "Revisa el documento cuanto antes."
       },
       {
-        "id": "lesson-a2-4-v-20",
-        "word": "follow up",
-        "phonetic": "/ˈfɒloʊ ʌp/",
+        "id": "v-A2-4-18",
+        "word": "look forward to",
+        "phonetic": "/lʊk ˈfɔːrwərd/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "esperar con agrado",
+        "exampleEn": "I look forward to working with you.",
+        "exampleEs": "Espero con gusto trabajar contigo."
+      },
+      {
+        "id": "v-A2-4-19",
+        "word": "deal with",
+        "phonetic": "/diːl wɪð/",
         "partOfSpeech": "phrasal verb",
-        "meaningEs": "dar seguimiento a un asunto",
-        "exampleEn": "I will follow up with you tomorrow.",
-        "exampleEs": "Daré seguimiento contigo mañana."
+        "meaningEs": "gestionar un asunto",
+        "exampleEn": "I am dealing with customer requests.",
+        "exampleEs": "Gestiono solicitudes de clientes."
+      },
+      {
+        "id": "v-A2-4-20",
+        "word": "figure out",
+        "phonetic": "/ˈfɪɡjər aʊt/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "descifrar / resolver",
+        "exampleEn": "We need to figure out a better solution.",
+        "exampleEs": "Debemos descifrar una mejor solución."
       }
     ],
     "coreChunks": [
       {
-        "id": "lesson-a2-4-c-1",
+        "id": "c-A2-4-1",
         "chunk": "Could I get a...",
         "meaningEs": "Me podrías dar / poner un...",
         "usageContext": "Restaurantes y cafés",
         "exampleSentence": "Could I get a black coffee to go, please?"
       },
       {
-        "id": "lesson-a2-4-c-2",
+        "id": "c-A2-4-2",
         "chunk": "I'm in the middle of something",
         "meaningEs": "Estoy en medio de algo ahora",
         "usageContext": "Cuando te interrumpen",
         "exampleSentence": "Can you give me five minutes? I'm in the middle of something."
       },
       {
-        "id": "lesson-a2-4-c-3",
+        "id": "c-A2-4-3",
         "chunk": "I'll get back to you soon",
         "meaningEs": "Te respondo pronto",
         "usageContext": "Consultas y correos",
         "exampleSentence": "Let me check the numbers and I'll get back to you soon."
       },
       {
-        "id": "lesson-a2-4-c-4",
+        "id": "c-A2-4-4",
         "chunk": "Let me think for a second...",
         "meaningEs": "Déjame pensar un segundo...",
         "usageContext": "Ganar tiempo natural",
         "exampleSentence": "That's a good question, let me think for a second..."
       },
       {
-        "id": "lesson-a2-4-c-5",
+        "id": "c-A2-4-5",
         "chunk": "What I mean is...",
         "meaningEs": "Lo que quiero decir es...",
         "usageContext": "Reencauzar la idea",
         "exampleSentence": "What I mean is that we should start with a small pilot."
       },
       {
-        "id": "lesson-a2-4-c-6",
+        "id": "c-A2-4-6",
         "chunk": "It depends on the day",
         "meaningEs": "Depende del día (nunca depend of)",
         "usageContext": "Hábitos con variación",
         "exampleSentence": "Sometimes I cook, but it depends on the day."
       },
       {
-        "id": "lesson-a2-4-c-7",
+        "id": "c-A2-4-7",
         "chunk": "Can I take a rain check?",
         "meaningEs": "¿Lo dejamos para otra ocasión?",
         "usageContext": "Posponer un plan con cortesía",
         "exampleSentence": "I have an exam tomorrow; can I take a rain check?"
       },
       {
-        "id": "lesson-a2-4-c-8",
+        "id": "c-A2-4-8",
         "chunk": "Would it be possible to...",
         "meaningEs": "¿Sería posible...",
         "usageContext": "Negociar plazos",
         "exampleSentence": "Would it be possible to extend the deadline until Monday?"
       },
       {
-        "id": "lesson-a2-4-c-9",
+        "id": "c-A2-4-9",
         "chunk": "To be honest with you...",
         "meaningEs": "Para ser sincero contigo...",
         "usageContext": "Dar opiniones francas",
         "exampleSentence": "To be honest with you, I think we need more time."
       },
       {
-        "id": "lesson-a2-4-c-10",
+        "id": "c-A2-4-10",
         "chunk": "As far as I know...",
         "meaningEs": "Hasta donde yo sé...",
         "usageContext": "Compartir información sin ser tajante",
@@ -2081,7 +2238,7 @@ export const A2_LESSONS: CourseLesson[] = [
     ],
     "clarificationTools": [
       {
-        "id": "lesson-a2-4-cf-1",
+        "id": "cf-A2-4-1",
         "triggerSituation": "No escuchaste bien una frase rápida",
         "phrase": "Could you say that one more time, please?",
         "meaningEs": "Podrías decir eso una vez más, por favor?",
@@ -2089,39 +2246,39 @@ export const A2_LESSONS: CourseLesson[] = [
         "whyItWorks": "Es la fórmula estándar más educada en inglés."
       },
       {
-        "id": "lesson-a2-4-cf-2",
+        "id": "cf-A2-4-2",
         "triggerSituation": "La persona habla muy acelerada",
         "phrase": "Could you speak a little slower, please?",
         "meaningEs": "Podrías hablar un poco más despacio, por favor?",
         "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide calma de forma asertiva sin disculpas excesivas."
+        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
       },
       {
-        "id": "lesson-a2-4-cf-3",
+        "id": "cf-A2-4-3",
         "triggerSituation": "No entendiste una palabra técnica o sigla",
         "phrase": "What does that acronym stand for?",
         "meaningEs": "Qué significan esas siglas?",
         "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para no quedarte con la duda."
+        "whyItWorks": "Pregunta directa para aclarar términos."
       },
       {
-        "id": "lesson-a2-4-cf-4",
+        "id": "cf-A2-4-4",
         "triggerSituation": "Quieres saber cómo se dice algo en inglés",
         "phrase": "How do you say that in English?",
         "meaningEs": "Cómo se dice eso en inglés?",
         "audioSample": "How do you say that in English?",
-        "whyItWorks": "Te permite preguntar apoyándote en gestos u objetos."
+        "whyItWorks": "Permite aprender señalando objetos o gestos."
       },
       {
-        "id": "lesson-a2-4-cf-5",
+        "id": "cf-A2-4-5",
         "triggerSituation": "Quieres verificar si entendiste bien",
         "phrase": "Just to make sure we're on the same page, did you mean...?",
         "meaningEs": "Solo para estar en sintonía, querías decir...?",
         "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones o encargos."
+        "whyItWorks": "Sincroniza acuerdos en reuniones."
       },
       {
-        "id": "lesson-a2-4-cf-6",
+        "id": "cf-A2-4-6",
         "triggerSituation": "Te perdiste en una explicación larga",
         "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
         "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
@@ -2130,278 +2287,278 @@ export const A2_LESSONS: CourseLesson[] = [
       }
     ],
     "listening": {
-      "id": "lesson-a2-4-ml",
-      "audioScript": "Hey! Quick update on the schedule: we're wrapping up the morning review, and we'll head out for lunch around one. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para coordinar la hora de almuerzo y el avance del día.",
-      "comprehensionQuestion": "¿Qué está terminando el equipo y a qué hora planean salir a almorzar?",
+      "id": "ml-A2-4",
+      "audioScript": "Hello! Quick update on our verbos modales de habilidad y obligación (can, could, have to, must): we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
+      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre verbos modales de habilidad y obligación (can, could, have to, must).",
+      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
       "options": [
-        "Están almorzando ya y regresan a la una",
-        "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-        "Cancelaron el almuerzo por exceso de trabajo"
+        "Cancelaron el proyecto por falta de tiempo",
+        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+        "Piden reprogramar todo para el próximo mes"
       ],
-      "correctAnswer": "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-      "explanation": "El chunk clave es 'wrapping up the morning review' y 'head out for lunch around one'."
+      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
     },
     "workbook": [
       {
-        "id": "lesson-a2-4-wb-1",
+        "id": "wb-A2-4-1",
         "category": "routine",
-        "situationEs": "Situación #1: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #1 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-2",
+        "id": "wb-A2-4-2",
         "category": "social",
-        "situationEs": "Situación #2: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #2 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-3",
+        "id": "wb-A2-4-3",
         "category": "problem_solving",
-        "situationEs": "Situación #3: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #3 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-4",
+        "id": "wb-A2-4-4",
         "category": "asking_help",
-        "situationEs": "Situación #4: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #4 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-5",
+        "id": "wb-A2-4-5",
         "category": "opinion",
-        "situationEs": "Situación #5: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #5 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-6",
+        "id": "wb-A2-4-6",
         "category": "routine",
-        "situationEs": "Situación #6: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #6 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-7",
+        "id": "wb-A2-4-7",
         "category": "social",
-        "situationEs": "Situación #7: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #7 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-8",
+        "id": "wb-A2-4-8",
         "category": "problem_solving",
-        "situationEs": "Situación #8: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #8 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-9",
+        "id": "wb-A2-4-9",
         "category": "asking_help",
-        "situationEs": "Situación #9: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #9 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-10",
+        "id": "wb-A2-4-10",
         "category": "opinion",
-        "situationEs": "Situación #10: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #10 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-11",
+        "id": "wb-A2-4-11",
         "category": "routine",
-        "situationEs": "Situación #11: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #11 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-12",
+        "id": "wb-A2-4-12",
         "category": "social",
-        "situationEs": "Situación #12: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #12 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-13",
+        "id": "wb-A2-4-13",
         "category": "problem_solving",
-        "situationEs": "Situación #13: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #13 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-14",
+        "id": "wb-A2-4-14",
         "category": "asking_help",
-        "situationEs": "Situación #14: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #14 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-15",
+        "id": "wb-A2-4-15",
         "category": "opinion",
-        "situationEs": "Situación #15: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #15 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-16",
+        "id": "wb-A2-4-16",
         "category": "routine",
-        "situationEs": "Situación #16: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #16 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-17",
+        "id": "wb-A2-4-17",
         "category": "social",
-        "situationEs": "Situación #17: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #17 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-18",
+        "id": "wb-A2-4-18",
         "category": "problem_solving",
-        "situationEs": "Situación #18: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #18 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-19",
+        "id": "wb-A2-4-19",
         "category": "asking_help",
-        "situationEs": "Situación #19: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #19 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-4-wb-20",
+        "id": "wb-A2-4-20",
         "category": "opinion",
-        "situationEs": "Situación #20: Estás en un contexto cotidiano relacionado con El Verbo Comodín: GET a Fondo y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #20 de Verbos Modales de Habilidad y Obligación (can, could, have to, must): Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on Verbos Modales de Habilidad y Obligación (can, could, have to, must) when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       }
     ]
   },
@@ -2409,161 +2566,156 @@ export const A2_LESSONS: CourseLesson[] = [
     "id": "lesson-a2-5",
     "level": "A2",
     "lessonNumber": 5,
-    "title": "Expresar Preferencias y Decir NO",
-    "tagline": "Domina el uso real de Softening (I would rather) en la vida diaria",
-    "grammarFocus": "Rechazos elegantes (I wish I could, rain check)",
-    "practicalGoal": "Decir que no amablemente y proponer alternativas",
+    "title": "El Verbo Comodín GET en Todas sus Facetas",
+    "tagline": "El secreto mejor guardado de los nativos: ahorra decenas de verbos difíciles",
+    "grammarFocus": "Usos múltiples de GET: llegar, conseguir/comprar, volverse/cambiar de estado y entender",
+    "practicalGoal": "Sustituir verbos formales pesados (arrive, receive, purchase, become) por fórmulas fluidas con GET.",
     "theory": {
-      "title": "El uso práctico de Softening (I would rather)",
-      "explanationEs": "A nivel A2, Softening (I would rather) es clave para comunicarse con naturalidad. Evita reglas teóricas confusas: concéntrate en las fórmulas que los nativos usan todos los días.",
-      "practicalFormula": "Subject + [Verb structure] + Time marker",
-      "timeExpressions": [
-        "regularly",
-        "right now",
-        "usually",
-        "yesterday",
-        "soon"
+      "title": "El Gran Verbo Comodín: GET",
+      "overviewEs": "En el inglés informal y de negocios diario, 'GET' es el verbo más utilizado. Dependiendo de las palabras que lo acompañen, reemplaza con total naturalidad a verbos como recibir (get an email), comprar (get coffee), llegar (get home), entender (get it) o cambiar de estado (get tired).",
+      "grammarChart": {
+        "title": "Las 5 Dimensiones del Verbo GET",
+        "structureFormula": "GET + noun (recibir/comprar) | GET + adjective (volverse) | GET to (llegar)",
+        "rows": [
+          {
+            "subject": "1. Recibir / Conseguir",
+            "affirmative": "I got your message five minutes ago.",
+            "negative": "I didn't get the receipt.",
+            "question": "Did you get my email?",
+            "shortAnswer": "Yes, I got it."
+          },
+          {
+            "subject": "2. Comprar / Obtener",
+            "affirmative": "Can you get some milk on your way?",
+            "negative": "I didn't get any bread.",
+            "question": "Where did you get that coat?",
+            "shortAnswer": "At the mall."
+          },
+          {
+            "subject": "3. Llegar a un destino",
+            "affirmative": "What time do you usually get home?",
+            "negative": "We didn't get to the airport on time.",
+            "question": "How did you get here?",
+            "shortAnswer": "By train."
+          },
+          {
+            "subject": "4. Cambiar de estado",
+            "affirmative": "It is getting dark and I am getting cold.",
+            "negative": "Don't get angry over small things.",
+            "question": "Are you getting tired?",
+            "shortAnswer": "Yes, a bit."
+          },
+          {
+            "subject": "5. Entender una idea",
+            "affirmative": "Oh, now I get what you mean!",
+            "negative": "I don't get the joke.",
+            "question": "Do you get my point?",
+            "shortAnswer": "Yes, I get it."
+          }
+        ],
+        "usageRules": [
+          {
+            "ruleTitle": "Get home (sin 'to')",
+            "description": "Con la palabra 'home' nunca se pone 'to'.",
+            "example": "I got home safely (NO: got to home)."
+          },
+          {
+            "ruleTitle": "Get back to you (responderte)",
+            "description": "El chunk de oro corporativo para prometer una respuesta.",
+            "example": "I will check the data and get back to you soon."
+          }
+        ]
+      },
+      "signalWords": [
+        "get home",
+        "get back to",
+        "get along with",
+        "get ready",
+        "get used to"
       ],
-      "commonMistakeEs": "Traducir palabra por palabra del español en lugar de adoptar el bloque completo en inglés."
+      "commonMistakes": [
+        {
+          "wrong": "I arrived to my home",
+          "correct": "I got home",
+          "explanation": "'I got home' es 10 veces más natural en el habla diaria que 'I arrived at home'."
+        }
+      ]
     },
     "vocabulary": [
       {
-        "id": "lesson-a2-5-v-1",
-        "word": "commute",
-        "phonetic": "/kəˈmjuːt/",
-        "partOfSpeech": "verb",
-        "meaningEs": "trasladarse al trabajo",
-        "exampleEn": "I commute by subway every morning.",
-        "exampleEs": "Me traslado en metro cada mañana."
-      },
-      {
-        "id": "lesson-a2-5-v-2",
+        "id": "v-A2-5-1",
         "word": "schedule",
         "phonetic": "/ˈskɛdʒuːl/",
         "partOfSpeech": "noun",
         "meaningEs": "horario / agenda",
-        "exampleEn": "I have a tight schedule today.",
-        "exampleEs": "Tengo una agenda apretada hoy."
+        "exampleEn": "We need to adjust the schedule.",
+        "exampleEs": "Debemos ajustar la agenda."
       },
       {
-        "id": "lesson-a2-5-v-3",
+        "id": "v-A2-5-2",
         "word": "deadline",
         "phonetic": "/ˈdɛdlaɪn/",
         "partOfSpeech": "noun",
         "meaningEs": "fecha límite de entrega",
         "exampleEn": "The deadline is this Friday at 5 PM.",
-        "exampleEs": "La fecha límite es este viernes a las 5."
+        "exampleEs": "La fecha límite es el viernes."
       },
       {
-        "id": "lesson-a2-5-v-4",
-        "word": "update",
-        "phonetic": "/ʌpˈdeɪt/",
-        "partOfSpeech": "verb/noun",
-        "meaningEs": "actualizar / reporte reciente",
-        "exampleEn": "Could you send me an update?",
-        "exampleEs": "¿Podrías enviarme una actualización?"
-      },
-      {
-        "id": "lesson-a2-5-v-5",
-        "word": "feedback",
-        "phonetic": "/ˈfiːdbæk/",
-        "partOfSpeech": "noun",
-        "meaningEs": "retroalimentación constructiva",
-        "exampleEn": "I appreciate your honest feedback.",
-        "exampleEs": "Agradezco tus comentarios sinceros."
-      },
-      {
-        "id": "lesson-a2-5-v-6",
-        "word": "groceries",
-        "phonetic": "/ˈɡroʊsəriz/",
-        "partOfSpeech": "noun",
-        "meaningEs": "compras de comida",
-        "exampleEn": "I buy groceries every weekend.",
-        "exampleEs": "Compro víveres cada fin de semana."
-      },
-      {
-        "id": "lesson-a2-5-v-7",
-        "word": "unwind",
-        "phonetic": "/ʌnˈwaɪnd/",
-        "partOfSpeech": "verb",
-        "meaningEs": "desconectarse del estrés",
-        "exampleEn": "I listen to music to unwind.",
-        "exampleEs": "Escucho música para relajarme."
-      },
-      {
-        "id": "lesson-a2-5-v-8",
-        "word": "traffic jam",
-        "phonetic": "/ˈtræfɪk dʒæm/",
-        "partOfSpeech": "noun",
-        "meaningEs": "atasco de tráfico",
-        "exampleEn": "I got stuck in a traffic jam.",
-        "exampleEs": "Me quedé atrapado en el tráfico."
-      },
-      {
-        "id": "lesson-a2-5-v-9",
-        "word": "head out",
-        "phonetic": "/hɛd aʊt/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "salir / marcharse ya",
-        "exampleEn": "I am heading out right now.",
-        "exampleEs": "Estoy saliendo justo ahora."
-      },
-      {
-        "id": "lesson-a2-5-v-10",
-        "word": "wrap up",
-        "phonetic": "/ræp ʌp/",
-        "partOfSpeech": "phrasal verb",
-        "meaningEs": "concluir una tarea",
-        "exampleEn": "Let's wrap up this meeting.",
-        "exampleEs": "Concluyamos esta reunión."
-      },
-      {
-        "id": "lesson-a2-5-v-11",
+        "id": "v-A2-5-3",
         "word": "budget",
         "phonetic": "/ˈbʌdʒɪt/",
         "partOfSpeech": "noun",
-        "meaningEs": "presupuesto disponible",
-        "exampleEn": "We need to stay within our budget.",
-        "exampleEs": "Debemos mantenernos dentro del presupuesto."
+        "meaningEs": "presupuesto asignado",
+        "exampleEn": "We must respect the project budget.",
+        "exampleEs": "Debemos respetar el presupuesto."
       },
       {
-        "id": "lesson-a2-5-v-12",
-        "word": "available",
-        "phonetic": "/əˈveɪləbəl/",
-        "partOfSpeech": "adj",
-        "meaningEs": "disponible / libre",
-        "exampleEn": "Are you available this afternoon?",
-        "exampleEs": "¿Estás libre esta tarde?"
+        "id": "v-A2-5-4",
+        "word": "feedback",
+        "phonetic": "/ˈfiːdbæk/",
+        "partOfSpeech": "noun",
+        "meaningEs": "retroalimentación útil",
+        "exampleEn": "Thank you for the constructive feedback.",
+        "exampleEs": "Gracias por los comentarios."
       },
       {
-        "id": "lesson-a2-5-v-13",
-        "word": "convenient",
-        "phonetic": "/kənˈviːniənt/",
-        "partOfSpeech": "adj",
-        "meaningEs": "cómodo / oportuno de horario",
-        "exampleEn": "Is Tuesday convenient for you?",
-        "exampleEs": "¿Te resulta oportuno el martes?"
-      },
-      {
-        "id": "lesson-a2-5-v-14",
-        "word": "look forward to",
-        "phonetic": "/lʊk ˈfɔːrwərd/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "esperar algo con entusiasmo",
-        "exampleEn": "I look forward to our conversation.",
-        "exampleEs": "Espero con gusto nuestra conversación."
-      },
-      {
-        "id": "lesson-a2-5-v-15",
+        "id": "v-A2-5-5",
         "word": "issue",
         "phonetic": "/ˈɪʃuː/",
         "partOfSpeech": "noun",
-        "meaningEs": "inconveniente o problema",
-        "exampleEn": "We resolved the technical issue.",
-        "exampleEs": "Resolvimos el problema técnico."
+        "meaningEs": "problema o dificultad",
+        "exampleEn": "We are solving the technical issue.",
+        "exampleEs": "Resolvemos el problema técnico."
       },
       {
-        "id": "lesson-a2-5-v-16",
+        "id": "v-A2-5-6",
+        "word": "convenient",
+        "phonetic": "/kənˈviːniənt/",
+        "partOfSpeech": "adjective",
+        "meaningEs": "oportuno o cómodo",
+        "exampleEn": "Is 3 PM convenient for our call?",
+        "exampleEs": "¿Te queda cómodo a las 3 PM?"
+      },
+      {
+        "id": "v-A2-5-7",
+        "word": "follow up",
+        "phonetic": "/ˈfɒloʊ ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "dar seguimiento a algo",
+        "exampleEn": "I will follow up with the vendor.",
+        "exampleEs": "Daré seguimiento con el proveedor."
+      },
+      {
+        "id": "v-A2-5-8",
+        "word": "wrap up",
+        "phonetic": "/ræp ʌp/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "concluir una sesión",
+        "exampleEn": "Let's wrap up today's meeting.",
+        "exampleEs": "Concluyamos la reunión de hoy."
+      },
+      {
+        "id": "v-A2-5-9",
         "word": "workload",
         "phonetic": "/ˈwɜːrkloʊd/",
         "partOfSpeech": "noun",
@@ -2572,108 +2724,171 @@ export const A2_LESSONS: CourseLesson[] = [
         "exampleEs": "Mi carga de trabajo es pesada."
       },
       {
-        "id": "lesson-a2-5-v-17",
-        "word": "in advance",
-        "phonetic": "/ədˈvæns/",
-        "partOfSpeech": "phrase",
-        "meaningEs": "por adelantado / con anticipación",
-        "exampleEn": "Thanks in advance for your help.",
-        "exampleEs": "Gracias por adelantado por tu ayuda."
+        "id": "v-A2-5-10",
+        "word": "proposal",
+        "phonetic": "/prəˈpoʊzəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "propuesta formal",
+        "exampleEn": "The client accepted our proposal.",
+        "exampleEs": "El cliente aceptó la propuesta."
       },
       {
-        "id": "lesson-a2-5-v-18",
+        "id": "v-A2-5-11",
+        "word": "deliverable",
+        "phonetic": "/dɪˈlɪvərəbəl/",
+        "partOfSpeech": "noun",
+        "meaningEs": "entregable de proyecto",
+        "exampleEn": "Here is the final deliverable.",
+        "exampleEs": "Aquí está el entregable final."
+      },
+      {
+        "id": "v-A2-5-12",
         "word": "priority",
         "phonetic": "/praɪˈɒrɪti/",
         "partOfSpeech": "noun",
         "meaningEs": "asunto prioritario",
-        "exampleEn": "Client satisfaction is our top priority.",
-        "exampleEs": "La satisfacción del cliente es prioridad."
+        "exampleEn": "Client support is our top priority.",
+        "exampleEs": "Soporte es nuestra prioridad."
       },
       {
-        "id": "lesson-a2-5-v-19",
+        "id": "v-A2-5-13",
+        "word": "clarify",
+        "phonetic": "/ˈklærɪfaɪ/",
+        "partOfSpeech": "verb",
+        "meaningEs": "aclarar un punto",
+        "exampleEn": "Could you clarify the third bullet?",
+        "exampleEs": "¿Podrías aclarar el tercer punto?"
+      },
+      {
+        "id": "v-A2-5-14",
+        "word": "confirm",
+        "phonetic": "/kənˈfɜːrm/",
+        "partOfSpeech": "verb",
+        "meaningEs": "confirmar asistencia o datos",
+        "exampleEn": "Please confirm your attendance.",
+        "exampleEs": "Por favor confirma tu asistencia."
+      },
+      {
+        "id": "v-A2-5-15",
+        "word": "update",
+        "phonetic": "/ʌpˈdeɪt/",
+        "partOfSpeech": "verb/noun",
+        "meaningEs": "actualización de estado",
+        "exampleEn": "Could you send a quick update?",
+        "exampleEs": "¿Podrías enviar una actualización?"
+      },
+      {
+        "id": "v-A2-5-16",
+        "word": "in advance",
+        "phonetic": "/ədˈvæns/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "con anticipación",
+        "exampleEn": "Thanks in advance for your support.",
+        "exampleEs": "Gracias de antemano por tu apoyo."
+      },
+      {
+        "id": "v-A2-5-17",
         "word": "asap",
         "phonetic": "/ˈeɪsæp/",
-        "partOfSpeech": "adv",
+        "partOfSpeech": "adverb",
         "meaningEs": "lo antes posible",
-        "exampleEn": "Please let me know asap.",
-        "exampleEs": "Por favor avísame lo antes posible."
+        "exampleEn": "Please review the document asap.",
+        "exampleEs": "Revisa el documento cuanto antes."
       },
       {
-        "id": "lesson-a2-5-v-20",
-        "word": "follow up",
-        "phonetic": "/ˈfɒloʊ ʌp/",
+        "id": "v-A2-5-18",
+        "word": "look forward to",
+        "phonetic": "/lʊk ˈfɔːrwərd/",
+        "partOfSpeech": "phrase",
+        "meaningEs": "esperar con agrado",
+        "exampleEn": "I look forward to working with you.",
+        "exampleEs": "Espero con gusto trabajar contigo."
+      },
+      {
+        "id": "v-A2-5-19",
+        "word": "deal with",
+        "phonetic": "/diːl wɪð/",
         "partOfSpeech": "phrasal verb",
-        "meaningEs": "dar seguimiento a un asunto",
-        "exampleEn": "I will follow up with you tomorrow.",
-        "exampleEs": "Daré seguimiento contigo mañana."
+        "meaningEs": "gestionar un asunto",
+        "exampleEn": "I am dealing with customer requests.",
+        "exampleEs": "Gestiono solicitudes de clientes."
+      },
+      {
+        "id": "v-A2-5-20",
+        "word": "figure out",
+        "phonetic": "/ˈfɪɡjər aʊt/",
+        "partOfSpeech": "phrasal verb",
+        "meaningEs": "descifrar / resolver",
+        "exampleEn": "We need to figure out a better solution.",
+        "exampleEs": "Debemos descifrar una mejor solución."
       }
     ],
     "coreChunks": [
       {
-        "id": "lesson-a2-5-c-1",
+        "id": "c-A2-5-1",
         "chunk": "Could I get a...",
         "meaningEs": "Me podrías dar / poner un...",
         "usageContext": "Restaurantes y cafés",
         "exampleSentence": "Could I get a black coffee to go, please?"
       },
       {
-        "id": "lesson-a2-5-c-2",
+        "id": "c-A2-5-2",
         "chunk": "I'm in the middle of something",
         "meaningEs": "Estoy en medio de algo ahora",
         "usageContext": "Cuando te interrumpen",
         "exampleSentence": "Can you give me five minutes? I'm in the middle of something."
       },
       {
-        "id": "lesson-a2-5-c-3",
+        "id": "c-A2-5-3",
         "chunk": "I'll get back to you soon",
         "meaningEs": "Te respondo pronto",
         "usageContext": "Consultas y correos",
         "exampleSentence": "Let me check the numbers and I'll get back to you soon."
       },
       {
-        "id": "lesson-a2-5-c-4",
+        "id": "c-A2-5-4",
         "chunk": "Let me think for a second...",
         "meaningEs": "Déjame pensar un segundo...",
         "usageContext": "Ganar tiempo natural",
         "exampleSentence": "That's a good question, let me think for a second..."
       },
       {
-        "id": "lesson-a2-5-c-5",
+        "id": "c-A2-5-5",
         "chunk": "What I mean is...",
         "meaningEs": "Lo que quiero decir es...",
         "usageContext": "Reencauzar la idea",
         "exampleSentence": "What I mean is that we should start with a small pilot."
       },
       {
-        "id": "lesson-a2-5-c-6",
+        "id": "c-A2-5-6",
         "chunk": "It depends on the day",
         "meaningEs": "Depende del día (nunca depend of)",
         "usageContext": "Hábitos con variación",
         "exampleSentence": "Sometimes I cook, but it depends on the day."
       },
       {
-        "id": "lesson-a2-5-c-7",
+        "id": "c-A2-5-7",
         "chunk": "Can I take a rain check?",
         "meaningEs": "¿Lo dejamos para otra ocasión?",
         "usageContext": "Posponer un plan con cortesía",
         "exampleSentence": "I have an exam tomorrow; can I take a rain check?"
       },
       {
-        "id": "lesson-a2-5-c-8",
+        "id": "c-A2-5-8",
         "chunk": "Would it be possible to...",
         "meaningEs": "¿Sería posible...",
         "usageContext": "Negociar plazos",
         "exampleSentence": "Would it be possible to extend the deadline until Monday?"
       },
       {
-        "id": "lesson-a2-5-c-9",
+        "id": "c-A2-5-9",
         "chunk": "To be honest with you...",
         "meaningEs": "Para ser sincero contigo...",
         "usageContext": "Dar opiniones francas",
         "exampleSentence": "To be honest with you, I think we need more time."
       },
       {
-        "id": "lesson-a2-5-c-10",
+        "id": "c-A2-5-10",
         "chunk": "As far as I know...",
         "meaningEs": "Hasta donde yo sé...",
         "usageContext": "Compartir información sin ser tajante",
@@ -2682,7 +2897,7 @@ export const A2_LESSONS: CourseLesson[] = [
     ],
     "clarificationTools": [
       {
-        "id": "lesson-a2-5-cf-1",
+        "id": "cf-A2-5-1",
         "triggerSituation": "No escuchaste bien una frase rápida",
         "phrase": "Could you say that one more time, please?",
         "meaningEs": "Podrías decir eso una vez más, por favor?",
@@ -2690,39 +2905,39 @@ export const A2_LESSONS: CourseLesson[] = [
         "whyItWorks": "Es la fórmula estándar más educada en inglés."
       },
       {
-        "id": "lesson-a2-5-cf-2",
+        "id": "cf-A2-5-2",
         "triggerSituation": "La persona habla muy acelerada",
         "phrase": "Could you speak a little slower, please?",
         "meaningEs": "Podrías hablar un poco más despacio, por favor?",
         "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide calma de forma asertiva sin disculpas excesivas."
+        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
       },
       {
-        "id": "lesson-a2-5-cf-3",
+        "id": "cf-A2-5-3",
         "triggerSituation": "No entendiste una palabra técnica o sigla",
         "phrase": "What does that acronym stand for?",
         "meaningEs": "Qué significan esas siglas?",
         "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para no quedarte con la duda."
+        "whyItWorks": "Pregunta directa para aclarar términos."
       },
       {
-        "id": "lesson-a2-5-cf-4",
+        "id": "cf-A2-5-4",
         "triggerSituation": "Quieres saber cómo se dice algo en inglés",
         "phrase": "How do you say that in English?",
         "meaningEs": "Cómo se dice eso en inglés?",
         "audioSample": "How do you say that in English?",
-        "whyItWorks": "Te permite preguntar apoyándote en gestos u objetos."
+        "whyItWorks": "Permite aprender señalando objetos o gestos."
       },
       {
-        "id": "lesson-a2-5-cf-5",
+        "id": "cf-A2-5-5",
         "triggerSituation": "Quieres verificar si entendiste bien",
         "phrase": "Just to make sure we're on the same page, did you mean...?",
         "meaningEs": "Solo para estar en sintonía, querías decir...?",
         "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones o encargos."
+        "whyItWorks": "Sincroniza acuerdos en reuniones."
       },
       {
-        "id": "lesson-a2-5-cf-6",
+        "id": "cf-A2-5-6",
         "triggerSituation": "Te perdiste en una explicación larga",
         "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
         "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
@@ -2731,278 +2946,278 @@ export const A2_LESSONS: CourseLesson[] = [
       }
     ],
     "listening": {
-      "id": "lesson-a2-5-ml",
-      "audioScript": "Hey! Quick update on the schedule: we're wrapping up the morning review, and we'll head out for lunch around one. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para coordinar la hora de almuerzo y el avance del día.",
-      "comprehensionQuestion": "¿Qué está terminando el equipo y a qué hora planean salir a almorzar?",
+      "id": "ml-A2-5",
+      "audioScript": "Hello! Quick update on our el verbo comodín get en todas sus facetas: we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
+      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre el verbo comodín get en todas sus facetas.",
+      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
       "options": [
-        "Están almorzando ya y regresan a la una",
-        "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-        "Cancelaron el almuerzo por exceso de trabajo"
+        "Cancelaron el proyecto por falta de tiempo",
+        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+        "Piden reprogramar todo para el próximo mes"
       ],
-      "correctAnswer": "Están terminando la revisión de la mañana y saldrán a almorzar cerca de la una",
-      "explanation": "El chunk clave es 'wrapping up the morning review' y 'head out for lunch around one'."
+      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
+      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
     },
     "workbook": [
       {
-        "id": "lesson-a2-5-wb-1",
+        "id": "wb-A2-5-1",
         "category": "routine",
-        "situationEs": "Situación #1: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #1 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-2",
+        "id": "wb-A2-5-2",
         "category": "social",
-        "situationEs": "Situación #2: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #2 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-3",
+        "id": "wb-A2-5-3",
         "category": "problem_solving",
-        "situationEs": "Situación #3: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #3 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-4",
+        "id": "wb-A2-5-4",
         "category": "asking_help",
-        "situationEs": "Situación #4: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #4 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-5",
+        "id": "wb-A2-5-5",
         "category": "opinion",
-        "situationEs": "Situación #5: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #5 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-6",
+        "id": "wb-A2-5-6",
         "category": "routine",
-        "situationEs": "Situación #6: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #6 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-7",
+        "id": "wb-A2-5-7",
         "category": "social",
-        "situationEs": "Situación #7: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #7 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-8",
+        "id": "wb-A2-5-8",
         "category": "problem_solving",
-        "situationEs": "Situación #8: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #8 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-9",
+        "id": "wb-A2-5-9",
         "category": "asking_help",
-        "situationEs": "Situación #9: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #9 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-10",
+        "id": "wb-A2-5-10",
         "category": "opinion",
-        "situationEs": "Situación #10: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #10 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-11",
+        "id": "wb-A2-5-11",
         "category": "routine",
-        "situationEs": "Situación #11: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #11 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-12",
+        "id": "wb-A2-5-12",
         "category": "social",
-        "situationEs": "Situación #12: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #12 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-13",
+        "id": "wb-A2-5-13",
         "category": "problem_solving",
-        "situationEs": "Situación #13: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #13 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-14",
+        "id": "wb-A2-5-14",
         "category": "asking_help",
-        "situationEs": "Situación #14: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #14 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-15",
+        "id": "wb-A2-5-15",
         "category": "opinion",
-        "situationEs": "Situación #15: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #15 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-16",
+        "id": "wb-A2-5-16",
         "category": "routine",
-        "situationEs": "Situación #16: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #16 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-17",
+        "id": "wb-A2-5-17",
         "category": "social",
-        "situationEs": "Situación #17: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #17 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-18",
+        "id": "wb-A2-5-18",
         "category": "problem_solving",
-        "situationEs": "Situación #18: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #18 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-19",
+        "id": "wb-A2-5-19",
         "category": "asking_help",
-        "situationEs": "Situación #19: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Are you able to handle this today, or should we schedule it for tomorrow?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #19 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Are you able to take care of this today, or should we schedule it for tomorrow?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       },
       {
-        "id": "lesson-a2-5-wb-20",
+        "id": "wb-A2-5-20",
         "category": "opinion",
-        "situationEs": "Situación #20: Estás en un contexto cotidiano relacionado con Expresar Preferencias y Decir NO y debes responder de forma directa y natural.",
-        "promptEn": "Could you let me know your thoughts on this when you have a moment?",
-        "guidanceTipEs": "Usa los chunks de la clase y responde en 1 o 2 oraciones sin traducir literal del español.",
+        "situationEs": "Situación #20 de El Verbo Comodín GET en Todas sus Facetas: Un interlocutor te hace una pregunta cotidiana relacionada con este tema y debes responder con naturalidad.",
+        "promptEn": "Could you give me your update on El Verbo Comodín GET en Todas sus Facetas when you have a moment?",
+        "guidanceTipEs": "Usa las estructuras gramaticales de la lección y responde en 1 o 2 oraciones completas.",
         "recommendedAnswers": [
-          "I'm actually in the middle of something right now, but I can definitely check it out in twenty minutes.",
-          "I'd rather take care of this first thing tomorrow morning, if that works for you.",
-          "Let me look over the details and I'll get back to you shortly."
+          "I'm actually in the middle of finishing this task, but I'll get back to you in twenty minutes.",
+          "I'd rather handle this first thing tomorrow morning, if that works on your end.",
+          "Let me double-check the details and I'll confirm with you shortly."
         ],
-        "pedagogicalNote": "Prioriza sonar fluido y amable. En inglés las respuestas directas siempre se acompañan de una razón breve o una alternativa."
+        "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
       }
     ]
   }

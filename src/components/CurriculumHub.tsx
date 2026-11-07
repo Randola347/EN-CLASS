@@ -6,7 +6,6 @@ import {
   Lightbulb, 
   Sparkles,
   MessageCircleQuestion,
-  ShieldAlert,
   Headphones,
   Check,
   Eye,
@@ -15,6 +14,7 @@ import {
 import type { CourseLesson } from '../types/curriculum';
 import { useSpeech } from '../hooks/useSpeech';
 import { InteractiveWorkbook } from './InteractiveWorkbook';
+import { GrammarChartViewer } from './GrammarChartViewer';
 
 interface Props {
   lessons: CourseLesson[];
@@ -88,7 +88,7 @@ export const CurriculumHub: React.FC<Props> = ({
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
+    <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 space-y-6">
       {/* Level Selector Bar (Clean White & Blue Style) */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 p-4 rounded-3xl shadow-xs">
         <div className="flex items-center gap-3">
@@ -248,51 +248,10 @@ export const CurriculumHub: React.FC<Props> = ({
             </button>
           </div>
 
-          {/* STEP 1: THEORY */}
+          {/* STEP 1: THEORY & GRAMMAR CHART */}
           {activeStep === 'theory' && (
             <div className="space-y-6">
-              <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200">
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{selectedLesson.theory.title}</h3>
-                <p className="text-sm text-slate-700 leading-relaxed">
-                  {selectedLesson.theory.explanationEs}
-                </p>
-
-                <div className="mt-5 p-4 bg-blue-50 border border-blue-200 rounded-2xl">
-                  <span className="text-xs font-bold uppercase tracking-wider text-blue-800 block mb-1">
-                    Fórmula de Uso Inmediato:
-                  </span>
-                  <span className="text-base font-mono font-bold text-slate-900">
-                    {selectedLesson.theory.practicalFormula}
-                  </span>
-                </div>
-
-                {selectedLesson.theory.timeExpressions && (
-                  <div className="mt-4 p-4 bg-white border border-slate-200 rounded-2xl">
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
-                      Expresiones Temporales Frecuentes:
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedLesson.theory.timeExpressions.map((exp, i) => (
-                        <span key={i} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-xl text-xs font-medium">
-                          {exp}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3">
-                  <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-amber-900 block mb-0.5">
-                      El error típico del hispanohablante:
-                    </span>
-                    <p className="text-xs text-amber-900/90 leading-relaxed">
-                      {selectedLesson.theory.commonMistakeEs || selectedLesson.theory.comparisonSpanish}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <GrammarChartViewer theory={selectedLesson.theory} />
 
               <button
                 onClick={() => handleStepChange('vocabulary')}

@@ -224,7 +224,7 @@ export const App: React.FC = () => {
 
       {/* Top Navbar (Clean White & Blue Style) */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center font-black text-white text-lg shadow-sm shadow-blue-600/30">
               EN
@@ -356,7 +356,7 @@ export const App: React.FC = () => {
       </nav>
 
       {/* Main Dynamic Viewport */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-8">
+      <main className="flex-1 w-full max-w-[1600px] mx-auto px-2 sm:px-6 py-6">
         {activeTab === 'curriculum' && (
           <CurriculumHub
             lessons={COMPREHENSIVE_CURRICULUM}

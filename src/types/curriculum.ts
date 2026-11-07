@@ -1,12 +1,41 @@
 export type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2';
 
+export interface GrammarChartRow {
+  subject: string;
+  affirmative: string;
+  negative: string;
+  question: string;
+  shortAnswer: string;
+}
+
+export interface GrammarChart {
+  title: string;
+  structureFormula: string; // e.g. "Subject + verb + -s / -es"
+  rows: GrammarChartRow[];
+  usageRules: {
+    ruleTitle: string;
+    description: string;
+    example: string;
+  }[];
+  spellingRules?: {
+    condition: string;
+    change: string;
+    example: string;
+  }[];
+}
+
 export interface TheoryPoint {
   title: string;
-  explanationEs: string;
-  practicalFormula: string;
-  timeExpressions?: string[];
-  commonMistakeEs?: string;
-  comparisonSpanish?: string;
+  overviewEs: string;
+  explanationEs?: string;
+  practicalFormula?: string;
+  grammarChart: GrammarChart;
+  signalWords: string[];
+  commonMistakes: {
+    wrong: string;
+    correct: string;
+    explanation: string;
+  }[];
 }
 
 export interface VocabularyItem {
@@ -20,7 +49,7 @@ export interface VocabularyItem {
 }
 
 export interface FunctionalChunk {
-  id?: string;
+  id: string;
   chunk: string;
   meaningEs: string;
   usageContext: string;
@@ -28,13 +57,12 @@ export interface FunctionalChunk {
 }
 
 export interface ClarificationQuestion {
-  id?: string;
+  id: string;
   triggerSituation: string;
   phrase: string;
-  audioText?: string;
   audioSample?: string;
   meaningEs: string;
-  whyItWorks?: string;
+  whyItWorks: string;
 }
 
 export interface MicroListeningItem {
@@ -60,15 +88,15 @@ export interface WorkbookPrompt {
 export interface CourseLesson {
   id: string;
   level: CEFRLevel;
-  lessonNumber: number;
+  lessonNumber: number; // 1 to 5
   title: string;
   tagline: string;
   practicalGoal: string;
-  grammarFocus?: string;
+  grammarFocus: string;
   theory: TheoryPoint;
-  vocabulary: VocabularyItem[];
-  coreChunks: FunctionalChunk[];
-  clarificationTools: ClarificationQuestion[];
+  vocabulary: VocabularyItem[]; // 20 palabras específicas
+  coreChunks: FunctionalChunk[]; // 10 chunks específicos
+  clarificationTools: ClarificationQuestion[]; // 6 preguntas salvavidas
   listening: MicroListeningItem;
-  workbook: WorkbookPrompt[];
+  workbook: WorkbookPrompt[]; // 20 prompts prácticos con redacción
 }
