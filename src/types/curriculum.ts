@@ -10,7 +10,7 @@ export interface GrammarChartRow {
 
 export interface GrammarChart {
   title: string;
-  structureFormula: string; // e.g. "Subject + verb + -s / -es"
+  structureFormula: string;
   rows: GrammarChartRow[];
   usageRules: {
     ruleTitle: string;
@@ -56,17 +56,25 @@ export interface FunctionalChunk {
   exampleSentence: string;
 }
 
-export interface ClarificationQuestion {
+export interface RescueFormula {
   id: string;
-  triggerSituation: string;
+  category: 'repeat' | 'meaning' | 'translate' | 'clarify' | 'buying_time' | 'confirm';
+  categoryLabelEs: string;
+  situationEs: string;
   phrase: string;
-  audioSample?: string;
   meaningEs: string;
+  audioSample: string;
   whyItWorks: string;
+  exampleDialogue: {
+    speakerA: string;
+    userReply: string;
+  };
 }
 
 export interface MicroListeningItem {
   id: string;
+  title: string; // e.g. "Audio 1: Diálogo Informal en la Cafetería"
+  contextType: 'daily' | 'work' | 'fast_paced';
   audioScript: string;
   spanishContext: string;
   comprehensionQuestion: string;
@@ -94,9 +102,8 @@ export interface CourseLesson {
   practicalGoal: string;
   grammarFocus: string;
   theory: TheoryPoint;
-  vocabulary: VocabularyItem[]; // 20 palabras específicas
-  coreChunks: FunctionalChunk[]; // 10 chunks específicos
-  clarificationTools: ClarificationQuestion[]; // 6 preguntas salvavidas
-  listening: MicroListeningItem;
-  workbook: WorkbookPrompt[]; // 20 prompts prácticos con redacción
+  vocabulary: VocabularyItem[]; // 20 palabras 100% únicas
+  coreChunks: FunctionalChunk[]; // 10 chunks 100% únicos
+  listenings: MicroListeningItem[]; // 3 micro-listenings por clase
+  workbook: WorkbookPrompt[]; // 20 ejercicios 100% únicos
 }

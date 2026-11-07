@@ -5,13 +5,12 @@ import {
   CheckCircle, 
   Lightbulb, 
   Sparkles,
-  MessageCircleQuestion,
   Headphones,
   Check,
   Eye,
   EyeOff
 } from 'lucide-react';
-import type { CourseLesson } from '../types/curriculum';
+import type { CourseLesson, MicroListeningItem } from '../types/curriculum';
 import { useSpeech } from '../hooks/useSpeech';
 import { InteractiveWorkbook } from './InteractiveWorkbook';
 import { GrammarChartViewer } from './GrammarChartViewer';
@@ -54,19 +53,22 @@ export const CurriculumHub: React.FC<Props> = ({
     return lessons[0];
   });
 
-  const [activeStep, setActiveStep] = useState<'theory' | 'vocabulary' | 'chunks' | 'clarification' | 'listening' | 'workbook'>(
-    (lastActiveStep as any) || 'theory'
+  const [activeStep, setActiveStep] = useState<'theory' | 'vocabulary' | 'chunks' | 'listening' | 'workbook'>(
+    (lastActiveStep === 'clarification' ? 'listening' : (lastActiveStep as any)) || 'theory'
   );
 
-  // Micro-listening state
-  const [selectedListeningOption, setSelectedListeningOption] = useState<string | null>(null);
-  const [showScript, setShowScript] = useState(false);
+  // Multi-Listening State
+  const [activeListeningIdx, setActiveListeningIdx] = useState<number>(0);
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
+  const [showScript, setShowScript] = useState<Record<string, boolean>>({});
 
   const { speak, isSpeaking } = useSpeech();
 
   const filteredLessons = lessons.filter(l => l.level === selectedLevel);
+  const currentListenings: MicroListeningItem[] = selectedLesson.listenings || [];
+  const activeListening = currentListenings[activeListeningIdx] || currentListenings[0];
 
-  const handleStepChange = (step: 'theory' | 'vocabulary' | 'chunks' | 'clarification' | 'listening' | 'workbook') => {
+  const handleStepChange = (step: 'theory' | 'vocabulary' | 'chunks' | 'listening' | 'workbook') => {
     setActiveStep(step);
     onSavePosition(selectedLesson.id, step);
   };
@@ -74,8 +76,9 @@ export const CurriculumHub: React.FC<Props> = ({
   const handleSelectLesson = (lesson: CourseLesson) => {
     setSelectedLesson(lesson);
     setActiveStep('theory');
-    setSelectedListeningOption(null);
-    setShowScript(false);
+    setActiveListeningIdx(0);
+    setSelectedOptions({});
+    setShowScript({});
     onSavePosition(lesson.id, 'theory');
   };
 
@@ -89,7 +92,7 @@ export const CurriculumHub: React.FC<Props> = ({
 
   return (
     <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 space-y-6">
-      {/* Level Selector Bar (Clean White & Blue Style) */}
+      {/* Level Selector Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 p-4 rounded-3xl shadow-xs">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
@@ -97,7 +100,7 @@ export const CurriculumHub: React.FC<Props> = ({
           </div>
           <div>
             <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Plan de Clases Prácticas</h3>
-            <p className="text-xs text-slate-500">20 Clases Maestras con Práctica Extensiva</p>
+            <p className="text-xs text-slate-500">20 Clases Maestras con Contenido 100% Único e Individual</p>
           </div>
         </div>
 
@@ -108,7 +111,7 @@ export const CurriculumHub: React.FC<Props> = ({
               onClick={() => handleLevelChange(lvl)}
               className={`px-4 py-2 rounded-2xl text-xs font-black transition-all ${
                 selectedLevel === lvl
-                  ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30 scale-105'
+                  ? 'bg-blue-600 text-white shadow-xs scale-105'
                   : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
               }`}
             >
@@ -173,7 +176,7 @@ export const CurriculumHub: React.FC<Props> = ({
             </p>
           </div>
 
-          {/* Navigation Steps inside the Lesson */}
+          {/* Navigation Steps inside the Lesson (5 Pasos Limpios) */}
           <div className="flex gap-2 border-b border-slate-100 pb-4 mb-6 overflow-x-auto">
             <button
               onClick={() => handleStepChange('theory')}
@@ -184,7 +187,7 @@ export const CurriculumHub: React.FC<Props> = ({
               }`}
             >
               <Lightbulb className="w-4 h-4" />
-              <span>1. Teoría & Tiempos</span>
+              <span>1. Teoría & Tablas</span>
             </button>
 
             <button
@@ -196,7 +199,7 @@ export const CurriculumHub: React.FC<Props> = ({
               }`}
             >
               <BookOpen className="w-4 h-4" />
-              <span>2. Vocabulario ({selectedLesson.vocabulary.length})</span>
+              <span>2. Vocabulario Único ({selectedLesson.vocabulary.length})</span>
             </button>
 
             <button
@@ -212,18 +215,6 @@ export const CurriculumHub: React.FC<Props> = ({
             </button>
 
             <button
-              onClick={() => handleStepChange('clarification')}
-              className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
-                activeStep === 'clarification'
-                  ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <MessageCircleQuestion className="w-4 h-4" />
-              <span>4. ¿Si No Sé Algo? (Preguntas)</span>
-            </button>
-
-            <button
               onClick={() => handleStepChange('listening')}
               className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
                 activeStep === 'listening'
@@ -232,7 +223,7 @@ export const CurriculumHub: React.FC<Props> = ({
               }`}
             >
               <Headphones className="w-4 h-4" />
-              <span>5. Micro-Listening</span>
+              <span>4. Multi-Listening ({currentListenings.length} Audios)</span>
             </button>
 
             <button
@@ -244,7 +235,7 @@ export const CurriculumHub: React.FC<Props> = ({
               }`}
             >
               <CheckCircle className="w-4 h-4" />
-              <span>6. Workbook Práctico ({selectedLesson.workbook.length})</span>
+              <span>5. Workbook Práctico ({selectedLesson.workbook.length})</span>
             </button>
           </div>
 
@@ -263,12 +254,12 @@ export const CurriculumHub: React.FC<Props> = ({
             </div>
           )}
 
-          {/* STEP 2: VOCABULARY (20 Palabras) */}
+          {/* STEP 2: VOCABULARY (20 Palabras Únicas) */}
           {activeStep === 'vocabulary' && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-600">
-                  Las 20 palabras indispensables de este tema. Pulsa el altavoz para escuchar su pronunciación:
+                  Las 20 palabras indispensables de esta clase. Pulsa el altavoz para escuchar su pronunciación nativa:
                 </p>
                 <span className="text-xs font-bold text-blue-600">{selectedLesson.vocabulary.length} palabras</span>
               </div>
@@ -317,7 +308,7 @@ export const CurriculumHub: React.FC<Props> = ({
             </div>
           )}
 
-          {/* STEP 3: CHUNKS (10 Chunks) */}
+          {/* STEP 3: CHUNKS (10 Chunks Únicos) */}
           {activeStep === 'chunks' && (
             <div className="space-y-4">
               <p className="text-xs text-slate-600">
@@ -354,86 +345,55 @@ export const CurriculumHub: React.FC<Props> = ({
               </div>
 
               <button
-                onClick={() => handleStepChange('clarification')}
-                className="w-full mt-4 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
-              >
-                <span>Ver Fórmulas Salvavidas ("¿Y si no sé algo?")</span>
-                <span>→</span>
-              </button>
-            </div>
-          )}
-
-          {/* STEP 4: CLARIFICATION (6 Fórmulas para Preguntar) */}
-          {activeStep === 'clarification' && (
-            <div className="space-y-4">
-              <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
-                <h4 className="text-sm font-bold text-blue-900 mb-0.5 flex items-center gap-2">
-                  <MessageCircleQuestion className="w-4 h-4 text-blue-600" />
-                  Cómo preguntar y pedir ayuda como un nativo
-                </h4>
-                <p className="text-xs text-slate-600">
-                  Si no entendiste, no sabes cómo se dice algo o hablaron muy rápido, usa estas 6 fórmulas para tomar el control de la charla:
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                {selectedLesson.clarificationTools.map((tool, idx) => (
-                  <div
-                    key={tool.id || idx}
-                    className="p-4 rounded-2xl border border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
-                  >
-                    <div>
-                      <span className="text-[11px] font-bold text-slate-400 block mb-0.5">
-                        Situación: {tool.triggerSituation}
-                      </span>
-                      <div className="text-base font-bold text-slate-900 flex items-center gap-2">
-                        "{tool.phrase}"
-                        <button
-                          onClick={() => speak(tool.audioSample || tool.phrase)}
-                          className="p-1 rounded bg-slate-100 hover:bg-blue-600 text-slate-600 hover:text-white transition"
-                          title="Audio"
-                        >
-                          <Volume2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                      <p className="text-xs text-blue-700 font-semibold mt-0.5">👉 {tool.meaningEs}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <button
                 onClick={() => handleStepChange('listening')}
                 className="w-full mt-4 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
               >
-                <span>Continuar al Micro-Listening</span>
+                <span>Continuar al Multi-Listening ({currentListenings.length} Audios)</span>
                 <span>→</span>
               </button>
             </div>
           )}
 
-          {/* STEP 5: LISTENING */}
-          {activeStep === 'listening' && (
+          {/* STEP 4: MULTI-LISTENING (3 Audios Diferenciados por Clase) */}
+          {activeStep === 'listening' && activeListening && (
             <div className="space-y-6">
+              {/* Listening Selector Tabs */}
+              <div className="flex flex-wrap gap-2 border-b border-slate-200 pb-3">
+                {currentListenings.map((item, idx) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveListeningIdx(idx)}
+                    className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 ${
+                      activeListeningIdx === idx
+                        ? 'bg-blue-600 text-white shadow-xs'
+                        : 'bg-slate-100 text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    <Headphones className="w-3.5 h-3.5" />
+                    <span>{item.title}</span>
+                  </button>
+                ))}
+              </div>
+
               <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8">
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
                   <div>
                     <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800 rounded-full">
-                      Micro-Listening Nativo
+                      Audio #{activeListeningIdx + 1} de {currentListenings.length}
                     </span>
-                    <h3 className="text-lg font-bold text-slate-900 mt-2">Entrenamiento Auditivo en Contexto</h3>
+                    <h3 className="text-lg font-bold text-slate-900 mt-2">{activeListening.title}</h3>
                   </div>
                 </div>
 
                 <div className="bg-white rounded-2xl p-4 mb-6 border border-slate-200">
-                  <p className="text-xs uppercase font-bold text-slate-400 mb-1">Contexto:</p>
-                  <p className="text-sm text-slate-700">{selectedLesson.listening.spanishContext}</p>
+                  <p className="text-xs uppercase font-bold text-slate-400 mb-1">Situación / Contexto:</p>
+                  <p className="text-sm text-slate-700">{activeListening.spanishContext}</p>
                 </div>
 
                 {/* Audio controls */}
                 <div className="flex flex-wrap items-center justify-center gap-4 py-6 bg-blue-50/50 rounded-2xl border border-blue-100 mb-6">
                   <button
-                    onClick={() => speak(selectedLesson.listening.audioScript, 0.95)}
+                    onClick={() => speak(activeListening.audioScript, 0.95)}
                     className="flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition shadow-sm"
                   >
                     <Volume2 className="w-5 h-5" />
@@ -441,7 +401,7 @@ export const CurriculumHub: React.FC<Props> = ({
                   </button>
 
                   <button
-                    onClick={() => speak(selectedLesson.listening.audioScript, 0.75)}
+                    onClick={() => speak(activeListening.audioScript, 0.75)}
                     className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition"
                   >
                     <Volume2 className="w-4 h-4 text-blue-600" />
@@ -449,33 +409,33 @@ export const CurriculumHub: React.FC<Props> = ({
                   </button>
 
                   <button
-                    onClick={() => setShowScript(!showScript)}
+                    onClick={() => setShowScript(prev => ({ ...prev, [activeListening.id]: !prev[activeListening.id] }))}
                     className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition"
                   >
-                    {showScript ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4 text-emerald-600" />}
-                    <span>{showScript ? 'Ocultar Guion' : 'Revelar Guion'}</span>
+                    {showScript[activeListening.id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4 text-emerald-600" />}
+                    <span>{showScript[activeListening.id] ? 'Ocultar Guion' : 'Revelar Guion'}</span>
                   </button>
                 </div>
 
-                {showScript && (
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mb-6 text-center">
+                {showScript[activeListening.id] && (
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mb-6 text-center animate-fade-in">
                     <p className="text-xs uppercase font-bold text-emerald-800 mb-1">Guion Completo:</p>
-                    <p className="text-base font-semibold text-slate-900 italic">"{selectedLesson.listening.audioScript}"</p>
+                    <p className="text-base font-semibold text-slate-900 italic">"{activeListening.audioScript}"</p>
                   </div>
                 )}
 
                 {/* Comprehension Question */}
                 <div className="mb-4">
                   <label className="block text-sm font-bold text-slate-800 mb-3">
-                    {selectedLesson.listening.comprehensionQuestion}
+                    {activeListening.comprehensionQuestion}
                   </label>
                   <div className="space-y-2">
-                    {selectedLesson.listening.options.map((opt, i) => {
-                      const isCorrect = opt === selectedLesson.listening.correctAnswer;
-                      const isSelected = selectedListeningOption === opt;
+                    {activeListening.options.map((opt, i) => {
+                      const isCorrect = opt === activeListening.correctAnswer;
+                      const isSelected = selectedOptions[activeListening.id] === opt;
 
                       let style = "w-full text-left p-3.5 rounded-2xl border text-sm font-medium transition flex items-center justify-between ";
-                      if (!selectedListeningOption) {
+                      if (!selectedOptions[activeListening.id]) {
                         style += "bg-white border-slate-200 text-slate-700 hover:border-blue-400 hover:bg-blue-50/20";
                       } else if (isCorrect) {
                         style += "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold";
@@ -488,37 +448,51 @@ export const CurriculumHub: React.FC<Props> = ({
                       return (
                         <button
                           key={i}
-                          disabled={!!selectedListeningOption}
-                          onClick={() => setSelectedListeningOption(opt)}
+                          disabled={!!selectedOptions[activeListening.id]}
+                          onClick={() => setSelectedOptions(prev => ({ ...prev, [activeListening.id]: opt }))}
                           className={style}
                         >
                           <span>{opt}</span>
-                          {selectedListeningOption && isCorrect && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
+                          {selectedOptions[activeListening.id] && isCorrect && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
                         </button>
                       );
                     })}
                   </div>
                 </div>
 
-                {selectedListeningOption && (
+                {selectedOptions[activeListening.id] && (
                   <div className="p-4 rounded-2xl bg-white border border-slate-200 text-xs text-slate-600">
                     <span className="font-bold text-slate-800 block mb-1">Explicación:</span>
-                    {selectedLesson.listening.explanation}
+                    {activeListening.explanation}
                   </div>
                 )}
               </div>
 
-              <button
-                onClick={() => handleStepChange('workbook')}
-                className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black rounded-2xl text-sm transition shadow-md flex items-center justify-center gap-2"
-              >
-                <span>¡Ir al Workbook de Práctica Extensiva (20 Ejercicios)!</span>
-                <span>→</span>
-              </button>
+              {/* Next Audio / Go to Workbook */}
+              <div className="flex items-center justify-between">
+                {activeListeningIdx < currentListenings.length - 1 ? (
+                  <button
+                    onClick={() => setActiveListeningIdx(prev => prev + 1)}
+                    className="px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-2xl text-xs transition"
+                  >
+                    Siguiente Audio de la Clase ({activeListeningIdx + 2}/{currentListenings.length}) →
+                  </button>
+                ) : (
+                  <div />
+                )}
+
+                <button
+                  onClick={() => handleStepChange('workbook')}
+                  className="py-3.5 px-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black rounded-2xl text-sm transition shadow-md flex items-center gap-2"
+                >
+                  <span>Ir al Workbook de Práctica Extensiva (20 Ejercicios)</span>
+                  <span>→</span>
+                </button>
+              </div>
             </div>
           )}
 
-          {/* STEP 6: WORKBOOK (20 Ejercicios Interactivos con Respuestas Guardadas) */}
+          {/* STEP 5: WORKBOOK (20 Ejercicios Interactivos con Respuestas Guardadas) */}
           {activeStep === 'workbook' && (
             <InteractiveWorkbook
               prompts={selectedLesson.workbook}

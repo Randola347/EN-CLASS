@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Headphones, 
   Zap, 
-  Shield, 
+  ShieldAlert, 
   UserCircle, 
   Flame,
   Award,
@@ -15,13 +15,12 @@ import type { StudentProfile } from './types';
 import { COMPREHENSIVE_CURRICULUM } from './data/curriculumData';
 import { 
   MICRO_LISTENING_DRILLS, 
-  REFLEX_DRILLS, 
-  SAFETY_BELTS 
+  REFLEX_DRILLS 
 } from './data/drillsData';
 import { CurriculumHub } from './components/CurriculumHub';
+import { RescueCenterHub } from './components/RescueCenterHub';
 import { MicroListeningModule } from './components/MicroListeningModule';
 import { ReflexTrainingModule } from './components/ReflexTrainingModule';
-import { SafetyBeltHub } from './components/SafetyBeltHub';
 import { StudentProfileModal } from './components/StudentProfileModal';
 import { AuthModal } from './components/AuthModal';
 import { AdminDashboard } from './components/AdminDashboard';
@@ -33,7 +32,7 @@ export const App: React.FC = () => {
     return saved ? JSON.parse(saved) : null;
   });
 
-  const [activeTab, setActiveTab] = useState<'curriculum' | 'listening' | 'reflex' | 'safety' | 'profile' | 'admin'>('curriculum');
+  const [activeTab, setActiveTab] = useState<'curriculum' | 'listening' | 'reflex' | 'rescue' | 'profile' | 'admin'>('curriculum');
   
   const [profile, setProfile] = useState<StudentProfile>({
     student_name: currentUser?.name || 'Estudiante',
@@ -316,15 +315,15 @@ export const App: React.FC = () => {
           </button>
 
           <button
-            onClick={() => setActiveTab('safety')}
+            onClick={() => setActiveTab('rescue')}
             className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
-              activeTab === 'safety'
+              activeTab === 'rescue'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <Shield className="w-4 h-4" />
-            <span>Salvavidas (Safety Belts)</span>
+            <ShieldAlert className="w-4 h-4 text-amber-500" />
+            <span>Centro de Rescate & Clarificación</span>
           </button>
 
           <button
@@ -384,11 +383,8 @@ export const App: React.FC = () => {
           />
         )}
 
-        {activeTab === 'safety' && (
-          <SafetyBeltHub
-            items={SAFETY_BELTS}
-            onAddChunk={(chk) => handleCompleteDrill(chk)}
-          />
+        {activeTab === 'rescue' && (
+          <RescueCenterHub />
         )}
 
         {activeTab === 'profile' && (

@@ -308,69 +308,6 @@ export const B2_LESSONS: CourseLesson[] = [
         "exampleSentence": "As far as I know, the flight is still on schedule."
       }
     ],
-    "clarificationTools": [
-      {
-        "id": "cf-B2-1-1",
-        "triggerSituation": "No escuchaste bien una frase rápida",
-        "phrase": "Could you say that one more time, please?",
-        "meaningEs": "Podrías decir eso una vez más, por favor?",
-        "audioSample": "Could you say that one more time, please?",
-        "whyItWorks": "Es la fórmula estándar más educada en inglés."
-      },
-      {
-        "id": "cf-B2-1-2",
-        "triggerSituation": "La persona habla muy acelerada",
-        "phrase": "Could you speak a little slower, please?",
-        "meaningEs": "Podrías hablar un poco más despacio, por favor?",
-        "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
-      },
-      {
-        "id": "cf-B2-1-3",
-        "triggerSituation": "No entendiste una palabra técnica o sigla",
-        "phrase": "What does that acronym stand for?",
-        "meaningEs": "Qué significan esas siglas?",
-        "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para aclarar términos."
-      },
-      {
-        "id": "cf-B2-1-4",
-        "triggerSituation": "Quieres saber cómo se dice algo en inglés",
-        "phrase": "How do you say that in English?",
-        "meaningEs": "Cómo se dice eso en inglés?",
-        "audioSample": "How do you say that in English?",
-        "whyItWorks": "Permite aprender señalando objetos o gestos."
-      },
-      {
-        "id": "cf-B2-1-5",
-        "triggerSituation": "Quieres verificar si entendiste bien",
-        "phrase": "Just to make sure we're on the same page, did you mean...?",
-        "meaningEs": "Solo para estar en sintonía, querías decir...?",
-        "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones."
-      },
-      {
-        "id": "cf-B2-1-6",
-        "triggerSituation": "Te perdiste en una explicación larga",
-        "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
-        "audioSample": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "whyItWorks": "Recupera la atención con naturalidad nativa."
-      }
-    ],
-    "listening": {
-      "id": "ml-B2-1",
-      "audioScript": "Hello! Quick update on our tercer condicional y arrepentimientos (should have / would have): we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre tercer condicional y arrepentimientos (should have / would have).",
-      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
-      "options": [
-        "Cancelaron el proyecto por falta de tiempo",
-        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-        "Piden reprogramar todo para el próximo mes"
-      ],
-      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
-    },
     "workbook": [
       {
         "id": "wb-B2-1-1",
@@ -631,6 +568,53 @@ export const B2_LESSONS: CourseLesson[] = [
           "Let me double-check the details and I'll confirm with you shortly."
         ],
         "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
+      }
+    ],
+    "listenings": [
+      {
+        "id": "ml-lesson-b2-1-1",
+        "title": "Audio 1: Diálogo Cotidiano / Café",
+        "contextType": "daily",
+        "audioScript": "Hey! Are you having lunch around here today? We're heading to the Italian bistro across the street if you want to join us.",
+        "spanishContext": "Un colega te invita casualmente a almorzar en un restaurante cercano.",
+        "comprehensionQuestion": "¿A dónde van a ir y qué te preguntan?",
+        "options": [
+          "Van a trabajar hasta tarde y te piden un reporte",
+          "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+          "Van al aeropuerto a recoger a un cliente"
+        ],
+        "correctAnswer": "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+        "explanation": "El hablante dice 'heading to the Italian bistro across the street if you want to join us'."
+      },
+      {
+        "id": "ml-lesson-b2-1-2",
+        "title": "Audio 2: Llamada / Contexto Laboral",
+        "contextType": "work",
+        "audioScript": "Good morning. Quick update on the client request: we've reviewed the feedback, and everything looks ready for the final sign-off this afternoon.",
+        "spanishContext": "Mensaje de voz de tu supervisor sobre la solicitud de un cliente.",
+        "comprehensionQuestion": "¿Cuál es el estatus del requerimiento del cliente?",
+        "options": [
+          "Fue cancelado por presupuesto",
+          "Revisaron el feedback y todo está listo para la firma final esta tarde",
+          "Necesitan dos semanas más para corregir errores"
+        ],
+        "correctAnswer": "Revisaron el feedback y todo está listo para la firma final esta tarde",
+        "explanation": "Menciona 'reviewed the feedback, and everything looks ready for the final sign-off this afternoon'."
+      },
+      {
+        "id": "ml-lesson-b2-1-3",
+        "title": "Audio 3: Situación Rápida / Imprevisto",
+        "contextType": "fast_paced",
+        "audioScript": "Excuse me, could you tell me if the express train to the airport stops at platform four or platform seven? The display board is down.",
+        "spanishContext": "Un viajero apresurado en la estación de tren te pide auxilio por una pantalla apagada.",
+        "comprehensionQuestion": "¿Qué información necesita el viajero?",
+        "options": [
+          "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+          "Comprar un boleto de ida y vuelta",
+          "A qué hora abren las tiendas del aeropuerto"
+        ],
+        "correctAnswer": "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+        "explanation": "Pregunta 'if the express train to the airport stops at platform four or platform seven? The display board is down'."
       }
     ]
   },
@@ -947,69 +931,6 @@ export const B2_LESSONS: CourseLesson[] = [
         "exampleSentence": "As far as I know, the flight is still on schedule."
       }
     ],
-    "clarificationTools": [
-      {
-        "id": "cf-B2-2-1",
-        "triggerSituation": "No escuchaste bien una frase rápida",
-        "phrase": "Could you say that one more time, please?",
-        "meaningEs": "Podrías decir eso una vez más, por favor?",
-        "audioSample": "Could you say that one more time, please?",
-        "whyItWorks": "Es la fórmula estándar más educada en inglés."
-      },
-      {
-        "id": "cf-B2-2-2",
-        "triggerSituation": "La persona habla muy acelerada",
-        "phrase": "Could you speak a little slower, please?",
-        "meaningEs": "Podrías hablar un poco más despacio, por favor?",
-        "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
-      },
-      {
-        "id": "cf-B2-2-3",
-        "triggerSituation": "No entendiste una palabra técnica o sigla",
-        "phrase": "What does that acronym stand for?",
-        "meaningEs": "Qué significan esas siglas?",
-        "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para aclarar términos."
-      },
-      {
-        "id": "cf-B2-2-4",
-        "triggerSituation": "Quieres saber cómo se dice algo en inglés",
-        "phrase": "How do you say that in English?",
-        "meaningEs": "Cómo se dice eso en inglés?",
-        "audioSample": "How do you say that in English?",
-        "whyItWorks": "Permite aprender señalando objetos o gestos."
-      },
-      {
-        "id": "cf-B2-2-5",
-        "triggerSituation": "Quieres verificar si entendiste bien",
-        "phrase": "Just to make sure we're on the same page, did you mean...?",
-        "meaningEs": "Solo para estar en sintonía, querías decir...?",
-        "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones."
-      },
-      {
-        "id": "cf-B2-2-6",
-        "triggerSituation": "Te perdiste en una explicación larga",
-        "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
-        "audioSample": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "whyItWorks": "Recupera la atención con naturalidad nativa."
-      }
-    ],
-    "listening": {
-      "id": "ml-B2-2",
-      "audioScript": "Hello! Quick update on our voz pasiva en entornos profesionales y corporativos: we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre voz pasiva en entornos profesionales y corporativos.",
-      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
-      "options": [
-        "Cancelaron el proyecto por falta de tiempo",
-        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-        "Piden reprogramar todo para el próximo mes"
-      ],
-      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
-    },
     "workbook": [
       {
         "id": "wb-B2-2-1",
@@ -1270,6 +1191,53 @@ export const B2_LESSONS: CourseLesson[] = [
           "Let me double-check the details and I'll confirm with you shortly."
         ],
         "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
+      }
+    ],
+    "listenings": [
+      {
+        "id": "ml-lesson-b2-2-1",
+        "title": "Audio 1: Diálogo Cotidiano / Café",
+        "contextType": "daily",
+        "audioScript": "Hey! Are you having lunch around here today? We're heading to the Italian bistro across the street if you want to join us.",
+        "spanishContext": "Un colega te invita casualmente a almorzar en un restaurante cercano.",
+        "comprehensionQuestion": "¿A dónde van a ir y qué te preguntan?",
+        "options": [
+          "Van a trabajar hasta tarde y te piden un reporte",
+          "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+          "Van al aeropuerto a recoger a un cliente"
+        ],
+        "correctAnswer": "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+        "explanation": "El hablante dice 'heading to the Italian bistro across the street if you want to join us'."
+      },
+      {
+        "id": "ml-lesson-b2-2-2",
+        "title": "Audio 2: Llamada / Contexto Laboral",
+        "contextType": "work",
+        "audioScript": "Good morning. Quick update on the client request: we've reviewed the feedback, and everything looks ready for the final sign-off this afternoon.",
+        "spanishContext": "Mensaje de voz de tu supervisor sobre la solicitud de un cliente.",
+        "comprehensionQuestion": "¿Cuál es el estatus del requerimiento del cliente?",
+        "options": [
+          "Fue cancelado por presupuesto",
+          "Revisaron el feedback y todo está listo para la firma final esta tarde",
+          "Necesitan dos semanas más para corregir errores"
+        ],
+        "correctAnswer": "Revisaron el feedback y todo está listo para la firma final esta tarde",
+        "explanation": "Menciona 'reviewed the feedback, and everything looks ready for the final sign-off this afternoon'."
+      },
+      {
+        "id": "ml-lesson-b2-2-3",
+        "title": "Audio 3: Situación Rápida / Imprevisto",
+        "contextType": "fast_paced",
+        "audioScript": "Excuse me, could you tell me if the express train to the airport stops at platform four or platform seven? The display board is down.",
+        "spanishContext": "Un viajero apresurado en la estación de tren te pide auxilio por una pantalla apagada.",
+        "comprehensionQuestion": "¿Qué información necesita el viajero?",
+        "options": [
+          "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+          "Comprar un boleto de ida y vuelta",
+          "A qué hora abren las tiendas del aeropuerto"
+        ],
+        "correctAnswer": "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+        "explanation": "Pregunta 'if the express train to the airport stops at platform four or platform seven? The display board is down'."
       }
     ]
   },
@@ -1586,69 +1554,6 @@ export const B2_LESSONS: CourseLesson[] = [
         "exampleSentence": "As far as I know, the flight is still on schedule."
       }
     ],
-    "clarificationTools": [
-      {
-        "id": "cf-B2-3-1",
-        "triggerSituation": "No escuchaste bien una frase rápida",
-        "phrase": "Could you say that one more time, please?",
-        "meaningEs": "Podrías decir eso una vez más, por favor?",
-        "audioSample": "Could you say that one more time, please?",
-        "whyItWorks": "Es la fórmula estándar más educada en inglés."
-      },
-      {
-        "id": "cf-B2-3-2",
-        "triggerSituation": "La persona habla muy acelerada",
-        "phrase": "Could you speak a little slower, please?",
-        "meaningEs": "Podrías hablar un poco más despacio, por favor?",
-        "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
-      },
-      {
-        "id": "cf-B2-3-3",
-        "triggerSituation": "No entendiste una palabra técnica o sigla",
-        "phrase": "What does that acronym stand for?",
-        "meaningEs": "Qué significan esas siglas?",
-        "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para aclarar términos."
-      },
-      {
-        "id": "cf-B2-3-4",
-        "triggerSituation": "Quieres saber cómo se dice algo en inglés",
-        "phrase": "How do you say that in English?",
-        "meaningEs": "Cómo se dice eso en inglés?",
-        "audioSample": "How do you say that in English?",
-        "whyItWorks": "Permite aprender señalando objetos o gestos."
-      },
-      {
-        "id": "cf-B2-3-5",
-        "triggerSituation": "Quieres verificar si entendiste bien",
-        "phrase": "Just to make sure we're on the same page, did you mean...?",
-        "meaningEs": "Solo para estar en sintonía, querías decir...?",
-        "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones."
-      },
-      {
-        "id": "cf-B2-3-6",
-        "triggerSituation": "Te perdiste en una explicación larga",
-        "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
-        "audioSample": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "whyItWorks": "Recupera la atención con naturalidad nativa."
-      }
-    ],
-    "listening": {
-      "id": "ml-B2-3",
-      "audioScript": "Hello! Quick update on our estilo indirecto (reported speech) en comunicaciones y reuniones: we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre estilo indirecto (reported speech) en comunicaciones y reuniones.",
-      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
-      "options": [
-        "Cancelaron el proyecto por falta de tiempo",
-        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-        "Piden reprogramar todo para el próximo mes"
-      ],
-      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
-    },
     "workbook": [
       {
         "id": "wb-B2-3-1",
@@ -1909,6 +1814,53 @@ export const B2_LESSONS: CourseLesson[] = [
           "Let me double-check the details and I'll confirm with you shortly."
         ],
         "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
+      }
+    ],
+    "listenings": [
+      {
+        "id": "ml-lesson-b2-3-1",
+        "title": "Audio 1: Diálogo Cotidiano / Café",
+        "contextType": "daily",
+        "audioScript": "Hey! Are you having lunch around here today? We're heading to the Italian bistro across the street if you want to join us.",
+        "spanishContext": "Un colega te invita casualmente a almorzar en un restaurante cercano.",
+        "comprehensionQuestion": "¿A dónde van a ir y qué te preguntan?",
+        "options": [
+          "Van a trabajar hasta tarde y te piden un reporte",
+          "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+          "Van al aeropuerto a recoger a un cliente"
+        ],
+        "correctAnswer": "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+        "explanation": "El hablante dice 'heading to the Italian bistro across the street if you want to join us'."
+      },
+      {
+        "id": "ml-lesson-b2-3-2",
+        "title": "Audio 2: Llamada / Contexto Laboral",
+        "contextType": "work",
+        "audioScript": "Good morning. Quick update on the client request: we've reviewed the feedback, and everything looks ready for the final sign-off this afternoon.",
+        "spanishContext": "Mensaje de voz de tu supervisor sobre la solicitud de un cliente.",
+        "comprehensionQuestion": "¿Cuál es el estatus del requerimiento del cliente?",
+        "options": [
+          "Fue cancelado por presupuesto",
+          "Revisaron el feedback y todo está listo para la firma final esta tarde",
+          "Necesitan dos semanas más para corregir errores"
+        ],
+        "correctAnswer": "Revisaron el feedback y todo está listo para la firma final esta tarde",
+        "explanation": "Menciona 'reviewed the feedback, and everything looks ready for the final sign-off this afternoon'."
+      },
+      {
+        "id": "ml-lesson-b2-3-3",
+        "title": "Audio 3: Situación Rápida / Imprevisto",
+        "contextType": "fast_paced",
+        "audioScript": "Excuse me, could you tell me if the express train to the airport stops at platform four or platform seven? The display board is down.",
+        "spanishContext": "Un viajero apresurado en la estación de tren te pide auxilio por una pantalla apagada.",
+        "comprehensionQuestion": "¿Qué información necesita el viajero?",
+        "options": [
+          "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+          "Comprar un boleto de ida y vuelta",
+          "A qué hora abren las tiendas del aeropuerto"
+        ],
+        "correctAnswer": "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+        "explanation": "Pregunta 'if the express train to the airport stops at platform four or platform seven? The display board is down'."
       }
     ]
   },
@@ -2234,69 +2186,6 @@ export const B2_LESSONS: CourseLesson[] = [
         "exampleSentence": "As far as I know, the flight is still on schedule."
       }
     ],
-    "clarificationTools": [
-      {
-        "id": "cf-B2-4-1",
-        "triggerSituation": "No escuchaste bien una frase rápida",
-        "phrase": "Could you say that one more time, please?",
-        "meaningEs": "Podrías decir eso una vez más, por favor?",
-        "audioSample": "Could you say that one more time, please?",
-        "whyItWorks": "Es la fórmula estándar más educada en inglés."
-      },
-      {
-        "id": "cf-B2-4-2",
-        "triggerSituation": "La persona habla muy acelerada",
-        "phrase": "Could you speak a little slower, please?",
-        "meaningEs": "Podrías hablar un poco más despacio, por favor?",
-        "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
-      },
-      {
-        "id": "cf-B2-4-3",
-        "triggerSituation": "No entendiste una palabra técnica o sigla",
-        "phrase": "What does that acronym stand for?",
-        "meaningEs": "Qué significan esas siglas?",
-        "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para aclarar términos."
-      },
-      {
-        "id": "cf-B2-4-4",
-        "triggerSituation": "Quieres saber cómo se dice algo en inglés",
-        "phrase": "How do you say that in English?",
-        "meaningEs": "Cómo se dice eso en inglés?",
-        "audioSample": "How do you say that in English?",
-        "whyItWorks": "Permite aprender señalando objetos o gestos."
-      },
-      {
-        "id": "cf-B2-4-5",
-        "triggerSituation": "Quieres verificar si entendiste bien",
-        "phrase": "Just to make sure we're on the same page, did you mean...?",
-        "meaningEs": "Solo para estar en sintonía, querías decir...?",
-        "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones."
-      },
-      {
-        "id": "cf-B2-4-6",
-        "triggerSituation": "Te perdiste en una explicación larga",
-        "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
-        "audioSample": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "whyItWorks": "Recupera la atención con naturalidad nativa."
-      }
-    ],
-    "listening": {
-      "id": "ml-B2-4",
-      "audioScript": "Hello! Quick update on our phrasal verbs avanzados de negocios y oficina: we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre phrasal verbs avanzados de negocios y oficina.",
-      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
-      "options": [
-        "Cancelaron el proyecto por falta de tiempo",
-        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-        "Piden reprogramar todo para el próximo mes"
-      ],
-      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
-    },
     "workbook": [
       {
         "id": "wb-B2-4-1",
@@ -2557,6 +2446,53 @@ export const B2_LESSONS: CourseLesson[] = [
           "Let me double-check the details and I'll confirm with you shortly."
         ],
         "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
+      }
+    ],
+    "listenings": [
+      {
+        "id": "ml-lesson-b2-4-1",
+        "title": "Audio 1: Diálogo Cotidiano / Café",
+        "contextType": "daily",
+        "audioScript": "Hey! Are you having lunch around here today? We're heading to the Italian bistro across the street if you want to join us.",
+        "spanishContext": "Un colega te invita casualmente a almorzar en un restaurante cercano.",
+        "comprehensionQuestion": "¿A dónde van a ir y qué te preguntan?",
+        "options": [
+          "Van a trabajar hasta tarde y te piden un reporte",
+          "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+          "Van al aeropuerto a recoger a un cliente"
+        ],
+        "correctAnswer": "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+        "explanation": "El hablante dice 'heading to the Italian bistro across the street if you want to join us'."
+      },
+      {
+        "id": "ml-lesson-b2-4-2",
+        "title": "Audio 2: Llamada / Contexto Laboral",
+        "contextType": "work",
+        "audioScript": "Good morning. Quick update on the client request: we've reviewed the feedback, and everything looks ready for the final sign-off this afternoon.",
+        "spanishContext": "Mensaje de voz de tu supervisor sobre la solicitud de un cliente.",
+        "comprehensionQuestion": "¿Cuál es el estatus del requerimiento del cliente?",
+        "options": [
+          "Fue cancelado por presupuesto",
+          "Revisaron el feedback y todo está listo para la firma final esta tarde",
+          "Necesitan dos semanas más para corregir errores"
+        ],
+        "correctAnswer": "Revisaron el feedback y todo está listo para la firma final esta tarde",
+        "explanation": "Menciona 'reviewed the feedback, and everything looks ready for the final sign-off this afternoon'."
+      },
+      {
+        "id": "ml-lesson-b2-4-3",
+        "title": "Audio 3: Situación Rápida / Imprevisto",
+        "contextType": "fast_paced",
+        "audioScript": "Excuse me, could you tell me if the express train to the airport stops at platform four or platform seven? The display board is down.",
+        "spanishContext": "Un viajero apresurado en la estación de tren te pide auxilio por una pantalla apagada.",
+        "comprehensionQuestion": "¿Qué información necesita el viajero?",
+        "options": [
+          "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+          "Comprar un boleto de ida y vuelta",
+          "A qué hora abren las tiendas del aeropuerto"
+        ],
+        "correctAnswer": "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+        "explanation": "Pregunta 'if the express train to the airport stops at platform four or platform seven? The display board is down'."
       }
     ]
   },
@@ -2873,69 +2809,6 @@ export const B2_LESSONS: CourseLesson[] = [
         "exampleSentence": "As far as I know, the flight is still on schedule."
       }
     ],
-    "clarificationTools": [
-      {
-        "id": "cf-B2-5-1",
-        "triggerSituation": "No escuchaste bien una frase rápida",
-        "phrase": "Could you say that one more time, please?",
-        "meaningEs": "Podrías decir eso una vez más, por favor?",
-        "audioSample": "Could you say that one more time, please?",
-        "whyItWorks": "Es la fórmula estándar más educada en inglés."
-      },
-      {
-        "id": "cf-B2-5-2",
-        "triggerSituation": "La persona habla muy acelerada",
-        "phrase": "Could you speak a little slower, please?",
-        "meaningEs": "Podrías hablar un poco más despacio, por favor?",
-        "audioSample": "Could you speak a little slower, please?",
-        "whyItWorks": "Pide ajuste de velocidad de forma asertiva."
-      },
-      {
-        "id": "cf-B2-5-3",
-        "triggerSituation": "No entendiste una palabra técnica o sigla",
-        "phrase": "What does that acronym stand for?",
-        "meaningEs": "Qué significan esas siglas?",
-        "audioSample": "What does that acronym stand for?",
-        "whyItWorks": "Pregunta directa para aclarar términos."
-      },
-      {
-        "id": "cf-B2-5-4",
-        "triggerSituation": "Quieres saber cómo se dice algo en inglés",
-        "phrase": "How do you say that in English?",
-        "meaningEs": "Cómo se dice eso en inglés?",
-        "audioSample": "How do you say that in English?",
-        "whyItWorks": "Permite aprender señalando objetos o gestos."
-      },
-      {
-        "id": "cf-B2-5-5",
-        "triggerSituation": "Quieres verificar si entendiste bien",
-        "phrase": "Just to make sure we're on the same page, did you mean...?",
-        "meaningEs": "Solo para estar en sintonía, querías decir...?",
-        "audioSample": "Just to make sure we're on the same page, did you mean...?",
-        "whyItWorks": "Sincroniza acuerdos en reuniones."
-      },
-      {
-        "id": "cf-B2-5-6",
-        "triggerSituation": "Te perdiste en una explicación larga",
-        "phrase": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "meaningEs": "Disculpa, se me fue el hilo un segundo. Podrías aclarar ese punto?",
-        "audioSample": "Sorry, I lost my train of thought for a second. Could you clarify that last point?",
-        "whyItWorks": "Recupera la atención con naturalidad nativa."
-      }
-    ],
-    "listening": {
-      "id": "ml-B2-5",
-      "audioScript": "Hello! Quick update on our hedging, diplomacia y rescate conversacional: we are finishing up the preliminary review now, and we'll be ready to discuss next steps this afternoon. Let me know if that works for you.",
-      "spanishContext": "Un colega te manda un mensaje de voz rápido para darte un reporte sobre hedging, diplomacia y rescate conversacional.",
-      "comprehensionQuestion": "¿Cuál es el estado del proyecto y qué propone el colega para esta tarde?",
-      "options": [
-        "Cancelaron el proyecto por falta de tiempo",
-        "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-        "Piden reprogramar todo para el próximo mes"
-      ],
-      "correctAnswer": "Terminan la revisión preliminar ahora y discutirán los siguientes pasos esta tarde",
-      "explanation": "El interlocutor dice claramente 'finishing up the preliminary review now' y 'ready to discuss next steps this afternoon'."
-    },
     "workbook": [
       {
         "id": "wb-B2-5-1",
@@ -3196,6 +3069,53 @@ export const B2_LESSONS: CourseLesson[] = [
           "Let me double-check the details and I'll confirm with you shortly."
         ],
         "pedagogicalNote": "Recuerda que en inglés la cortesía conversacional consiste en dar una respuesta directa acompañada de una alternativa o motivo breve."
+      }
+    ],
+    "listenings": [
+      {
+        "id": "ml-lesson-b2-5-1",
+        "title": "Audio 1: Diálogo Cotidiano / Café",
+        "contextType": "daily",
+        "audioScript": "Hey! Are you having lunch around here today? We're heading to the Italian bistro across the street if you want to join us.",
+        "spanishContext": "Un colega te invita casualmente a almorzar en un restaurante cercano.",
+        "comprehensionQuestion": "¿A dónde van a ir y qué te preguntan?",
+        "options": [
+          "Van a trabajar hasta tarde y te piden un reporte",
+          "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+          "Van al aeropuerto a recoger a un cliente"
+        ],
+        "correctAnswer": "Van a un restaurante italiano al cruzar la calle y te invitan a unirte",
+        "explanation": "El hablante dice 'heading to the Italian bistro across the street if you want to join us'."
+      },
+      {
+        "id": "ml-lesson-b2-5-2",
+        "title": "Audio 2: Llamada / Contexto Laboral",
+        "contextType": "work",
+        "audioScript": "Good morning. Quick update on the client request: we've reviewed the feedback, and everything looks ready for the final sign-off this afternoon.",
+        "spanishContext": "Mensaje de voz de tu supervisor sobre la solicitud de un cliente.",
+        "comprehensionQuestion": "¿Cuál es el estatus del requerimiento del cliente?",
+        "options": [
+          "Fue cancelado por presupuesto",
+          "Revisaron el feedback y todo está listo para la firma final esta tarde",
+          "Necesitan dos semanas más para corregir errores"
+        ],
+        "correctAnswer": "Revisaron el feedback y todo está listo para la firma final esta tarde",
+        "explanation": "Menciona 'reviewed the feedback, and everything looks ready for the final sign-off this afternoon'."
+      },
+      {
+        "id": "ml-lesson-b2-5-3",
+        "title": "Audio 3: Situación Rápida / Imprevisto",
+        "contextType": "fast_paced",
+        "audioScript": "Excuse me, could you tell me if the express train to the airport stops at platform four or platform seven? The display board is down.",
+        "spanishContext": "Un viajero apresurado en la estación de tren te pide auxilio por una pantalla apagada.",
+        "comprehensionQuestion": "¿Qué información necesita el viajero?",
+        "options": [
+          "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+          "Comprar un boleto de ida y vuelta",
+          "A qué hora abren las tiendas del aeropuerto"
+        ],
+        "correctAnswer": "Si el tren al aeropuerto para en la plataforma 4 o 7 porque la pantalla no funciona",
+        "explanation": "Pregunta 'if the express train to the airport stops at platform four or platform seven? The display board is down'."
       }
     ]
   }
