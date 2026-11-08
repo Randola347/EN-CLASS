@@ -94,22 +94,22 @@ export const CurriculumHub: React.FC<Props> = ({
     <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4 space-y-6">
       {/* Level Selector Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 p-4 rounded-3xl shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div className="w-9 h-9 shrink-0 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
             <BookOpen className="w-5 h-5" />
           </div>
-          <div>
-            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Plan de Clases Prácticas</h3>
-            <p className="text-xs text-slate-500">20 Clases Maestras con Contenido 100% Único e Individual</p>
+          <div className="min-w-0">
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider break-words">Plan de Clases Prácticas</h3>
+            <p className="text-xs text-slate-500 break-words">{lessons.length} Clases Maestras con Contenido 100% Único e Individual</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-2 w-full sm:w-auto">
           {(['A1', 'A2', 'B1', 'B2'] as const).map(lvl => (
             <button
               key={lvl}
               onClick={() => handleLevelChange(lvl)}
-              className={`px-4 py-2 rounded-2xl text-xs font-black transition-all ${
+              className={`px-2 sm:px-4 py-2 rounded-2xl text-[11px] sm:text-xs font-black transition-all whitespace-nowrap ${
                 selectedLevel === lvl
                   ? 'bg-blue-600 text-white shadow-xs scale-105'
                   : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
@@ -160,24 +160,24 @@ export const CurriculumHub: React.FC<Props> = ({
         </div>
 
         {/* Right side: Lesson Content Engine */}
-        <div className="lg:col-span-9 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xs">
+        <div className="lg:col-span-9 bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 md:p-8 shadow-xs min-w-0">
           {/* Lesson Header */}
           <div className="border-b border-slate-100 pb-5 mb-6">
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="px-3 py-0.5 rounded-full text-[11px] font-black bg-blue-100 text-blue-800 border border-blue-200">
+            <div className="flex flex-wrap items-center gap-2 mb-1.5">
+              <span className="px-3 py-0.5 rounded-full text-[11px] font-black bg-blue-100 text-blue-800 border border-blue-200 whitespace-nowrap">
                 {selectedLesson.level} • Clase {selectedLesson.lessonNumber}
               </span>
-              <span className="text-xs text-slate-500 font-medium">{selectedLesson.grammarFocus}</span>
+              <span className="text-xs text-slate-500 font-medium break-words">{selectedLesson.grammarFocus}</span>
             </div>
-            <h2 className="text-2xl font-black text-slate-900">{selectedLesson.title}</h2>
-            <p className="text-sm text-slate-600 mt-1.5 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
-              <span>{selectedLesson.practicalGoal}</span>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 break-words">{selectedLesson.title}</h2>
+            <p className="text-sm text-slate-600 mt-1.5 flex items-start gap-2">
+              <Sparkles className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+              <span className="break-words">{selectedLesson.practicalGoal}</span>
             </p>
           </div>
 
           {/* Navigation Steps inside the Lesson (5 Pasos Limpios) */}
-          <div className="flex gap-2 border-b border-slate-100 pb-4 mb-6 overflow-x-auto">
+          <div className="flex gap-2 border-b border-slate-100 pb-4 mb-6 overflow-x-auto -mx-1 px-1">
             <button
               onClick={() => handleStepChange('theory')}
               className={`px-4 py-2 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap ${
@@ -248,7 +248,7 @@ export const CurriculumHub: React.FC<Props> = ({
                 onClick={() => handleStepChange('vocabulary')}
                 className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
               >
-                <span>Continuar al Vocabulario Frecuente (20 Palabras)</span>
+                <span>Continuar al Vocabulario Frecuente ({selectedLesson.vocabulary.length} Palabras)</span>
                 <span>→</span>
               </button>
             </div>
@@ -257,11 +257,11 @@ export const CurriculumHub: React.FC<Props> = ({
           {/* STEP 2: VOCABULARY (20 Palabras Únicas) */}
           {activeStep === 'vocabulary' && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <p className="text-xs text-slate-600">
-                  Las 20 palabras indispensables de esta clase. Pulsa el altavoz para escuchar su pronunciación nativa:
+                  Las {selectedLesson.vocabulary.length} palabras indispensables de esta clase. Pulsa el altavoz para escuchar su pronunciación nativa:
                 </p>
-                <span className="text-xs font-bold text-blue-600">{selectedLesson.vocabulary.length} palabras</span>
+                <span className="text-xs font-bold text-blue-600 shrink-0">{selectedLesson.vocabulary.length} palabras</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
@@ -302,7 +302,7 @@ export const CurriculumHub: React.FC<Props> = ({
                 onClick={() => handleStepChange('chunks')}
                 className="w-full mt-4 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm transition shadow-xs flex items-center justify-center gap-2"
               >
-                <span>Continuar a los Chunks de Oro (10 Frases)</span>
+                <span>Continuar a los Chunks de Oro ({selectedLesson.coreChunks.length} Frases)</span>
                 <span>→</span>
               </button>
             </div>
@@ -312,7 +312,7 @@ export const CurriculumHub: React.FC<Props> = ({
           {activeStep === 'chunks' && (
             <div className="space-y-4">
               <p className="text-xs text-slate-600">
-                Los 10 chunks automáticos para hablar sin traducir palabra por palabra:
+                Los {selectedLesson.coreChunks.length} chunks automáticos para hablar sin traducir palabra por palabra:
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -375,26 +375,26 @@ export const CurriculumHub: React.FC<Props> = ({
                 ))}
               </div>
 
-              <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
-                  <div>
+              <div className="bg-slate-50 border border-slate-200 rounded-3xl p-4 sm:p-6 md:p-8">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-4 mb-6">
+                  <div className="min-w-0">
                     <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800 rounded-full">
                       Audio #{activeListeningIdx + 1} de {currentListenings.length}
                     </span>
-                    <h3 className="text-lg font-bold text-slate-900 mt-2">{activeListening.title}</h3>
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-2 break-words">{activeListening.title}</h3>
                   </div>
                 </div>
 
                 <div className="bg-white rounded-2xl p-4 mb-6 border border-slate-200">
                   <p className="text-xs uppercase font-bold text-slate-400 mb-1">Situación / Contexto:</p>
-                  <p className="text-sm text-slate-700">{activeListening.spanishContext}</p>
+                  <p className="text-sm text-slate-700 break-words">{activeListening.spanishContext}</p>
                 </div>
 
                 {/* Audio controls */}
-                <div className="flex flex-wrap items-center justify-center gap-4 py-6 bg-blue-50/50 rounded-2xl border border-blue-100 mb-6">
+                <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 py-4 sm:py-6 bg-blue-50/50 rounded-2xl border border-blue-100 mb-6 px-3 sm:px-4">
                   <button
                     onClick={() => speak(activeListening.audioScript, 0.95)}
-                    className="flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition shadow-sm"
+                    className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition shadow-sm w-full sm:w-auto"
                   >
                     <Volume2 className="w-5 h-5" />
                     <span>{isSpeaking ? 'Escuchando...' : 'Velocidad Normal (1.0x)'}</span>
@@ -402,7 +402,7 @@ export const CurriculumHub: React.FC<Props> = ({
 
                   <button
                     onClick={() => speak(activeListening.audioScript, 0.75)}
-                    className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition"
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition w-full sm:w-auto"
                   >
                     <Volume2 className="w-4 h-4 text-blue-600" />
                     <span>Lento (0.75x)</span>
@@ -410,7 +410,7 @@ export const CurriculumHub: React.FC<Props> = ({
 
                   <button
                     onClick={() => setShowScript(prev => ({ ...prev, [activeListening.id]: !prev[activeListening.id] }))}
-                    className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition"
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-white hover:bg-slate-100 text-slate-700 rounded-2xl font-semibold border border-slate-200 transition w-full sm:w-auto"
                   >
                     {showScript[activeListening.id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4 text-emerald-600" />}
                     <span>{showScript[activeListening.id] ? 'Ocultar Guion' : 'Revelar Guion'}</span>
@@ -469,30 +469,30 @@ export const CurriculumHub: React.FC<Props> = ({
               </div>
 
               {/* Next Audio / Go to Workbook */}
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 {activeListeningIdx < currentListenings.length - 1 ? (
                   <button
                     onClick={() => setActiveListeningIdx(prev => prev + 1)}
-                    className="px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-2xl text-xs transition"
+                    className="px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-2xl text-xs transition text-center"
                   >
                     Siguiente Audio de la Clase ({activeListeningIdx + 2}/{currentListenings.length}) →
                   </button>
                 ) : (
-                  <div />
+                  <div className="hidden sm:block" />
                 )}
 
                 <button
                   onClick={() => handleStepChange('workbook')}
-                  className="py-3.5 px-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black rounded-2xl text-sm transition shadow-md flex items-center gap-2"
+                  className="py-3.5 px-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black rounded-2xl text-sm transition shadow-md flex items-center justify-center gap-2 text-center"
                 >
-                  <span>Ir al Workbook de Práctica Extensiva (20 Ejercicios)</span>
+                  <span>Ir al Workbook de Práctica Extensiva ({selectedLesson.workbook.length} Ejercicios)</span>
                   <span>→</span>
                 </button>
               </div>
             </div>
           )}
 
-          {/* STEP 5: WORKBOOK (20 Ejercicios Interactivos con Respuestas Guardadas) */}
+          {/* STEP 5: WORKBOOK (Ejercicios Interactivos con Respuestas Guardadas) */}
           {activeStep === 'workbook' && (
             <InteractiveWorkbook
               prompts={selectedLesson.workbook}

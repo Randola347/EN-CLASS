@@ -24,6 +24,7 @@ import { ReflexTrainingModule } from './components/ReflexTrainingModule';
 import { StudentProfileModal } from './components/StudentProfileModal';
 import { AuthModal } from './components/AuthModal';
 import { AdminDashboard } from './components/AdminDashboard';
+import { apiFetch } from './config/api';
 
 export const App: React.FC = () => {
   const [authToken, setAuthToken] = useState<string | null>(() => localStorage.getItem('en_class_token'));
@@ -65,7 +66,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     if (!authToken) return;
 
-    fetch('http://127.0.0.1:3001/api/student/profile', {
+    apiFetch('/api/student/profile', {
       headers: { 'Authorization': `Bearer ${authToken}` }
     })
       .then(res => res.json())
@@ -125,7 +126,7 @@ export const App: React.FC = () => {
     setLastPosition({ lessonId, step });
     if (!authToken) return;
 
-    fetch('http://127.0.0.1:3001/api/student/position', {
+    apiFetch('/api/student/position', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -144,7 +145,7 @@ export const App: React.FC = () => {
 
     if (!authToken) return;
 
-    fetch('http://127.0.0.1:3001/api/student/workbook', {
+    apiFetch('/api/student/workbook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -157,8 +158,10 @@ export const App: React.FC = () => {
       })
     })
       .then(res => res.json())
-      .then(() => {
-        setProfile(prev => ({ ...prev, drills_completed: prev.drills_completed + 1 }));
+      .then((data) => {
+        if (typeof data.drills_completed === 'number') {
+          setProfile(prev => ({ ...prev, drills_completed: data.drills_completed }));
+        }
       })
       .catch(console.error);
   };
@@ -170,7 +173,7 @@ export const App: React.FC = () => {
     triggerCelebration();
 
     if (authToken) {
-      fetch('http://127.0.0.1:3001/api/student/profile', {
+      apiFetch('/api/student/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -185,31 +188,53 @@ export const App: React.FC = () => {
   };
 
   const handleCompleteDrill = (chunk: string, errorFeedback?: { error: string; correction: string }) => {
-    setProfile(prev => {
-      const alreadyMastered = prev.mastered_chunks.includes(chunk);
-      const newMastered = alreadyMastered ? prev.mastered_chunks : [...prev.mastered_chunks, chunk];
+    const alreadyMastered = profile.mastered_chunks.includes(chunk);
+    const newMastered = alreadyMastered ? profile.mastered_chunks : [...profile.mastered_chunks, chunk];
 
-      let newErrorBank = prev.error_bank;
-      if (errorFeedback) {
-        newErrorBank = [
-          {
-            error: errorFeedback.error,
-            correction: errorFeedback.correction,
-            timestamp: new Date().toLocaleTimeString()
-          },
-          ...prev.error_bank.slice(0, 19)
-        ];
-      } else {
-        triggerCelebration();
-      }
+    let newErrorBank = profile.error_bank;
+    if (errorFeedback) {
+      newErrorBank = [
+        {
+          error: errorFeedback.error,
+          correction: errorFeedback.correction,
+          timestamp: new Date().toLocaleTimeString()
+        },
+        ...profile.error_bank.slice(0, 19)
+      ];
+    } else {
+      triggerCelebration();
+    }
 
-      return {
-        ...prev,
-        mastered_chunks: newMastered,
-        error_bank: newErrorBank,
-        drills_completed: prev.drills_completed + 1
-      };
-    });
+    setProfile(prev => ({
+      ...prev,
+      mastered_chunks: newMastered,
+      error_bank: newErrorBank,
+      drills_completed: prev.drills_completed + 1
+    }));
+
+    if (!authToken) return;
+
+    apiFetch('/api/student/drill', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        chunk,
+        drill_type: 'reflex',
+        is_correct: !errorFeedback,
+        error: errorFeedback?.error,
+        correction: errorFeedback?.correction
+      })
+    })
+      .then(res => res.json())
+      .then((data) => {
+        if (typeof data.drills_completed === 'number') {
+          setProfile(prev => ({ ...prev, drills_completed: data.drills_completed }));
+        }
+      })
+      .catch(console.error);
   };
 
   const updateProfileFields = (updates: Partial<StudentProfile>) => {
@@ -217,35 +242,35 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans overflow-x-hidden">
       {/* If not logged in, show AuthModal */}
       {!authToken && <AuthModal onLoginSuccess={handleLoginSuccess} />}
 
       {/* Top Navbar (Clean White & Blue Style) */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-xs">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center font-black text-white text-lg shadow-sm shadow-blue-600/30">
+        <div className="w-full max-w-[1600px] mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-2xl bg-blue-600 flex items-center justify-center font-black text-white text-base sm:text-lg shadow-sm shadow-blue-600/30">
               EN
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-bold text-slate-900 text-base tracking-tight">EN-Class Fluency</h1>
-                <span className="text-[10px] font-black uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <h1 className="font-bold text-slate-900 text-sm sm:text-base tracking-tight truncate">EN-Class Fluency</h1>
+                <span className="text-[10px] font-black uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200 px-1.5 sm:px-2 py-0.5 rounded-full">
                   A1 ➔ B2
                 </span>
                 {currentUser?.role === 'admin' && (
-                  <span className="text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200 px-1.5 sm:px-2 py-0.5 rounded-full">
                     Admin
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-500">Test-English Method • Neon PostgreSQL</p>
+              <p className="text-[11px] sm:text-xs text-slate-500 truncate">Test-English Method • Neon PostgreSQL</p>
             </div>
           </div>
 
           {/* Student Status Quick Widget */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <div className="hidden sm:flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs">
               <Flame className="w-4 h-4 text-amber-500 fill-current" />
               <span className="font-semibold text-slate-700">{profile.streak_days}d Racha</span>
@@ -258,15 +283,15 @@ export const App: React.FC = () => {
 
             <button
               onClick={() => setActiveTab('profile')}
-              className="flex items-center gap-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-blue-700 transition"
+              className="flex items-center gap-1.5 sm:gap-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl px-2 sm:px-3 py-1.5 text-xs font-semibold text-blue-700 transition"
             >
-              <UserCircle className="w-4 h-4 text-blue-600" />
-              <span>{currentUser?.name || profile.student_name}</span>
+              <UserCircle className="w-4 h-4 text-blue-600 shrink-0" />
+              <span className="hidden sm:inline max-w-[140px] truncate">{currentUser?.name || profile.student_name}</span>
             </button>
 
             <button
               onClick={handleLogout}
-              className="p-2 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition border border-slate-200"
+              className="p-2 shrink-0 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition border border-slate-200"
               title="Cerrar Sesión"
             >
               <LogOut className="w-4 h-4" />
@@ -276,8 +301,8 @@ export const App: React.FC = () => {
       </header>
 
       {/* Navigation Sub-bar */}
-      <nav className="bg-white border-b border-slate-200 px-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-around sm:justify-center gap-1 sm:gap-3 py-2.5 overflow-x-auto">
+      <nav className="bg-white border-b border-slate-200 px-2 sm:px-4">
+        <div className="max-w-full lg:max-w-4xl mx-auto flex items-center justify-start sm:justify-center gap-1 sm:gap-3 py-2.5 overflow-x-auto">
           <button
             onClick={() => setActiveTab('curriculum')}
             className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
@@ -287,7 +312,7 @@ export const App: React.FC = () => {
             }`}
           >
             <BookOpen className="w-4 h-4" />
-            <span>Clases A1-B2 (20 Clases)</span>
+            <span>Clases A1-B2 ({COMPREHENSIVE_CURRICULUM.length} Clases)</span>
           </button>
 
           <button
@@ -400,8 +425,8 @@ export const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-        <p>EN-Class • Plataforma de Fluidez Acelerada A1-B2 • Estilo Test-English • Base de Datos Neon PostgreSQL</p>
+      <footer className="border-t border-slate-200 bg-white py-6 px-4 text-center text-xs text-slate-500">
+        <p className="break-words">EN-Class • Plataforma de Fluidez Acelerada A1-B2 • Estilo Test-English • Base de Datos Neon PostgreSQL</p>
       </footer>
     </div>
   );

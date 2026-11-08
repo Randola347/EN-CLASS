@@ -1,0 +1,574 @@
+PROMPT DE TRASPASO — EN-Class
+================================
+
+Copia y pega todo este archivo como prompt inicial en el nuevo modelo.
+
+Actúa como desarrollador senior full-stack. Trabaja en el repositorio:
+
+C:\Users\lpper\OneDrive\Documentos\EN-Class
+
+Stack: React 19 + TypeScript + Vite 8 + Tailwind 4 + Express 5 + PostgreSQL/Neon + JWT + bcrypt.
+La app es una plataforma de inglés A1-B2 con 20 lecciones (5 por nivel), teoría gramatical, vocabulario, chunks, listenings, workbook, drills y panel admin.
+
+El proyecto está en Git y se desplegará en Vercel. La web NO debe indexarse en Google. Debe ser 100% responsive (móvil, tablet, portátil y escritorio).
+
+
+0. ACTUALIZACIÓN IMPORTANTE: TRABAJO YA COMPLETADO
+--------------------------------------------------
+
+Este archivo nació como prompt de traspaso antes de empezar. Gran parte del trabajo ya
+está hecho y validado. Antes de continuar, comprueba el estado real con `git status`,
+`npm run validate:content`, `npm run typecheck:server` y `npm run build`.
+
+Completado:
+
+- Contenido único en las 20 lecciones: 400 vocab, 200 chunks, 60 listenings,
+  200 prompts de workbook y 200 conjuntos de respuestas, todos únicos.
+- A1, B1 y B2 reescritos con `src/data/curriculum/a1Content.ts`, `b1Content.ts`,
+  `b2Content.ts`; A2 conserva su vocab/chunks y usa `a2Content.ts` para listenings
+  y workbook.
+- Validador `scripts/validateCurriculum.mjs`, script `validate:content` y `prebuild`.
+- Persistencia real: endpoints de posición, workbook y drills; esquema con
+  `workbook_answers`, `last_active_lesson_id`, `last_active_step` y racha por días.
+- Seguridad: rol `student` forzado en registro, `JWT_SECRET` estricto, CORS por
+  `CORS_ORIGIN`, rate limiting y validación de entrada.
+- `src/config/api.ts` con `VITE_API_URL`, proxy de Vite y scripts `dev:web`,
+  `dev:api`, `dev:all`.
+- Responsive aplicado en todos los componentes y contadores dinámicos.
+- `robots.txt`, meta `noindex`, README de arranque/despliegue y `.env.example`.
+- `npm run build`, `npm run typecheck:server` y `npm run validate:content` pasan.
+
+Pendiente / opcional:
+
+- Code splitting para reducir el bundle principal (~1 MB; aviso de Vite).
+- Limpiar scripts generadores antiguos y warnings de oxlint en scripts legacy.
+- Probar en móvil real y desplegar frontend en Vercel + backend en Render/Railway.
+
+Las secciones 1 y 2 siguientes describen la auditoría original y el objetivo; son
+contexto histórico. No vuelvas a reescribir el contenido que ya pasa el validador.
+
+
+1. ESTADO ACTUAL: QUÉ YA ESTÁ HECHO
+------------------------------------
+
+Ya se hizo una auditoría completa del contenido y del código. NO se ha reescrito el contenido todavía. El usuario eligió la SOLUCIÓN COMPLETA CON CONTENIDO ÚNICO.
+
+Hallazgos confirmados de la auditoría:
+
+- Hay 20 lecciones: 5 A1, 5 A2, 5 B1, 5 B2.
+- La teoría gramatical SÍ es única: 20 títulos, 20 explicaciones y 20 tablas distintas.
+- El resto del contenido está masivamente duplicado:
+  - Vocabulario: 400 elementos, solo 155 palabras únicas (~61% repetido).
+  - Chunks: 200 elementos, solo 60 únicos (~70% repetido).
+  - Listenings: 60 elementos, solo 3 guiones únicos (~95% repetido).
+  - Workbook: 400 prompts, solo 21 únicos (~95% repetido).
+  - Respuestas modelo del workbook: 400 elementos, 1 único conjunto de respuestas.
+- 13 lecciones comparten exactamente las mismas 20 palabras de negocio:
+  lesson-a1-3, a1-4, a1-5, b1-1 a b1-5 y b2-1 a b2-5.
+  Ejemplo grave: lesson-a1-3 ("Present Continuous", nivel A1) usa schedule, deadline, budget, feedback, issue, workload, deliverable, asap, etc.
+- 15 de 20 lecciones comparten exactamente los mismos 10 chunks.
+  Solo las 5 lecciones A2 tienen chunks propios.
+- Las 20 lecciones repiten los mismos 3 listenings:
+  restaurante italiano, llamada sobre el cliente/sign-off y viajero en la estación de tren.
+- Cada lección tiene 20 ejercicios de workbook, pero solo 2 prompts distintos repetidos 10 veces cada uno.
+  Las 3 respuestas modelo, la pista y la nota pedagógica son idénticas en los 400 ejercicios.
+- Las lecciones A2 tienen vocabulario y chunks únicos (probablemente generados por scripts/buildCompleteA2Curriculum.mjs), pero siguen con listenings y workbook duplicados. Hay que preservar esa parte única de A2.
+
+Causa raíz:
+
+- scripts/seedMasterCurriculum.mjs:
+  - buildUniqueVocab solo define A1-1 y A1-2; el resto cae en genericTerms, una lista fija de 20 palabras de negocio (líneas ~582-676).
+  - buildUniqueChunks ignora nivel/lección y devuelve siempre los mismos 10 chunks (líneas ~678-699).
+  - buildUniqueWorkbook alterna solo 2 prompts y reutiliza las mismas respuestas (líneas ~737-760).
+- scripts/migrateMultiListening.mjs inyecta los mismos 3 listenings en todas las lecciones (líneas ~21-67).
+- Existen varios generadores que escriben los mismos archivos:
+  buildCompleteCurriculum.mjs, buildCompleteA2Curriculum.mjs, generateAllCurriculum.mjs,
+  masterCurriculumDatabase.mjs, seedMasterCurriculum.mjs, migrateMultiListening.mjs.
+  Ejecutar el equivocado puede sobrescribir contenido único. Hay que consolidar.
+
+También se detectaron problemas críticos de producto y seguridad:
+
+- App.tsx llama a PUT /api/student/position y POST /api/student/workbook, pero server/index.ts NO implementa esos endpoints.
+- GET /api/student/profile no devuelve workbook_answers, last_active_lesson_id ni last_active_step.
+- La UI afirma "Guardado en Neon DB", pero ese guardado no funciona.
+- AuthModal.tsx asigna rol admin si el email contiene "admin"; server/index.ts acepta role desde el body. Es una escalada de privilegios.
+- JWT_SECRET tiene fallback 'secret123'; CORS está abierto; no hay rate limiting ni política de contraseñas.
+- PUT /api/student/profile incrementa drills_completed en cada actualización, incluso al marcar una lección completada.
+- streak_days nunca se actualiza realmente.
+- Las URLs de API estaban hardcodeadas como http://127.0.0.1:3001 en App.tsx, AuthModal.tsx y AdminDashboard.tsx.
+- index.html tenía lang="en" y title "en-class", aunque la UI está en español.
+- Hay código/assets muertos: src/App.css, RoleplayStudio.tsx, SafetyBeltHub.tsx, hero.png, vite.svg, react.svg.
+- El bundle inicial carga ~700 KB de datos de los 4 niveles.
+
+IMPORTANTE: el árbol de trabajo tiene cambios sin commitear. Antes de tocar nada ejecuta `git status` y `git diff` y NO sobrescribas trabajo del usuario. Archivos modificados conocidos:
+scripts/buildCompleteCurriculum.mjs, buildCurriculum.mjs, curriculumHelpers.mjs,
+generateAllCurriculum.mjs, migrateMultiListening.mjs,
+src/components/GrammarChartViewer.tsx, InteractiveWorkbook.tsx,
+src/data/levels/a2Data.ts, src/data/rescueData.ts.
+Archivos nuevos sin trackear: scripts/buildCompleteA2Curriculum.mjs, scripts/masterCurriculumDatabase.mjs.
+
+Archivos de traspaso ya creados en el proyecto:
+- PROMPT_TRASPASO.txt (este archivo)
+- README.md (guía de arranque y despliegue)
+- public/robots.txt (bloqueo de indexación)
+- src/config/api.ts (URL de API configurable por entorno)
+- Posibles mejoras responsive ya aplicadas en componentes. Revisa `git diff` antes de continuar.
+
+
+2. OBJETIVO PRINCIPAL
+----------------------
+
+Reescribir el contenido de las 20 lecciones para que sea realmente único, coherente con el nivel CEFR y con el foco gramatical de cada lección. No se acepta contenido generado por plantillas que repitan textos entre lecciones.
+
+La meta no es solo "que no se repita": el contenido debe ser pedagógicamente correcto, natural y adecuado al nivel.
+
+Objetivos secundarios obligatorios:
+
+- Dejar la web 100% responsive en móvil, tablet y escritorio.
+- Dejar el proyecto listo para desplegar en Vercel sin depender del PC del usuario.
+- Corregir la persistencia real de progreso en PostgreSQL/Neon.
+- Corregir los agujeros de seguridad del registro/login.
+- No indexar la web en Google (robots + meta noindex).
+- Mantener el repositorio Git limpio y con documentación.
+
+
+3. REGLAS DE TRABAJO
+---------------------
+
+1. No uses los generadores antiguos para producir el contenido final.
+2. No dejes fallbacks silenciosos que rellenen lecciones con contenido genérico. Si falta contenido, el build debe fallar.
+3. Mantén la API pública actual:
+   - src/data/curriculumData.ts debe seguir exportando COMPREHENSIVE_CURRICULUM.
+   - src/data/levels/a1Data.ts, a2Data.ts, b1Data.ts y b2Data.ts deben seguir exportando A1_LESSONS, A2_LESSONS, B1_LESSONS y B2_LESSONS.
+   - No cambies los componentes para adaptarlos a una estructura de datos distinta si puedes evitarlo.
+4. Conserva los tipos de src/types/curriculum.ts. Si necesitas añadir un campo opcional, hazlo de forma retrocompatible.
+5. El contenido de la app debe ser:
+   - Explicaciones y traducciones en español natural.
+   - Ejemplos, chunks y listenings en inglés natural.
+   - Sin errores gramaticales ni traducciones literales raras.
+6. Controla el nivel:
+   - A1: presente simple/continuo, TO BE, pasado básico, vocabulario cotidiano de altísima frecuencia.
+   - A2: pasado, futuro, modales básicos, viajes/compras/salud/trabajo cotidiano.
+   - B1: present perfect, condicionales, modales de deducción, experiencias/estudios/trabajo.
+   - B2: tercer condicional, pasiva, reported speech, phrasal verbs de negocio, hedging/diplomacia.
+7. No dupliques literalmente fórmulas de RescueCenter/Safety Belts dentro de los chunks de lección. Si quieres reforzar una fórmula, referénciala como repaso y muestra la etiqueta "Repaso"; no la presentes como contenido nuevo.
+8. No afirmes "100% único" en la UI hasta que el validador pase.
+9. Trabaja por fases y valida después de cada nivel. No reescribas los 4 niveles de golpe sin comprobar.
+10. No toques la base de datos ni los endpoints en la fase de contenido; eso va después.
+11. Antes de cada fase, revisa `git diff` y no borres cambios del usuario.
+12. No subas `.env`, tokens, contraseñas ni credenciales al repositorio.
+
+
+4. ARQUITECTURA RECOMENDADA
+----------------------------
+
+Mantén los archivos actuales y reescribe su contenido en sitio:
+
+src/data/levels/a1Data.ts
+src/data/levels/a2Data.ts
+src/data/levels/b1Data.ts
+src/data/levels/b2Data.ts
+
+Cada archivo debe contener 5 objetos CourseLesson completos y únicos.
+
+Opcionalmente, si el volumen lo hace inmanejable, crea:
+
+src/data/curriculum/a1Content.ts
+src/data/curriculum/a2Content.ts
+src/data/curriculum/b1Content.ts
+src/data/curriculum/b2Content.ts
+
+y haz que src/data/levels/*.ts solo importe y reexporte. Pero no rompas los imports existentes.
+
+Contenido compartido permitido:
+- src/data/rescueData.ts y src/data/drillsData.ts pueden seguir existiendo como módulos de repaso.
+- No copies sus textos literalmente en las lecciones.
+
+Estructura de API configurable:
+- src/config/api.ts debe exportar API_URL y apiFetch.
+- Usa VITE_API_URL en producción.
+- En desarrollo, Vite debe tener proxy para /api hacia http://127.0.0.1:3001.
+
+
+5. CONTENIDO EXACTO QUE DEBE TENER CADA LECCIÓN
+------------------------------------------------
+
+Para cada una de las 20 lecciones:
+
+5.1 Vocabulario: 20 palabras
+Cada item debe tener:
+- id único: v-{LEVEL}-{lessonNumber}-{n}
+- word
+- phonetic (IPA)
+- partOfSpeech
+- meaningEs
+- exampleEn
+- exampleEs
+
+Requisitos:
+- 100% de palabras únicas entre las 20 lecciones.
+- Vocabulario alineado con el tema y el nivel.
+- Ejemplos en inglés naturales, cortos y relacionados con el foco gramatical.
+- Nada de repetir la misma lista de negocios en A1/A2.
+
+5.2 Chunks: 10 por lección
+Cada item:
+- id único: c-{LEVEL}-{lessonNumber}-{n}
+- chunk
+- meaningEs
+- usageContext
+- exampleSentence
+
+Requisitos:
+- 100% de chunks únicos entre lecciones.
+- Alineados con la función comunicativa de la lección.
+- Ejemplos únicos.
+- No copiar los chunks actuales "Could I get a...", "Let me think for a second...", etc.
+
+5.3 Listenings: 3 por lección
+Cada item:
+- id único: ml-lesson-{level}-{lessonNumber}-{n}
+- title único
+- contextType: daily, work o fast_paced
+- audioScript único
+- spanishContext
+- comprehensionQuestion
+- options (3)
+- correctAnswer (debe coincidir exactamente con una opción)
+- explanation
+
+Requisitos:
+- 60 guiones únicos en total.
+- Guiones de 1-3 frases, nivel adecuado, con vocabulario y gramática de la lección.
+- Preguntas y opciones únicas.
+- Los 3 contextos deben ser distintos entre sí.
+- No reutilizar los audios actuales del restaurante, la llamada laboral ni la estación de tren.
+
+5.4 Workbook: mínimo 10 ejercicios por lección
+Cada item:
+- id único: wb-{LEVEL}-{lessonNumber}-{n}
+- category: routine, social, problem_solving, asking_help u opinion
+- situationEs única
+- promptEn único
+- guidanceTipEs
+- recommendedAnswers (3 respuestas naturales, distintas por ejercicio)
+- pedagogicalNote
+
+Requisitos:
+- Mínimo 10 ejercicios únicos por lección.
+- Si se mantienen 20, los 20 deben ser únicos. No rellenar con repeticiones.
+- Cada ejercicio debe tener su propia situación, su propio prompt y sus propias 3 respuestas modelo.
+- Actualiza la UI para que muestre el número real (prompts.length), no "20" hardcodeado.
+- Recomendación: 10 por lección para poder mantener calidad. Si se reducen, actualizar todos los textos.
+
+5.5 Teoría
+- Mantén la teoría actual si es correcta y única.
+- Corrige cualquier ejemplo o vocabulario que no corresponda al nivel.
+- No es necesario reescribir las 20 tablas gramaticales, pero sí revisar coherencia con el nuevo contenido.
+
+
+6. MAPA DE TEMAS Y NIVELES
+---------------------------
+
+Usa esta guía para que el contenido sea coherente:
+
+A1:
+1. TO BE: identidad, nacionalidad, edad, sentimientos, ubicación.
+2. Present Simple: rutina diaria, horas, trabajo/estudio, aficiones.
+3. Present Continuous: acciones ahora, ropa, clima, actividades temporales.
+4. Present Simple vs Continuous: hábitos vs ahora, marcadores de tiempo.
+5. Past Simple básico: was/were, verbos regulares, ayer, lugares, eventos simples.
+
+A2:
+1. Past Simple irregular + did: fin de semana, anécdotas, preguntas.
+2. Past Continuous: interrupciones, accidentes, escenas.
+3. Futuro: planes de viaje, citas, decisiones espontáneas.
+4. Modales: habilidad, obligación, reglas, trabajo/estudio.
+5. GET: transporte, cambios, obtener, entender.
+
+B1:
+1. Present Perfect: experiencias, logros, vida.
+2. Present Perfect vs Past Simple: entrevistas, timelines, noticias.
+3. Present Perfect Continuous: acciones en curso, síntomas, proyectos.
+4. First/Second Conditional: decisiones, consejos, hipótesis.
+5. Modales de deducción: especulación, evidencia, fotos.
+
+B2:
+1. Third Conditional: arrepentimientos, decisiones, post-mortem de proyectos.
+2. Passive Voice: procesos, informes, comunicación corporativa.
+3. Reported Speech: reuniones, mensajes, rumores.
+4. Phrasal Verbs de negocio: reuniones, seguimiento, negociación.
+5. Hedging/Diplomacia: desacuerdos, feedback, negociación.
+
+
+7. FASE 1: VALIDADOR DE CONTENIDO
+----------------------------------
+
+Antes de reescribir todo, crea:
+
+scripts/validateCurriculum.mjs
+
+Debe poder ejecutarse con:
+
+npx tsx scripts/validateCurriculum.mjs
+
+Reglas que debe comprobar:
+
+1. Existen exactamente 20 lecciones: 5 por nivel.
+2. Cada lección tiene al menos:
+   - 20 vocab
+   - 10 chunks
+   - 3 listenings
+   - 10 workbook
+3. No hay IDs duplicados en todo el curriculum.
+4. No hay palabras duplicadas entre lecciones (normalizando minúsculas, puntuación y espacios).
+5. No hay chunks duplicados entre lecciones.
+6. No hay audioScript duplicados.
+7. No hay workbook.promptEn duplicados.
+8. No hay conjuntos de recommendedAnswers duplicados.
+9. Todos los correctAnswer existen dentro de options.
+10. No hay campos vacíos ni undefined.
+11. Cada lección tiene theory.overviewEs y grammarChart.
+12. Reporta métricas: total, únicos y repetidos por tipo.
+
+Salida esperada si todo está bien:
+- "Validación OK: 400 vocab únicos, 200 chunks únicos, 60 listenings únicos, 200 workbook únicos..." (los números reales según el contenido).
+
+Si algo falla, debe salir con exit code 1 y mostrar exactamente qué elemento y en qué lección falla.
+
+Añade scripts en package.json:
+
+"validate:content": "tsx scripts/validateCurriculum.mjs",
+"prebuild": "npm run validate:content"
+
+No lo añadas al `dev` para no bloquear el desarrollo, pero sí al build.
+
+
+8. FASE 2: REESCRITURA DEL CONTENIDO
+-------------------------------------
+
+Orden recomendado:
+
+1. Preserva y revisa A2 (ya tiene vocab/chunks únicos).
+2. Reescribe A1 completo.
+3. Reescribe B1 completo.
+4. Reescribe B2 completo.
+5. Ajusta A2 para que listenings y workbook también sean únicos.
+6. Ejecuta el validador después de cada nivel.
+
+Para cada nivel:
+- Revisa los títulos y el grammarFocus actuales.
+- Escribe el contenido nuevo respetando los tipos.
+- Verifica que no se repitan palabras/chunks con los otros niveles.
+- Verifica que el nivel sea correcto.
+- Ejecuta `npm run validate:content`.
+- Solo pasa al siguiente nivel cuando el nivel actual sea coherente.
+
+No uses el mismo pool de 20 palabras para varias lecciones. No uses el mismo pool de 10 chunks. No uses plantillas del tipo "Are you able to take care of this today...".
+
+
+9. FASE 3: ACTUALIZAR LA UI Y RESPONSIVE
+-----------------------------------------
+
+Cambia los textos hardcodeados para que reflejen el contenido real:
+
+- src/App.tsx: "Clases A1-B2 (20 Clases)" puede quedarse si siguen siendo 20.
+- src/components/CurriculumHub.tsx:
+  - "20 Clases Maestras con Contenido 100% Único e Individual" → solo mantener si el validador pasa; si no, describir la propuesta real.
+  - "Continuar al Vocabulario Frecuente (20 Palabras)" → usar selectedLesson.vocabulary.length.
+  - "Continuar a los Chunks de Oro (10 Frases)" → usar selectedLesson.coreChunks.length.
+  - Cualquier otro número hardcodeado.
+- src/components/InteractiveWorkbook.tsx:
+  - "Workbook de Práctica Extensiva (20 Situaciones Reales)" → ({prompts.length} Situaciones Reales).
+  - Revisar cualquier otro "20".
+- Si reduces el workbook a 10, actualiza también los textos de navegación y las expectativas.
+
+Nunca muestres un número que no coincida con los datos.
+
+Responsive 100%:
+- Probar a 320px, 375px, 390px, 768px, 1024px, 1440px y 1920px.
+- Sin scroll horizontal global. Las tablas pueden tener scroll horizontal interno.
+- El header no debe desbordarse: ocultar textos secundarios en móvil, truncar nombres y permitir wrap.
+- La barra de navegación debe hacer scroll horizontal suave en móvil.
+- Los botones largos deben ocupar el 100% del ancho en móvil cuando sea necesario.
+- Los formularios deben tener inputs de al menos 16px de font-size en móvil para evitar zoom automático en iOS.
+- Los modales deben tener max-h-[90vh] y overflow-y-auto.
+- Las tarjetas deben usar break-words para textos largos.
+- Las tablas deben tener min-w para no aplastar columnas y un contenedor overflow-x-auto.
+- Revisar AuthModal, StudentProfileModal, InteractiveWorkbook, CurriculumHub, GrammarChartViewer, MicroListeningModule, ReflexTrainingModule, RescueCenterHub y AdminDashboard.
+
+
+10. FASE 4: CORREGIR LOS BUGS CRÍTICOS
+---------------------------------------
+
+Después del contenido, arregla esto:
+
+10.1 Persistencia real
+Implementar en server/index.ts y server/db.ts:
+
+- Añadir a student_profiles:
+  - last_active_lesson_id TEXT
+  - last_active_step TEXT
+- Crear tabla workbook_answers:
+  - user_id INT REFERENCES users(id) ON DELETE CASCADE
+  - lesson_id TEXT
+  - question_id TEXT
+  - user_text TEXT
+  - updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  - PRIMARY KEY (user_id, question_id)
+
+Endpoints:
+- PUT /api/student/position
+  body: { last_active_lesson_id, last_active_step }
+  Actualiza student_profiles del usuario autenticado.
+- POST /api/student/workbook
+  body: { lesson_id, question_id, user_text }
+  Hace upsert en workbook_answers.
+- GET /api/student/profile
+  Debe devolver:
+  - profile.last_active_lesson_id
+  - profile.last_active_step
+  - workbook_answers: [{ question_id, lesson_id, user_text }]
+
+Alinea los payloads con lo que ya envía App.tsx. No cambies el contrato del frontend si puedes evitarlo.
+
+10.2 Seguridad
+- En register, ignorar el role enviado por el cliente. Crear siempre 'student'.
+- Los admins se promocionan desde la base de datos o mediante una variable de entorno/allowlist.
+- Quitar el fallback 'secret123': exigir JWT_SECRET en producción.
+- Configurar CORS con allowlist de orígenes.
+- Añadir rate limiting en /api/auth/login y /api/auth/register.
+- Validar contraseña mínima de 8 caracteres.
+- No mostrar credenciales demo en producción.
+
+10.3 Estadísticas
+- Quitar el incremento automático de drills_completed en PUT /api/student/profile.
+- Incrementar drills_completed solo cuando se completa un drill real y evitar dobles conteos.
+- Implementar lógica de racha por días de actividad o, como mínimo, no mostrar una racha falsa.
+
+10.4 Configuración y despliegue
+- Mantener src/config/api.ts con VITE_API_URL.
+- En desarrollo, proxy de Vite hacia http://127.0.0.1:3001.
+- En producción, configurar VITE_API_URL con la URL del backend.
+- Añadir scripts:
+  "dev:web": "vite",
+  "dev:api": "tsx watch server/index.ts",
+  "dev:all": "concurrently \"npm:dev:web\" \"npm:dev:api\""
+- Documentar en README: requisitos, .env, DATABASE_URL, JWT_SECRET, VITE_API_URL, cómo arrancar, cómo validar contenido y cómo desplegar.
+- No indexar en Google: public/robots.txt con Disallow: / y meta robots noindex, nofollow en index.html.
+
+
+11. FASE 5: DESPLIEGUE EN VERCEL
+---------------------------------
+
+El usuario quiere acceder a la web sin tener su PC encendido.
+
+Recomendación:
+- Frontend (Vite/React) en Vercel.
+- Backend (Express + PostgreSQL) en Render, Railway o Fly.io, porque Vercel es serverless y el backend actual usa app.listen y un Pool persistente.
+- Base de datos en Neon (ya está previsto).
+
+Alternativa "todo en Vercel":
+- Convertir server/index.ts en funciones serverless dentro de /api.
+- Exportar la app Express como handler por defecto.
+- Usar el driver serverless de Neon o configurar el Pool con conexiones limitadas.
+- Añadir vercel.json con rewrites para SPA y para /api.
+- Esta opción requiere refactor y más cuidado con conexiones; recomiendo hacerla solo si el usuario insiste en un único despliegue.
+
+Pasos mínimos para Vercel:
+1. Subir el repo a GitHub.
+2. Importar el repo en Vercel.
+3. Framework preset: Vite.
+4. Build command: npm run build.
+5. Output directory: dist.
+6. Variables de entorno:
+   - VITE_API_URL = URL pública del backend (ej. https://en-class-api.onrender.com)
+   - En el backend: DATABASE_URL, JWT_SECRET, PORT.
+7. En el backend, configurar CORS para aceptar el dominio de Vercel.
+8. Verificar que /api/auth/login y /api/student/profile responden desde el dominio de Vercel.
+9. Añadir robots.txt y meta noindex.
+10. Probar en móvil real.
+
+Si se elige backend en Render/Railway:
+- Crear un Web Service con root directory en la raíz del repo.
+- Build command: npm install && npm run build (o solo npm install si se ejecuta con tsx).
+- Start command: npx tsx server/index.ts.
+- Health check: /api/health (crear endpoint).
+- Configurar DATABASE_URL y JWT_SECRET.
+- Neon: usar connection string con sslmode=require.
+
+No hardcodees localhost en producción.
+
+
+12. CRITERIOS DE ACEPTACIÓN
+----------------------------
+
+No des la tarea por terminada hasta que se cumpla todo esto:
+
+- [ ] `npm run validate:content` sale con exit code 0.
+- [ ] Hay 20 lecciones, 5 por nivel.
+- [ ] 400 palabras de vocabulario, todas únicas (o el número real si se ajusta el diseño, pero 100% únicas).
+- [ ] 200 chunks, todos únicos.
+- [ ] 60 listenings, todos con guion único.
+- [ ] 200-400 ejercicios de workbook, todos con situación, prompt y respuestas modelo únicas.
+- [ ] Cada lección tiene al menos 20 vocab, 10 chunks, 3 listenings y 10 workbook.
+- [ ] No hay textos de plantilla repetidos entre lecciones.
+- [ ] El contenido es coherente con el nivel CEFR y el grammarFocus.
+- [ ] La UI muestra números reales, no hardcodeados.
+- [ ] La web es 100% responsive y no tiene scroll horizontal global.
+- [ ] `npm run build` funciona.
+- [ ] Los endpoints de posición y workbook funcionan y persisten en PostgreSQL.
+- [ ] El registro ya no permite elegir rol admin desde el cliente.
+- [ ] El frontend usa VITE_API_URL y no localhost hardcodeado.
+- [ ] public/robots.txt y meta noindex están presentes.
+- [ ] El README explica cómo arrancar, validar y desplegar.
+- [ ] `git status` no incluye archivos generados no deseados ni cambios accidentales en trabajo del usuario.
+- [ ] Probado en móvil real o en DevTools a 320px, 375px, 768px y 1440px.
+
+
+13. QUÉ NO HACER
+-----------------
+
+- No ejecutes los generadores antiguos para sobrescribir los datos.
+- No borres los cambios sin commitear del usuario sin revisar `git diff`.
+- No mantengas el fallback genericTerms.
+- No dejes listenings o prompts repetidos "porque ya existían".
+- No reduzcas la calidad para cumplir un número. Si 20 ejercicios por lección no se pueden hacer bien, usa 10 y actualiza la UI.
+- No cambies la estructura de datos ni los nombres de exports sin necesidad.
+- No añadas dependencias nuevas si no son imprescindibles.
+- No subas .env, tokens ni credenciales.
+- No indexes la web en Google.
+
+
+14. ORDEN DE EJECUCIÓN
+-----------------------
+
+1. `git status` y `git diff`: entender el estado actual.
+2. Crear `scripts/validateCurriculum.mjs` y verificar que detecta los problemas actuales.
+3. Añadir `validate:content` y `prebuild` a package.json.
+4. Reescribir A1 completo y validar.
+5. Reescribir B1 completo y validar.
+6. Reescribir B2 completo y validar.
+7. Completar A2 (listenings y workbook) y validar.
+8. Actualizar textos hardcodeados de la UI.
+9. Revisar y completar responsive en todos los componentes.
+10. Corregir persistencia, seguridad y estadísticas.
+11. Configurar VITE_API_URL, scripts de desarrollo y README.
+12. Preparar despliegue en Vercel (frontend) y backend en Render/Railway o serverless.
+13. Ejecutar validación final, build y revisar `git diff`.
+
+
+15. ENTREGA ESPERADA
+---------------------
+
+Al terminar, entrega un resumen con:
+
+- Métricas finales de unicidad por tipo de contenido.
+- Niveles reescritos y número de lecciones.
+- Archivos modificados y por qué.
+- Resultado de `npm run validate:content`.
+- Resultado de `npm run build`.
+- Bugs críticos corregidos.
+- Estado del responsive y pruebas realizadas.
+- Pasos exactos para desplegar en Vercel y en el backend.
+- Pendientes, si queda alguno.

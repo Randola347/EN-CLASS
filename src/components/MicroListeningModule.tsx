@@ -49,16 +49,16 @@ export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill 
   };
 
   return (
-    <div className="bg-slate-800/90 border border-slate-700/70 rounded-2xl p-6 sm:p-8 backdrop-blur shadow-xl max-w-2xl mx-auto">
+    <div className="bg-slate-800/90 border border-slate-700/70 rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur shadow-xl max-w-2xl mx-auto w-full">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-700/60 pb-4 mb-6">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-700/60 pb-4 mb-6">
+        <div className="min-w-0">
           <span className="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-indigo-500/20 text-indigo-400 rounded-full border border-indigo-500/30">
             Micro-Listening Drill #{currentIndex + 1} of {drills.length}
           </span>
-          <h2 className="text-xl font-bold text-white mt-2">Natural Ear Training</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-white mt-2 break-words">Natural Ear Training</h2>
         </div>
-        <div className="text-sm font-medium text-slate-400">
+        <div className="text-sm font-medium text-slate-400 shrink-0">
           Target: <span className="text-indigo-400 font-semibold">{current.chunkFocus.split(' ')[0]}</span>
         </div>
       </div>
@@ -66,17 +66,17 @@ export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill 
       {/* Context Badge */}
       <div className="bg-slate-900/60 rounded-xl p-4 mb-6 border border-slate-800 flex items-start gap-3">
         <Sparkles className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-        <div>
+        <div className="min-w-0">
           <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-1">Situación / Contexto</p>
-          <p className="text-sm text-slate-200">{current.spanishContext}</p>
+          <p className="text-sm text-slate-200 break-words">{current.spanishContext}</p>
         </div>
       </div>
 
       {/* Audio Controls */}
-      <div className="flex flex-wrap items-center justify-center gap-4 py-6 bg-slate-900/40 rounded-xl border border-slate-700/50 mb-6">
+      <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 py-4 sm:py-6 px-3 sm:px-4 bg-slate-900/40 rounded-xl border border-slate-700/50 mb-6">
         <button
           onClick={() => handlePlayAudio(0.95)}
-          className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all shadow-md ${
+          className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all shadow-md w-full sm:w-auto ${
             isSpeaking 
               ? 'bg-indigo-600 text-white animate-pulse' 
               : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-500/20'
@@ -88,7 +88,7 @@ export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill 
 
         <button
           onClick={() => handlePlayAudio(0.75)}
-          className="flex items-center gap-2 px-4 py-3 bg-slate-700/80 hover:bg-slate-700 text-slate-200 rounded-xl font-medium transition"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-slate-700/80 hover:bg-slate-700 text-slate-200 rounded-xl font-medium transition w-full sm:w-auto"
         >
           <Volume2 className="w-4 h-4 text-indigo-400" />
           Slow 0.75x
@@ -96,7 +96,7 @@ export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill 
 
         <button
           onClick={() => setShowScript(!showScript)}
-          className="flex items-center gap-2 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl border border-slate-700 transition w-full sm:w-auto"
         >
           {showScript ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4 text-emerald-400" />}
           {showScript ? 'Hide Script' : 'Reveal Script'}
@@ -107,8 +107,8 @@ export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill 
       {showScript && (
         <div className="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-4 mb-6 text-center animate-fade-in">
           <p className="text-xs uppercase font-semibold text-emerald-400 tracking-wider mb-1">Transcript & Chunk Breakdown</p>
-          <p className="text-lg font-medium text-white italic">"{current.script}"</p>
-          <div className="mt-2 inline-block px-3 py-1 bg-emerald-500/10 text-emerald-300 text-xs rounded-full border border-emerald-500/20">
+          <p className="text-base sm:text-lg font-medium text-white italic break-words">"{current.script}"</p>
+          <div className="mt-2 inline-block px-3 py-1 bg-emerald-500/10 text-emerald-300 text-xs rounded-full border border-emerald-500/20 max-w-full break-words">
             🎯 Functional Chunk: <strong>{current.chunkFocus}</strong>
           </div>
         </div>
@@ -116,7 +116,7 @@ export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill 
 
       {/* Question */}
       <div className="mb-6">
-        <label className="block text-sm font-semibold text-slate-300 mb-3">
+        <label className="block text-sm font-semibold text-slate-300 mb-3 break-words">
           {current.challengeQuestion}
         </label>
         <div className="space-y-2.5">
@@ -142,7 +142,7 @@ export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill 
                 onClick={() => handleSelectOption(option)}
                 className={btnClass}
               >
-                <span>{option}</span>
+                <span className="break-words">{option}</span>
                 {hasAnswered && isCorrect && <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />}
                 {hasAnswered && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-rose-400 shrink-0" />}
               </button>

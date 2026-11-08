@@ -20,14 +20,14 @@ export const GrammarChartViewer: React.FC<Props> = ({ theory }) => {
   return (
     <div className="space-y-6">
       {/* Overview Card */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+      <div className="bg-white border border-slate-200 rounded-3xl p-4 sm:p-6 shadow-xs">
+        <div className="flex items-start sm:items-center gap-2 mb-2">
+          <span className="w-8 h-8 shrink-0 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
             <BookOpen className="w-4 h-4" />
           </span>
-          <h3 className="text-lg font-bold text-slate-900">{theory.title}</h3>
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 break-words">{theory.title}</h3>
         </div>
-        <p className="text-sm text-slate-600 leading-relaxed mb-4">
+        <p className="text-sm text-slate-600 leading-relaxed mb-4 break-words">
           {overviewEs}
         </p>
 
@@ -37,7 +37,7 @@ export const GrammarChartViewer: React.FC<Props> = ({ theory }) => {
             <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700 block mb-0.5">
               Fórmula Estructural:
             </span>
-            <span className="text-base font-mono font-bold text-slate-900">
+            <span className="text-base font-mono font-bold text-slate-900 break-words">
               {grammarChart.structureFormula}
             </span>
           </div>
@@ -49,9 +49,9 @@ export const GrammarChartViewer: React.FC<Props> = ({ theory }) => {
 
       {/* Main Grammar Table (Test-English Style) */}
       <div className="bg-white border border-slate-200 rounded-3xl shadow-xs overflow-hidden">
-        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-blue-600" />
+        <div className="p-3 sm:p-4 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2 break-words">
+            <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
             Tabla de Conjugación Completa: {grammarChart.title}
           </span>
           <span className="text-[11px] text-slate-500 font-medium hidden sm:inline">
@@ -60,7 +60,7 @@ export const GrammarChartViewer: React.FC<Props> = ({ theory }) => {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full min-w-[760px] text-left text-xs">
             <thead className="bg-slate-50/70 text-slate-700 border-b border-slate-200 font-bold uppercase tracking-wider">
               <tr>
                 <th className="p-4 w-1/6">Sujeto / Persona</th>
@@ -122,13 +122,13 @@ export const GrammarChartViewer: React.FC<Props> = ({ theory }) => {
                 <span className="w-6 h-6 rounded-lg bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center shrink-0">
                   {idx + 1}
                 </span>
-                <h4 className="text-sm font-bold text-slate-900">{rule.ruleTitle}</h4>
+                <h4 className="text-sm font-bold text-slate-900 break-words">{rule.ruleTitle}</h4>
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed mb-3">
+              <p className="text-xs text-slate-600 leading-relaxed mb-3 break-words">
                 {rule.description}
               </p>
             </div>
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs font-semibold text-slate-800 italic">
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs font-semibold text-slate-800 italic break-words">
               Ejemplo: "{rule.example}"
             </div>
           </div>
@@ -186,11 +186,11 @@ export const GrammarChartViewer: React.FC<Props> = ({ theory }) => {
         <div className="space-y-3">
           {commonMistakes.map((m, idx) => (
             <div key={idx} className="p-4 rounded-2xl bg-amber-50/40 border border-amber-200/80 text-xs space-y-1.5">
-              <div className="flex items-center gap-3">
-                <span className="text-rose-600 font-bold line-through">✗ {m.wrong}</span>
-                <span className="text-emerald-700 font-bold">✓ {m.correct}</span>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="text-rose-600 font-bold line-through break-words">✗ {m.wrong}</span>
+                <span className="text-emerald-700 font-bold break-words">✓ {m.correct}</span>
               </div>
-              <p className="text-slate-600 mt-1">{m.explanation}</p>
+              <p className="text-slate-600 mt-1 break-words">{m.explanation}</p>
             </div>
           ))}
         </div>

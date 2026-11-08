@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LogIn, UserPlus, AlertCircle } from 'lucide-react';
+import { apiFetch } from '../config/api';
 
 interface Props {
   onLoginSuccess: (token: string, user: any) => void;
@@ -21,11 +22,11 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
 
     const endpoint = isRegister ? '/api/auth/register' : '/api/auth/login';
     const payload = isRegister 
-      ? { email, password, name, current_level: level, role: email.includes('admin') ? 'admin' : 'student' }
+      ? { email, password, name, current_level: level }
       : { email, password };
 
     try {
-      const res = await fetch(`http://127.0.0.1:3001${endpoint}`, {
+      const res = await apiFetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -44,16 +45,16 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
     }
   };
 
-  const handleQuickDemo = async (role: 'admin' | 'student') => {
-    setEmail(role === 'admin' ? 'admin@enclass.com' : 'estudiante@enclass.com');
+  const handleQuickDemo = () => {
+    setEmail('estudiante@enclass.com');
     setPassword('demo1234');
-    setName(role === 'admin' ? 'Profesor / Admin' : 'Carlos Méndez');
+    setName('Carlos Méndez');
     setIsRegister(true);
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative overflow-hidden">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
         {/* Glow accent */}
         <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
 
@@ -61,9 +62,9 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 to-amber-500 text-slate-950 font-black text-xl mb-3 shadow-lg shadow-indigo-500/20">
             EN
           </div>
-          <h2 className="text-2xl font-bold text-white">
-            {isRegister ? 'Crea tu Cuenta de Estudio' : 'Bienvenido a EN-Class'}
-          </h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-white break-words">
+                {isRegister ? 'Crea tu Cuenta de Estudio' : 'Bienvenido a EN-Class'}
+              </h2>
           <p className="text-xs text-slate-400 mt-1">
             Plataforma de fluidez acelerada con PostgreSQL en Neon DB
           </p>
@@ -86,7 +87,7 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
                 value={name}
                 onChange={e => setName(e.target.value)}
                 placeholder="Ej. Roberto Gómez"
-                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition"
+                className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-base sm:text-sm text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition"
               />
             </div>
           )}
@@ -98,8 +99,8 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="tu@correo.com (o admin@enclass.com)"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition"
+              placeholder="tu@correo.com"
+              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-base sm:text-sm text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition"
             />
           </div>
 
@@ -111,7 +112,7 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition"
+              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-base sm:text-sm text-white placeholder-slate-500 focus:border-indigo-500 outline-none transition"
             />
           </div>
 
@@ -158,24 +159,18 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
           </button>
         </form>
 
-        {/* Quick demo account fill */}
-        <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-          <span>Accesos rápidos:</span>
-          <div className="flex gap-2">
+        {/* Acceso rápido solo en desarrollo */}
+        {import.meta.env.DEV && (
+          <div className="mt-4 pt-4 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400">
+            <span>Acceso rápido (solo desarrollo):</span>
             <button
-              onClick={() => handleQuickDemo('student')}
+              onClick={handleQuickDemo}
               className="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-slate-300 transition"
             >
-              Demo Alumno
-            </button>
-            <button
-              onClick={() => handleQuickDemo('admin')}
-              className="px-2 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/20 rounded transition font-medium"
-            >
-              Demo Admin
+              Rellenar demo alumno
             </button>
           </div>
-        </div>
+        )}
 
         <div className="mt-4 text-center">
           <button

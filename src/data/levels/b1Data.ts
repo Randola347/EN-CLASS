@@ -1,6 +1,7 @@
 import type { CourseLesson } from '../../types/curriculum';
+import { B1_CONTENT } from '../curriculum/b1Content';
 
-export const B1_LESSONS: CourseLesson[] = [
+const BASE_B1_LESSONS: CourseLesson[] = [
   {
     "id": "lesson-b1-1",
     "level": "B1",
@@ -3126,3 +3127,11 @@ export const B1_LESSONS: CourseLesson[] = [
     ]
   }
 ];
+
+export const B1_LESSONS: CourseLesson[] = BASE_B1_LESSONS.map((lesson) => {
+  const content = B1_CONTENT[lesson.id];
+  if (!content) {
+    throw new Error(`Falta el contenido único de la lección ${lesson.id}`);
+  }
+  return { ...lesson, ...content };
+});

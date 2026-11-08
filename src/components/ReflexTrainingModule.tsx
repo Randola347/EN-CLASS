@@ -95,33 +95,33 @@ export const ReflexTrainingModule: React.FC<Props> = ({ drills, onCompleteDrill 
   const percentLeft = (timeLeft / current.timeLimitSec) * 100;
 
   return (
-    <div className="bg-slate-800/90 border border-slate-700/70 rounded-2xl p-6 sm:p-8 backdrop-blur shadow-xl max-w-2xl mx-auto">
+    <div className="bg-slate-800/90 border border-slate-700/70 rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur shadow-xl max-w-2xl mx-auto w-full">
       {/* Top Tag */}
-      <div className="flex items-center justify-between border-b border-slate-700/60 pb-4 mb-6">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-700/60 pb-4 mb-6">
+        <div className="min-w-0">
           <span className="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-amber-500/20 text-amber-400 rounded-full border border-amber-500/30 flex items-center gap-1.5 inline-flex">
             <Zap className="w-3.5 h-3.5 fill-current" />
             3-Second Reflex Drill #{currentIndex + 1}
           </span>
-          <h2 className="text-xl font-bold text-white mt-2">Zero-Translation Reflex</h2>
+          <h2 className="text-lg sm:text-xl font-bold text-white mt-2 break-words">Zero-Translation Reflex</h2>
         </div>
-        <div className="text-right">
+        <div className="sm:text-right min-w-0">
           <span className="text-xs text-slate-400 block">Target Chunk</span>
-          <span className="text-sm font-semibold text-amber-400">{current.targetChunk}</span>
+          <span className="text-sm font-semibold text-amber-400 break-words">{current.targetChunk}</span>
         </div>
       </div>
 
       {/* Spanish Situation Card */}
-      <div className="bg-slate-900/70 rounded-xl p-5 mb-6 border border-slate-700/80">
+      <div className="bg-slate-900/70 rounded-xl p-4 sm:p-5 mb-6 border border-slate-700/80">
         <p className="text-xs uppercase text-slate-400 font-semibold tracking-wider mb-1">
           Situación Inmediata
         </p>
-        <p className="text-base text-slate-100 font-medium leading-relaxed">
+        <p className="text-sm sm:text-base text-slate-100 font-medium leading-relaxed break-words">
           {current.promptEs}
         </p>
-        <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-          <span>Te dicen: <strong className="text-indigo-300 font-medium">"{current.promptEn}"</strong></span>
-          <span className="text-amber-400 font-medium">Límite: {current.timeLimitSec}s</span>
+        <div className="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-slate-400">
+          <span className="break-words">Te dicen: <strong className="text-indigo-300 font-medium">"{current.promptEn}"</strong></span>
+          <span className="text-amber-400 font-medium shrink-0">Límite: {current.timeLimitSec}s</span>
         </div>
       </div>
 
@@ -165,7 +165,7 @@ export const ReflexTrainingModule: React.FC<Props> = ({ drills, onCompleteDrill 
           <label className="block text-xs uppercase text-slate-400 font-semibold mb-2">
             Tu respuesta instantánea en inglés:
           </label>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               ref={inputRef}
               disabled={submitted}
@@ -173,12 +173,12 @@ export const ReflexTrainingModule: React.FC<Props> = ({ drills, onCompleteDrill 
               value={inputAnswer}
               onChange={(e) => setInputAnswer(e.target.value)}
               placeholder="Escribe o suelta la frase ya..."
-              className="flex-1 bg-slate-900 border border-slate-700 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-sm outline-none transition disabled:opacity-60"
+              className="flex-1 bg-slate-900 border border-slate-700 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 rounded-xl px-4 py-3 text-white placeholder-slate-500 text-base sm:text-sm outline-none transition disabled:opacity-60"
             />
             {!submitted && (
               <button
                 type="submit"
-                className="px-5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition"
+                className="px-5 py-3 sm:py-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition"
               >
                 Enviar
               </button>
@@ -208,7 +208,7 @@ export const ReflexTrainingModule: React.FC<Props> = ({ drills, onCompleteDrill 
                 </>
               )}
             </div>
-            <p className="text-xs text-slate-300 mt-1">
+            <p className="text-xs text-slate-300 mt-1 break-words">
               {current.explanation}
             </p>
           </div>
@@ -217,8 +217,8 @@ export const ReflexTrainingModule: React.FC<Props> = ({ drills, onCompleteDrill 
             <span className="font-semibold text-slate-400 uppercase tracking-wider block mb-2">Respuestas naturales recomendadas:</span>
             <ul className="space-y-1.5">
               {current.acceptableAnswers.map((ans, idx) => (
-                <li key={idx} className="flex items-center gap-2 text-slate-200 font-medium">
-                  <span className="text-amber-400 font-bold">•</span> "{ans}"
+                <li key={idx} className="flex items-start gap-2 text-slate-200 font-medium">
+                  <span className="text-amber-400 font-bold">•</span> <span className="break-words">"{ans}"</span>
                 </li>
               ))}
             </ul>

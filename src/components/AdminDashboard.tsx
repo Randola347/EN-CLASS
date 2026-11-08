@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Shield, AlertCircle, RefreshCw } from 'lucide-react';
+import { apiFetch } from '../config/api';
 
 interface Props {
   token: string;
@@ -14,7 +15,7 @@ export const AdminDashboard: React.FC<Props> = ({ token }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('http://127.0.0.1:3001/api/admin/overview', {
+      const res = await apiFetch('/api/admin/overview', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -37,12 +38,12 @@ export const AdminDashboard: React.FC<Props> = ({ token }) => {
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="bg-gradient-to-r from-amber-950/60 to-slate-900 border border-amber-500/30 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold mb-2">
-            <Shield className="w-3.5 h-3.5" />
-            Panel de Administración • Neon PostgreSQL
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold mb-2 max-w-full">
+            <Shield className="w-3.5 h-3.5 shrink-0" />
+            <span className="break-words">Panel de Administración • Neon PostgreSQL</span>
           </div>
-          <h2 className="text-2xl font-black text-white">Monitoreo de Estudiantes</h2>
-          <p className="text-xs text-slate-300 mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-white break-words">Monitoreo de Estudiantes</h2>
+          <p className="text-xs text-slate-300 mt-1 break-words">
             Visualiza en tiempo real el progreso de cada usuario, sus obstáculos detectados y chunks dominados.
           </p>
         </div>
@@ -65,12 +66,12 @@ export const AdminDashboard: React.FC<Props> = ({ token }) => {
 
       {/* Students Table */}
       <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl">
-        <div className="p-4 border-b border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
+        <div className="p-4 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-400">
           <span>Total de Usuarios Registrados: {students.length}</span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full min-w-[820px] text-left text-xs">
             <thead className="bg-slate-950 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
               <tr>
                 <th className="p-4">Estudiante</th>

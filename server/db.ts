@@ -6,15 +6,16 @@ const connectionString = process.env.DATABASE_URL;
 
 export const pool = new Pool({
   connectionString,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl:
+    connectionString && /localhost|127\.0\.0\.1/.test(connectionString)
+      ? false
+      : { rejectUnauthorized: false },
 });
 
 export async function initDb() {
   const client = await pool.connect();
   try {
-    console.log("Connected to Neon DB. Initializing tables...");
+    console.log('Connected to Neon DB. Initializing tables...');
 
     // Users table
     await client.query(`
@@ -31,6 +32,12 @@ export async function initDb() {
       );
     `);
 
+    // Backwards-compatible column additions for existing databases
+    await client.query(`
+      ALTER TABLE users
+        ADD COLUMN IF NOT EXISTS last_active_date DATE;
+    `);
+
     // Student profile metadata & progression
     await client.query(`
       CREATE TABLE IF NOT EXISTS student_profiles (
@@ -41,6 +48,25 @@ export async function initDb() {
         session_summary TEXT DEFAULT '',
         completed_lessons JSONB DEFAULT '[]'::jsonb,
         updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+      );
+    `);
+
+    await client.query(`
+      ALTER TABLE student_profiles
+        ADD COLUMN IF NOT EXISTS last_active_lesson_id VARCHAR(80),
+        ADD COLUMN IF NOT EXISTS last_active_step VARCHAR(40);
+    `);
+
+    // Saved workbook answers (one row per student + exercise)
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS workbook_answers (
+        id SERIAL PRIMARY KEY,
+        user_id INT REFERENCES users(id) ON DELETE CASCADE,
+        lesson_id VARCHAR(80) NOT NULL,
+        question_id VARCHAR(80) NOT NULL,
+        user_text TEXT NOT NULL,
+        updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        UNIQUE (user_id, question_id)
       );
     `);
 
@@ -57,11 +83,17 @@ export async function initDb() {
       );
     `);
 
-    console.log("Neon DB schema initialized successfully.");
+    await client.query(`
+      ALTER TABLE drill_logs
+        ADD COLUMN IF NOT EXISTS error_text TEXT,
+        ADD COLUMN IF NOT EXISTS correction TEXT;
+    `);
+
+    console.log('Neon DB schema initialized successfully.');
   } catch (err) {
-    console.error("Error creating tables in Neon DB:", err);
+    console.error('Error creating tables in Neon DB:', err);
+    throw err;
   } finally {
     client.release();
   }
 }
-
