@@ -16,6 +16,7 @@
     "lint": "oxlint",
     "typecheck:server": "tsc -p tsconfig.server.json",
     "test": "tsx --test tests/*.test.ts",
+    "smoke:prod": "node scripts/smokeProduction.mjs",
     "preview": "vite preview",
     "validate:content": "tsx scripts/validateCurriculum.mjs"
   },

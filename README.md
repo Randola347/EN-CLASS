@@ -139,6 +139,7 @@ backend en otra terminal (`npm run dev:api`) si quieres probar login y persisten
 | `npm run preview` | Sirve la build de producción |
 | `npm run lint` | Ejecuta oxlint |
 | `npm test` | Tests unitarios de seguridad + integración real contra Neon |
+| `npm run smoke:prod -- URL` | Smoke test contra un despliegue real de Vercel |
 | `npm run validate:content` | Valida que el contenido no tenga duplicados |
 | `npm run typecheck:server` | Comprueba los tipos del backend y de `api/` |
 
@@ -288,12 +289,25 @@ Cada push a `main` vuelve a desplegar automáticamente.
 ### 8.2 Cómo funciona la API en Vercel
 
 `api/[...path].ts` recibe todas las rutas `/api/*` y las delega en la misma app de
-Express que usas en local. La primera petición de cada instancia inicializa el esquema
-de Neon de forma perezosa (`ensureDb()`) y reutiliza un pool pequeño de conexiones.
-Vercel puede apagar y recrear instancias, por lo que no hay estado en memoria
-importante: el rate limiting es *best-effort* por instancia.
+Express que usas en local. En funciones Node de Vercel ese catch-all por sí solo
+solo captura un segmento, por eso `vercel.json` incluye un rewrite explícito de
+`/api/:path*` hacia el handler; sin él, rutas como `/api/auth/login` darían 404.
+La primera petición de cada instancia inicializa el esquema de Neon de forma
+perezosa (`ensureDb()`) y reutiliza un pool pequeño de conexiones. Vercel puede
+apagar y recrear instancias, por lo que no hay estado en memoria importante: el
+rate limiting es *best-effort* por instancia.
 
 ### 8.3 Verificar el despliegue
+
+```bash
+npm run smoke:prod -- https://tu-proyecto.vercel.app
+```
+
+Comprueba que `/api/health`, `/api/student/profile`, `/api/auth/login` y una ruta
+anidada inexistente llegan a Express. Así se detecta el 404 de Vercel que aparece
+cuando el rewrite de `/api/:path*` no está activo.
+
+También puedes comprobar la salud directamente:
 
 ```bash
 curl -s https://tu-proyecto.vercel.app/api/health

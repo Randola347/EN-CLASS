@@ -60,9 +60,14 @@ admin y persistencia en Neon. Ya está hecho:
 - Endurecimiento: `trust proxy`, comparación bcrypt de relleno para emails
   inexistentes, rol admin verificado en BD en cada petición, 413 para cuerpos
   demasiado grandes, rate limiting y validación estricta.
-- `vercel.json` con build de Vite, salida `dist/` y `maxDuration: 30` para `api/**`.
+- `vercel.json` con build de Vite, salida `dist/`, `maxDuration: 30` para `api/**`
+  y un rewrite `/api/:path*` -> `/api/[...path]`. Este rewrite es imprescindible:
+  el catch-all de una función Node de Vercel solo captura un segmento y, sin él,
+  `/api/auth/login` y el resto de rutas anidadas devuelven 404.
 - Tests: `npm test` ejecuta `tests/security.test.ts` (unitarios) y
   `tests/api.test.ts` (integración real contra Neon con usuarios temporales).
+  `npm run smoke:prod -- URL` verifica un despliegue real de Vercel, incluidas
+  las rutas anidadas `/api/*`.
 - `npm run build`, `npm run typecheck:server`, `npm test` y `npm run lint` pasan.
 
 Variables necesarias en Vercel: `DATABASE_URL` y `JWT_SECRET` (mínimo 24 caracteres).
