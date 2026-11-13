@@ -388,9 +388,13 @@ Prueba en DevTools con estos anchos:
 ### La API no responde en producción
 
 - Comprueba `https://tu-proyecto.vercel.app/api/health`.
+- Si devuelve **503** con `Configuración del servidor incompleta: JWT_SECRET...`,
+  falta `JWT_SECRET` en Vercel o mide menos de 24 caracteres (o es `secret123`).
+  Añádelo en **Settings → Environment Variables → Production** y vuelve a desplegar.
+- Si devuelve **503** con `Base de datos no configurada`, falta `DATABASE_URL` en
+  el entorno **Production** de Vercel.
 - Revisa los logs de la función en Vercel.
-- Verifica que `api/[...path].ts` está desplegado y que `DATABASE_URL` y
-  `JWT_SECRET` existen en el entorno de producción.
+- Verifica que `api/[...path].ts` está desplegado.
 - Si `/api/*` devuelve HTML, la función serverless no se desplegó.
 
 ### Error de CORS

@@ -7,7 +7,7 @@ import type { Request, Response, NextFunction } from 'express';
 export function assertJwtSecret(secret: string | undefined): string {
   if (!secret || secret === 'secret123' || secret.length < 24) {
     throw new Error(
-      'JWT_SECRET no es seguro. Define una cadena aleatoria de al menos 24 caracteres en .env'
+      'JWT_SECRET no es seguro. Define una cadena aleatoria de al menos 24 caracteres en .env (local) o en las variables de entorno de Vercel.'
     );
   }
   return secret;

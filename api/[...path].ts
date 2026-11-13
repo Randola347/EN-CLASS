@@ -32,11 +32,12 @@ export default async function handler(req: any, res: any) {
     }
 
     const detail = String(err?.stack ?? err?.message ?? err).slice(0, 1200);
+    console.error('API bootstrap detail:', detail);
+
+    // No devolvemos detalles internos al cliente en producción: solo el log.
     return res.end(
       JSON.stringify({
-        error: 'No se pudo iniciar la API.',
-        detail,
-        hint: 'Revisa los logs de Vercel y las variables DATABASE_URL y JWT_SECRET.',
+        error: 'No se pudo iniciar la API. Revisa los logs de Vercel y las variables DATABASE_URL y JWT_SECRET.',
       })
     );
   }
