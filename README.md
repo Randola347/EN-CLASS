@@ -13,7 +13,7 @@ Stack: React 19 + TypeScript + Vite 8 + Tailwind CSS 4 + Express 5 + PostgreSQL/
 
 ## 1. Requisitos
 
-- Node.js 20 o superior
+- Node.js 22 (Vercel usa Node 22; `package.json` lo fija con `engines`)
 - npm 10 o superior
 - Una base de datos PostgreSQL. Se recomienda [Neon](https://neon.tech) por su plan gratuito.
 - Git
@@ -44,21 +44,26 @@ Crea un archivo `.env` en la raíz del proyecto. **No lo subas a Git** (ya está
 Tienes una plantilla en `.env.example`.
 
 ```env
-# Backend
+# Backend / API
 PORT=3001
 DATABASE_URL=postgresql://usuario:password@host/neondb?sslmode=require
 JWT_SECRET=cambia-esto-por-un-secreto-aleatorio-de-al-menos-24-caracteres
 CORS_ORIGIN=http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173,http://127.0.0.1:4173
 
 # Frontend (Vite)
-# Déjalo vacío en local si usas el proxy de Vite.
-# En producción pon la URL pública del backend, sin barra final.
+# En local puede quedarse vacío: Vite hace proxy de /api al backend.
+# En Vercel también debe quedarse vacío: frontend y API comparten origen.
 VITE_API_URL=
 ```
 
 `JWT_SECRET` es obligatorio: si falta, mide menos de 24 caracteres o sigue siendo
 `secret123`, el backend se niega a arrancar. `CORS_ORIGIN` es una lista separada por
-comas de los dominios autorizados; en producción añade el dominio de Vercel.
+comas de dominios autorizados. Además de esa lista, la API acepta `localhost` y
+cualquier despliegue `*.vercel.app`; en Vercel las llamadas son del mismo origen, así
+que no necesitas configurar `CORS_ORIGIN` salvo que uses un dominio propio.
+
+En Vercel, define al menos `DATABASE_URL` y `JWT_SECRET` en
+**Project Settings → Environment Variables**. No configures `PORT`: lo gestiona Vercel.
 
 Para generar un `JWT_SECRET` seguro:
 
@@ -133,8 +138,25 @@ backend en otra terminal (`npm run dev:api`) si quieres probar login y persisten
 | `npm run build` | Valida el contenido, compila TypeScript y genera `dist/` |
 | `npm run preview` | Sirve la build de producción |
 | `npm run lint` | Ejecuta oxlint |
+| `npm test` | Tests unitarios de seguridad + integración real contra Neon |
 | `npm run validate:content` | Valida que el contenido no tenga duplicados |
-| `npm run typecheck:server` | Comprueba los tipos del backend |
+| `npm run typecheck:server` | Comprueba los tipos del backend y de `api/` |
+
+### Tests
+
+```bash
+npm test
+```
+
+- `tests/security.test.ts` valida JWT, CORS, saneamiento de datos y rate limiting.
+- `tests/api.test.ts` arranca la app real contra Neon y comprueba registro, login,
+  JWT, persistencia, aislamiento entre usuarios, CORS, JSON inválido, cuerpos
+  excesivos, inyección SQL y revocación del rol admin. Crea usuarios temporales con
+  emails únicos y los borra al terminar.
+
+Los tests de integración usan `DATABASE_URL` del `.env`; si no está definida, se
+omiten automáticamente. Para que no interfieran con el rate limiting se ejecutan con
+`RATE_LIMIT_DISABLED=1`.
 
 ---
 
@@ -156,12 +178,20 @@ EN-Class/
 │   ├── App.tsx
 │   └── main.tsx
 ├── server/
-│   ├── index.ts             API Express
-│   └── db.ts                Pool de PostgreSQL e inicialización
+│   ├── app.ts               App Express (rutas, CORS, autenticación)
+│   ├── index.ts             Entrada local: inicializa la BD y escucha en PORT
+│   ├── db.ts                Pool de PostgreSQL e inicialización del esquema
+│   └── security.ts          Validación, CORS y rate limiting compartidos
+├── api/
+│   └── [...path].ts         Función serverless catch-all de Vercel
+├── tests/
+│   ├── security.test.ts     Tests unitarios de validación y seguridad
+│   └── api.test.ts          Integración y pentesting contra la API real
 ├── public/
 │   └── robots.txt           Bloqueo de indexación
 ├── scripts/                 Generadores y validador de contenido
 ├── PROMPT_TRASPASO.txt      Contexto completo para continuar el trabajo
+├── vercel.json              Configuración de build y funciones de Vercel
 ├── .env.example             Plantilla de variables de entorno
 ├── .env                     Variables de entorno (no se sube)
 └── package.json
@@ -199,6 +229,9 @@ UPDATE users SET role = 'admin' WHERE email = 'tu-correo@ejemplo.com';
 ```
 
 Vuelve a iniciar sesión después del cambio para que el nuevo JWT incluya el rol.
+El endpoint de administración comprueba además el rol en la base de datos en cada
+petición, de modo que si retiras el rol a alguien, pierde el acceso al instante
+aunque conserve un token antiguo.
 
 ### Endpoints principales
 
@@ -223,92 +256,83 @@ Si el backend no conecta:
 
 ---
 
-## 8. Despliegue: cómo acceder sin tener el PC encendido
+## 8. Despliegue: todo en Vercel
 
-### Recomendación
+La app está preparada para desplegarse como **un único proyecto de Vercel**:
 
-Para este proyecto lo más fiable es separar frontend y backend:
+- El frontend React/Vite se sirve como sitio estático desde `dist/`.
+- La API Express se ejecuta en una función serverless catch-all en `api/[...path].ts`.
+- La persistencia sigue en **Neon** mediante `pg`.
+- Frontend y API comparten el mismo dominio, así que no hay que configurar CORS ni
+  `VITE_API_URL` entre ellos.
 
-| Parte | Plataforma | Motivo |
-|---|---|---|
-| Frontend React/Vite | **Vercel** | Despliegue estático rápido y gratuito |
-| Backend Express | **Render / Railway / Fly.io** | El backend necesita un proceso persistente |
-| Base de datos | **Neon** | PostgreSQL gestionado y gratuito |
-
-Vercel es serverless: no está pensado para un `app.listen()` con un pool de conexiones
-persistente como el backend actual. Se puede adaptar, pero requiere refactorizar la API
-a funciones serverless. Para ir rápido y sin dolores de cabeza, usa Vercel para el frontend
-y Render/Railway para el backend.
-
-### 8.1 Desplegar el frontend en Vercel
+### 8.1 Configuración del proyecto en Vercel
 
 1. Sube el proyecto a GitHub.
-2. Entra en https://vercel.com y elige **Add New Project**.
-3. Importa el repositorio.
-4. Configura:
+2. En https://vercel.com elige **Add New Project** e importa el repositorio.
+3. Vercel detecta `vercel.json`:
    - Framework Preset: **Vite**
    - Build Command: `npm run build`
    - Output Directory: `dist`
-   - Install Command: `npm install`
-5. Añade la variable de entorno:
-   - `VITE_API_URL` = URL pública del backend, por ejemplo `https://en-class-api.onrender.com`
-6. Deploy.
+   - Functions: `api/**/*.ts` (máximo 30 s)
+4. En **Settings → Environment Variables** añade:
+   - `DATABASE_URL` = cadena de conexión de Neon con `?sslmode=require`
+   - `JWT_SECRET` = secreto aleatorio de al menos 24 caracteres
+   - Opcional: `CORS_ORIGIN` = tu dominio propio, separado por comas
+   - Opcional: `PG_POOL_MAX` = máximo de conexiones por instancia (por defecto `3`)
+   - **No** definas `PORT` ni `VITE_API_URL`.
+5. Deploy.
 
-Cada push a `main` volverá a desplegar automáticamente.
+Cada push a `main` vuelve a desplegar automáticamente.
 
-### 8.2 Desplegar el backend en Render
+### 8.2 Cómo funciona la API en Vercel
 
-1. Crea un **Web Service** en https://render.com.
-2. Conecta el mismo repositorio.
-3. Configura:
-   - Root Directory: la raíz del repo
-   - Build Command: `npm install`
-   - Start Command: `npx tsx server/index.ts`
-   - Health Check Path: `/api/health`
-4. Variables de entorno:
-   - `DATABASE_URL`
-   - `JWT_SECRET` (mínimo 24 caracteres)
-   - `CORS_ORIGIN` = `https://tu-proyecto.vercel.app`
-   - `PORT` (Render lo asigna automáticamente; no lo fuerces)
-5. Copia la URL pública del servicio y pégala en `VITE_API_URL` en Vercel.
+`api/[...path].ts` recibe todas las rutas `/api/*` y las delega en la misma app de
+Express que usas en local. La primera petición de cada instancia inicializa el esquema
+de Neon de forma perezosa (`ensureDb()`) y reutiliza un pool pequeño de conexiones.
+Vercel puede apagar y recrear instancias, por lo que no hay estado en memoria
+importante: el rate limiting es *best-effort* por instancia.
 
-### 8.3 Desplegar el backend en Railway
+### 8.3 Verificar el despliegue
 
-1. Crea un proyecto en https://railway.app.
-2. Añade el repositorio.
-3. Añade un servicio PostgreSQL o usa Neon.
-4. Configura las variables `DATABASE_URL`, `JWT_SECRET` (mínimo 24 caracteres),
-   `CORS_ORIGIN` y `PORT`.
-5. Start Command: `npx tsx server/index.ts`.
-
-### 8.4 Alternativa: todo en Vercel
-
-Solo si quieres un único despliegue:
-
-1. Mueve la API a `api/` como funciones serverless.
-2. Exporta la app Express como handler por defecto.
-3. Usa el driver serverless de Neon o limita las conexiones del pool.
-4. Añade un `vercel.json` con rewrites para la SPA y `/api`.
-5. Configura `DATABASE_URL` y `JWT_SECRET` en Vercel.
-
-Esta opción requiere cambiar el backend. Si no hay prisa, la separación frontend/backend
-es más simple y estable.
-
-### 8.5 CORS
-
-En producción, el backend solo acepta los orígenes indicados en `CORS_ORIGIN`.
-No dejes el CORS abierto. Ejemplo:
-
-```env
-CORS_ORIGIN=http://localhost:5173,https://tu-proyecto.vercel.app
+```bash
+curl -s https://tu-proyecto.vercel.app/api/health
+# {"ok":true}
 ```
 
-El backend rechaza cualquier otro origen con un error 403. Si cambias el dominio de
-Vercel, actualiza esta variable y reinicia el servicio.
+Después comprueba desde el navegador:
 
-El backend también aplica un límite de peticiones en memoria (30 intentos de
-registro/login y 600 peticiones API cada 15 minutos por IP) y valida los datos de
-entrada. Para varias instancias haría falta un limitador compartido (por ejemplo Redis).
+1. Registro de una cuenta nueva.
+2. Logout y login con esa cuenta.
+3. Guardar posición, respuesta de workbook y drill; recargar y ver que persisten.
+4. Panel admin con una cuenta promocionada.
+
+Si `/api/*` devuelve HTML en vez de JSON, la función serverless no se desplegó:
+revisa que `api/[...path].ts` esté en el repositorio y que los logs de Vercel no
+muestren errores de `DATABASE_URL` o `JWT_SECRET`.
+
+### 8.4 CORS y seguridad
+
+En Vercel el navegador llama al mismo origen, así que CORS no interviene. Aun así la
+API mantiene una allowlist para desarrollo y para dominios externos:
+
+```env
+CORS_ORIGIN=http://localhost:5173,https://tu-dominio-propio.com
+```
+
+Se aceptan además `localhost` y `*.vercel.app`. Cualquier otro origen recibe un 403.
+
+Medidas activas:
+
+- `JWT_SECRET` obligatorio y robusto; el backend no arranca si es débil.
+- Contraseñas con bcrypt y comparación de relleno para emails inexistentes (evita
+  enumerar cuentas por tiempo de respuesta).
+- Rate limiting por IP (30 intentos de registro/login y 600 peticiones API cada
+  15 minutos por instancia).
+- Validación estricta de tipos, longitudes y niveles; consultas siempre parametrizadas.
+- Límite de cuerpo JSON de 100 KB (responde 413 si se supera).
+- Rol admin comprobado contra la base de datos en cada petición.
+- `x-powered-by` desactivado y CORS cerrado por allowlist.
 
 ---
 
@@ -361,16 +385,19 @@ Prueba en DevTools con estos anchos:
 
 ## 11. Solución de problemas
 
-### El frontend no conecta con el backend
+### La API no responde en producción
 
-- Comprueba que el backend esté corriendo en el puerto 3001.
-- Revisa `VITE_API_URL`.
-- Si estás en local y `VITE_API_URL` está vacío, Vite debe tener proxy para `/api`.
+- Comprueba `https://tu-proyecto.vercel.app/api/health`.
+- Revisa los logs de la función en Vercel.
+- Verifica que `api/[...path].ts` está desplegado y que `DATABASE_URL` y
+  `JWT_SECRET` existen en el entorno de producción.
+- Si `/api/*` devuelve HTML, la función serverless no se desplegó.
 
 ### Error de CORS
 
-- Añade el dominio exacto del frontend a la allowlist del backend.
-- Incluye `http://localhost:5173` para desarrollo.
+- En Vercel frontend y API comparten origen, así que no debería aparecer.
+- Si usas un dominio propio o llamas desde otro origen, añádelo a `CORS_ORIGIN`.
+- En local, `http://localhost:5173` está permitido por defecto.
 
 ### Error de conexión a Neon
 
@@ -380,9 +407,10 @@ Prueba en DevTools con estos anchos:
 
 ### El login no funciona
 
-- Revisa que el backend esté desplegado y accesible.
-- Comprueba `JWT_SECRET`.
-- Revisa la consola del navegador y la del backend.
+- Revisa que la API esté desplegada y que `/api/health` devuelva `{"ok":true}`.
+- Comprueba `JWT_SECRET` y `DATABASE_URL` en Vercel.
+- Revisa la consola del navegador (pestaña Network) y los logs de Vercel.
+- Recuerda que el registro fuerza el rol `student`; el admin se promociona en Neon.
 
 ### El backend no arranca por `JWT_SECRET`
 
@@ -420,9 +448,11 @@ Corrige los errores antes de desplegar.
 - [ ] `CORS_ORIGIN` incluye el dominio de producción.
 - [ ] El registro no permite crear administradores desde el cliente.
 - [ ] `robots.txt` y `meta noindex` están presentes.
+- [ ] `npm test` pasa.
 - [ ] `npm run validate:content` pasa.
 - [ ] `npm run typecheck:server` pasa.
 - [ ] `npm run build` funciona.
 - [ ] Probado en móvil real.
-- [ ] `VITE_API_URL` apunta al backend público.
-- [ ] El backend responde desde el dominio de Vercel y `/api/health` devuelve `{ "ok": true }`.
+- [ ] `DATABASE_URL` y `JWT_SECRET` están definidos en Vercel.
+- [ ] `/api/health` devuelve `{ "ok": true }` en el dominio de Vercel.
+- [ ] Registro, login y persistencia funcionan en producción.

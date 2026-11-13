@@ -42,7 +42,32 @@ Pendiente / opcional:
 
 - Code splitting para reducir el bundle principal (~1 MB; aviso de Vite).
 - Limpiar scripts generadores antiguos y warnings de oxlint en scripts legacy.
-- Probar en móvil real y desplegar frontend en Vercel + backend en Render/Railway.
+- Probar en móvil real.
+
+
+ACTUALIZACIÓN 2: DESPLIEGUE 100% VERCEL YA IMPLEMENTADO
+-------------------------------------------------------
+
+El usuario eligió convertir todo a Vercel (sin Render/Railway) manteniendo login,
+admin y persistencia en Neon. Ya está hecho:
+
+- `server/app.ts` exporta la app Express sin `app.listen`; `server/index.ts` es la
+  entrada local y `api/[...path].ts` es la función serverless catch-all de Vercel.
+- Inicialización perezosa de Neon por instancia (`ensureDb()`), pool pequeño
+  (`PG_POOL_MAX`, por defecto 3) y `allowExitOnIdle` para serverless.
+- CORS con allowlist + localhost + `*.vercel.app`; en Vercel todo es mismo origen,
+  así que `VITE_API_URL` debe quedar vacío.
+- Endurecimiento: `trust proxy`, comparación bcrypt de relleno para emails
+  inexistentes, rol admin verificado en BD en cada petición, 413 para cuerpos
+  demasiado grandes, rate limiting y validación estricta.
+- `vercel.json` con build de Vite, salida `dist/` y `maxDuration: 30` para `api/**`.
+- Tests: `npm test` ejecuta `tests/security.test.ts` (unitarios) y
+  `tests/api.test.ts` (integración real contra Neon con usuarios temporales).
+- `npm run build`, `npm run typecheck:server`, `npm test` y `npm run lint` pasan.
+
+Variables necesarias en Vercel: `DATABASE_URL` y `JWT_SECRET` (mínimo 24 caracteres).
+Opcionales: `CORS_ORIGIN` para dominio propio y `PG_POOL_MAX`. No definir `PORT` ni
+`VITE_API_URL`.
 
 Las secciones 1 y 2 siguientes describen la auditoría original y el objetivo; son
 contexto histórico. No vuelvas a reescribir el contenido que ya pasa el validador.
@@ -449,53 +474,42 @@ Alinea los payloads con lo que ya envía App.tsx. No cambies el contrato del fro
 10.4 Configuración y despliegue
 - Mantener src/config/api.ts con VITE_API_URL.
 - En desarrollo, proxy de Vite hacia http://127.0.0.1:3001.
-- En producción, configurar VITE_API_URL con la URL del backend.
-- Añadir scripts:
+- En Vercel, VITE_API_URL debe quedar vacío: frontend y API comparten origen.
+- Scripts:
   "dev:web": "vite",
   "dev:api": "tsx watch server/index.ts",
-  "dev:all": "concurrently \"npm:dev:web\" \"npm:dev:api\""
-- Documentar en README: requisitos, .env, DATABASE_URL, JWT_SECRET, VITE_API_URL, cómo arrancar, cómo validar contenido y cómo desplegar.
+  "dev:all": "concurrently \"npm:dev:web\" \"npm:dev:api\"",
+  "test": "tsx --test tests/*.test.ts"
+- Documentar en README: requisitos, .env, DATABASE_URL, JWT_SECRET, cómo arrancar, cómo validar contenido, cómo ejecutar tests y cómo desplegar en Vercel.
 - No indexar en Google: public/robots.txt con Disallow: / y meta robots noindex, nofollow en index.html.
 
 
-11. FASE 5: DESPLIEGUE EN VERCEL
----------------------------------
+11. FASE 5: DESPLIEGUE 100% EN VERCEL
+------------------------------------
 
-El usuario quiere acceder a la web sin tener su PC encendido.
+Implementado. El proyecto se despliega como un único proyecto de Vercel:
 
-Recomendación:
-- Frontend (Vite/React) en Vercel.
-- Backend (Express + PostgreSQL) en Render, Railway o Fly.io, porque Vercel es serverless y el backend actual usa app.listen y un Pool persistente.
-- Base de datos en Neon (ya está previsto).
+- Frontend React/Vite -> `dist/`.
+- API Express -> `api/[...path].ts` (función serverless catch-all).
+- Base de datos -> Neon con `pg` y pool limitado por instancia.
+- Frontend y API comparten origen: `VITE_API_URL` vacío y CORS sin configurar.
 
-Alternativa "todo en Vercel":
-- Convertir server/index.ts en funciones serverless dentro de /api.
-- Exportar la app Express como handler por defecto.
-- Usar el driver serverless de Neon o configurar el Pool con conexiones limitadas.
-- Añadir vercel.json con rewrites para SPA y para /api.
-- Esta opción requiere refactor y más cuidado con conexiones; recomiendo hacerla solo si el usuario insiste en un único despliegue.
-
-Pasos mínimos para Vercel:
+Pasos:
 1. Subir el repo a GitHub.
-2. Importar el repo en Vercel.
-3. Framework preset: Vite.
-4. Build command: npm run build.
-5. Output directory: dist.
-6. Variables de entorno:
-   - VITE_API_URL = URL pública del backend (ej. https://en-class-api.onrender.com)
-   - En el backend: DATABASE_URL, JWT_SECRET, PORT.
-7. En el backend, configurar CORS para aceptar el dominio de Vercel.
-8. Verificar que /api/auth/login y /api/student/profile responden desde el dominio de Vercel.
-9. Añadir robots.txt y meta noindex.
-10. Probar en móvil real.
+2. Importar el repo en Vercel (detecta `vercel.json`).
+3. Framework preset: Vite. Build: `npm run build`. Output: `dist`.
+4. Variables de entorno en Vercel:
+   - `DATABASE_URL` (cadena de Neon, preferiblemente pooled, con `?sslmode=require`)
+   - `JWT_SECRET` (aleatorio, >= 24 caracteres; nunca `secret123`)
+   - Opcional: `CORS_ORIGIN` para dominio propio
+   - Opcional: `PG_POOL_MAX` (por defecto 3)
+   - NO definir `PORT` ni `VITE_API_URL`
+5. Deploy.
+6. Verificar `https://tu-proyecto.vercel.app/api/health` -> `{"ok":true}`.
+7. Probar registro, login, persistencia y panel admin desde el dominio de Vercel.
 
-Si se elige backend en Render/Railway:
-- Crear un Web Service con root directory en la raíz del repo.
-- Build command: npm install && npm run build (o solo npm install si se ejecuta con tsx).
-- Start command: npx tsx server/index.ts.
-- Health check: /api/health (crear endpoint).
-- Configurar DATABASE_URL y JWT_SECRET.
-- Neon: usar connection string con sslmode=require.
+Para promocionar un admin, ejecutar en Neon:
+`UPDATE users SET role = 'admin' WHERE email = '...';` y volver a iniciar sesión.
 
 No hardcodees localhost en producción.
 
@@ -554,8 +568,8 @@ No des la tarea por terminada hasta que se cumpla todo esto:
 9. Revisar y completar responsive en todos los componentes.
 10. Corregir persistencia, seguridad y estadísticas.
 11. Configurar VITE_API_URL, scripts de desarrollo y README.
-12. Preparar despliegue en Vercel (frontend) y backend en Render/Railway o serverless.
-13. Ejecutar validación final, build y revisar `git diff`.
+12. Desplegar todo en Vercel: `api/[...path].ts`, `vercel.json` y variables.
+13. Ejecutar validación final, tests, build y revisar `git diff`.
 
 
 15. ENTREGA ESPERADA
@@ -568,7 +582,8 @@ Al terminar, entrega un resumen con:
 - Archivos modificados y por qué.
 - Resultado de `npm run validate:content`.
 - Resultado de `npm run build`.
+- Resultado de `npm test` (unitarios + integración/pentesting).
 - Bugs críticos corregidos.
 - Estado del responsive y pruebas realizadas.
-- Pasos exactos para desplegar en Vercel y en el backend.
+- Pasos exactos para desplegar todo en Vercel.
 - Pendientes, si queda alguno.
