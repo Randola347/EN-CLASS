@@ -44,6 +44,25 @@ const AdminDashboard = lazy(() =>
   import('./components/AdminDashboard').then((module) => ({ default: module.AdminDashboard }))
 );
 
+function createEmptyProfile(user: any | null): StudentProfile {
+  return {
+    student_name: user?.name || 'Invitado',
+    current_level: user?.current_level || 'A1',
+    target_level: 'B2',
+    obstacles: [
+      'Hesitación al hablar (traducción mental)',
+      'Falta de fórmulas para preguntar cuando no sé una palabra',
+    ],
+    mastered_chunks: [],
+    error_bank: [],
+    session_summary: user
+      ? 'Sesión en plataforma EN-Class.'
+      : 'Sesión de invitado en EN-Class.',
+    streak_days: user?.streak_days ?? 0,
+    drills_completed: user?.drills_completed ?? 0,
+  };
+}
+
 export const App: React.FC = () => {
   const [authToken, setAuthToken] = useState<string | null>(() => localStorage.getItem('en_class_token'));
   const [currentUser, setCurrentUser] = useState<any>(() => {
@@ -54,25 +73,7 @@ export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'curriculum' | 'listening' | 'reflex' | 'rescue' | 'profile' | 'admin'>('curriculum');
   const [authModalOpen, setAuthModalOpen] = useState(false);
   
-  const [profile, setProfile] = useState<StudentProfile>({
-    student_name: currentUser?.name || 'Estudiante',
-    current_level: currentUser?.current_level || 'A1',
-    target_level: 'B2',
-    obstacles: [
-      'Hesitación al hablar (traducción mental)',
-      'Falta de fórmulas para preguntar cuando no sé una palabra'
-    ],
-    mastered_chunks: [
-      "Could I get a...",
-      "What do you mean by that?",
-      "Let me think for a second...",
-      "Pretty good, thanks! How about yourself?"
-    ],
-    error_bank: [],
-    session_summary: "Sesión inicial en plataforma EN-Class.",
-    streak_days: currentUser?.streak_days || 1,
-    drills_completed: currentUser?.drills_completed || 0
-  });
+  const [profile, setProfile] = useState<StudentProfile>(() => createEmptyProfile(currentUser));
 
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
   const [savedAnswers, setSavedAnswers] = useState<Record<string, string>>({});
@@ -130,6 +131,10 @@ export const App: React.FC = () => {
     setCurrentUser(null);
     localStorage.removeItem('en_class_token');
     localStorage.removeItem('en_class_user');
+    setProfile(createEmptyProfile(null));
+    setCompletedLessons([]);
+    setSavedAnswers({});
+    setLastPosition({ lessonId: 'lesson-a1-1', step: 'theory' });
     setActiveTab('profile');
   };
 

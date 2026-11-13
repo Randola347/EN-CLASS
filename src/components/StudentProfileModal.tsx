@@ -40,7 +40,9 @@ export const StudentProfileModal: React.FC<Props> = ({
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-1 break-words">
-              Active Focus: Overcoming hesitation & eliminating mental Spanish translation.
+              {isAuthenticated
+                ? 'Progreso sincronizado con Neon.'
+                : 'Modo invitado: el progreso de esta sesión no se guarda al recargar.'}
             </p>
           </div>
         </div>
@@ -125,16 +127,23 @@ export const StudentProfileModal: React.FC<Props> = ({
           <p className="text-xs text-slate-400 mb-3">
             Estructuras automáticas listas para usar sin traducir:
           </p>
-          <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto no-scrollbar pr-1">
-            {profile.mastered_chunks.map((chk, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 rounded-lg text-xs font-medium"
-              >
-                "{chk}"
-              </span>
-            ))}
-          </div>
+          {profile.mastered_chunks.length === 0 ? (
+            <p className="rounded-xl border border-slate-700 bg-slate-900/60 p-3 text-xs text-slate-500">
+              Todavía no has dominado ningún chunk. Completa los Micro-Listening y Reflex Prompts y
+              aparecerán aquí.
+            </p>
+          ) : (
+            <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto no-scrollbar pr-1">
+              {profile.mastered_chunks.map((chk, i) => (
+                <span
+                  key={i}
+                  className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 rounded-lg text-xs font-medium"
+                >
+                  "{chk}"
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Error Bank */}
@@ -148,14 +157,20 @@ export const StudentProfileModal: React.FC<Props> = ({
           <p className="text-xs text-slate-400 mb-3">
             Vicios lingüísticos detectados y su reconfiguración:
           </p>
-          <div className="space-y-2 max-h-48 overflow-y-auto no-scrollbar pr-1 text-xs">
-            {profile.error_bank.map((err, i) => (
-              <div key={i} className="p-2.5 rounded-lg bg-slate-900/60 border border-rose-500/20">
-                <div className="text-rose-400 line-through">✗ {err.error}</div>
-                <div className="text-emerald-400 font-medium mt-0.5">✓ {err.correction}</div>
-              </div>
-            ))}
-          </div>
+          {profile.error_bank.length === 0 ? (
+            <p className="rounded-xl border border-slate-700 bg-slate-900/60 p-3 text-xs text-slate-500">
+              Sin errores registrados todavía. Cuando falles un drill, verás aquí la corrección.
+            </p>
+          ) : (
+            <div className="space-y-2 max-h-48 overflow-y-auto no-scrollbar pr-1 text-xs">
+              {profile.error_bank.map((err, i) => (
+                <div key={i} className="p-2.5 rounded-lg bg-slate-900/60 border border-rose-500/20">
+                  <div className="text-rose-400 line-through">✗ {err.error}</div>
+                  <div className="text-emerald-400 font-medium mt-0.5">✓ {err.correction}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
