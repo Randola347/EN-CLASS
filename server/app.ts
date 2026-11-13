@@ -4,7 +4,7 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { pool, initDb } from './db';
+import { pool, initDb } from './db.js';
 import {
   assertJwtSecret,
   cleanString,
@@ -12,7 +12,7 @@ import {
   isAllowedOrigin,
   isEmail,
   stringArray,
-} from './security';
+} from './security.js';
 
 dotenv.config();
 
