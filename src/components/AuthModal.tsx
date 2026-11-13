@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { LogIn, UserPlus, AlertCircle } from 'lucide-react';
+import { LogIn, UserPlus, AlertCircle, X } from 'lucide-react';
 import { apiJson } from '../config/api';
 
 interface Props {
   onLoginSuccess: (token: string, user: any) => void;
+  onClose?: () => void;
 }
 
-export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
+export const AuthModal: React.FC<Props> = ({ onLoginSuccess, onClose }) => {
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,6 +34,7 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
       });
 
       onLoginSuccess(data.token, data.user);
+      onClose?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error de conexión con el servidor');
     } finally {
@@ -49,9 +51,20 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-8 pt-12 sm:pt-8 max-w-md w-full max-h-[calc(100dvh-2rem)] overflow-y-auto no-scrollbar shadow-2xl relative">
         {/* Glow accent */}
         <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
+
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Cerrar y seguir sin cuenta"
+            className="absolute top-3 right-3 z-10 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
 
         <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 to-amber-500 text-slate-950 font-black text-xl mb-3 shadow-lg shadow-indigo-500/20">
@@ -180,6 +193,18 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
               : '¿Nuevo alumno? Regístrate gratis aquí'}
           </button>
         </div>
+
+        {onClose && (
+          <div className="mt-3 text-center">
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-xs text-slate-500 hover:text-slate-300 font-medium transition"
+            >
+              Seguir explorando sin cuenta
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

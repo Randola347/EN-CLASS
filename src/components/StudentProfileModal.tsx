@@ -1,43 +1,24 @@
-import React, { useState } from 'react';
-import { User, Award, Flame, AlertCircle, CheckCircle, Copy, Check, Download } from 'lucide-react';
+import React from 'react';
+import { User, Award, Flame, AlertCircle, CheckCircle, LogIn, LogOut, ShieldCheck } from 'lucide-react';
 import type { StudentProfile } from '../types';
 
 interface Props {
   profile: StudentProfile;
   onUpdateProfile: (updated: Partial<StudentProfile>) => void;
+  isAuthenticated: boolean;
+  userEmail?: string;
+  onRequestAuth: () => void;
+  onLogout: () => void;
 }
 
-export const StudentProfileModal: React.FC<Props> = ({ profile, onUpdateProfile }) => {
-  const [copied, setCopied] = useState(false);
-
-  const formattedJson = JSON.stringify(
-    {
-      student_name: profile.student_name,
-      current_level: profile.current_level,
-      obstacles: profile.obstacles,
-      mastered_chunks: profile.mastered_chunks,
-      error_bank: profile.error_bank,
-      session_summary: profile.session_summary,
-    },
-    null,
-    2
-  );
-
-  const handleCopyJson = () => {
-    navigator.clipboard.writeText(formattedJson);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleDownloadJson = () => {
-    const blob = new Blob([formattedJson], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `student_profile_${profile.student_name.toLowerCase().replace(/\s+/g, '_')}.json`;
-    a.click();
-  };
-
+export const StudentProfileModal: React.FC<Props> = ({
+  profile,
+  onUpdateProfile,
+  isAuthenticated,
+  userEmail,
+  onRequestAuth,
+  onLogout,
+}) => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Profile Overview Card */}
@@ -84,6 +65,54 @@ export const StudentProfileModal: React.FC<Props> = ({ profile, onUpdateProfile 
         </div>
       </div>
 
+      {/* Account / Login */}
+      {isAuthenticated ? (
+        <div className="rounded-2xl border border-emerald-500/25 bg-slate-900 p-4 sm:p-5 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-3 min-w-0">
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 shrink-0">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <h3 className="text-sm font-bold text-white">Cuenta conectada</h3>
+              <p className="text-xs text-slate-400 mt-0.5 break-words">
+                {userEmail ? `${userEmail} · ` : ''}Tu progreso, respuestas y chunks se guardan en Neon.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onLogout}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-rose-500/40 hover:bg-rose-500/10 hover:text-rose-300"
+          >
+            <LogOut className="w-4 h-4" />
+            Cerrar sesión
+          </button>
+        </div>
+      ) : (
+        <div className="rounded-2xl border border-indigo-500/30 bg-gradient-to-r from-indigo-950/70 to-slate-900 p-4 sm:p-5 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3 min-w-0">
+            <div className="p-2.5 rounded-xl bg-indigo-500/15 text-indigo-300 shrink-0">
+              <LogIn className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <h3 className="text-sm font-bold text-white">Estás en modo invitado</h3>
+              <p className="text-xs text-slate-400 mt-0.5 break-words">
+                Puedes usar todas las clases, listenings y drills sin cuenta. Inicia sesión solo si
+                quieres guardar tu progreso y tu racha en Neon.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onRequestAuth}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-500"
+          >
+            <LogIn className="w-4 h-4" />
+            Iniciar sesión o crear cuenta
+          </button>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Mastered Chunks */}
         <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 shadow-lg">
@@ -96,7 +125,7 @@ export const StudentProfileModal: React.FC<Props> = ({ profile, onUpdateProfile 
           <p className="text-xs text-slate-400 mb-3">
             Estructuras automáticas listas para usar sin traducir:
           </p>
-          <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-1">
+          <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto no-scrollbar pr-1">
             {profile.mastered_chunks.map((chk, i) => (
               <span
                 key={i}
@@ -119,7 +148,7 @@ export const StudentProfileModal: React.FC<Props> = ({ profile, onUpdateProfile 
           <p className="text-xs text-slate-400 mb-3">
             Vicios lingüísticos detectados y su reconfiguración:
           </p>
-          <div className="space-y-2 max-h-48 overflow-y-auto pr-1 text-xs">
+          <div className="space-y-2 max-h-48 overflow-y-auto no-scrollbar pr-1 text-xs">
             {profile.error_bank.map((err, i) => (
               <div key={i} className="p-2.5 rounded-lg bg-slate-900/60 border border-rose-500/20">
                 <div className="text-rose-400 line-through">✗ {err.error}</div>
@@ -128,40 +157,6 @@ export const StudentProfileModal: React.FC<Props> = ({ profile, onUpdateProfile 
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Database / JSON Export System */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-          <div className="min-w-0">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider break-words">
-              System Database Payload (Standard Output)
-            </h3>
-            <p className="text-xs text-slate-400 break-words">
-              Formato JSON estructurado para persistencia multiusuario en base de datos.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <button
-              onClick={handleCopyJson}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition border border-slate-700"
-            >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              {copied ? 'Copied!' : 'Copy JSON'}
-            </button>
-            <button
-              onClick={handleDownloadJson}
-              className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow"
-            >
-              <Download className="w-3.5 h-3.5" />
-              Export
-            </button>
-          </div>
-        </div>
-
-        <pre className="bg-slate-950 p-4 rounded-xl text-indigo-300 font-mono text-xs overflow-x-auto border border-slate-800 leading-relaxed max-h-60">
-          {formattedJson}
-        </pre>
       </div>
     </div>
   );

@@ -411,6 +411,15 @@ Prueba en DevTools con estos anchos:
 - Verifica que `api/[...path].ts` está desplegado.
 - Si `/api/*` devuelve HTML, la función serverless no se desplegó.
 
+### La URL de "Visit" de Vercel da 404 en `/api`
+
+Cada despliegue tiene una URL inmutable propia
+(`https://tu-proyecto-<hash>-<equipo>.vercel.app`). Si entras por la URL de un
+despliegue antiguo, ese build conserva el `vercel.json` de su momento y puede no
+incluir el rewrite de `/api/:path*`; entonces el registro y el login reciben el
+404 de plataforma. Usa siempre el dominio de producción
+(`https://en-class.vercel.app`) o la URL del despliegue más reciente.
+
 ### Error de CORS
 
 - En Vercel frontend y API comparten origen, así que no debería aparecer.

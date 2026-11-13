@@ -105,7 +105,7 @@ export const REFLEX_DRILLS: ReflexDrill[] = [
     promptEs: "Un colega te ofrece café, pero tú prefieres agua con gas con amabilidad.",
     targetChunk: "I'd rather have / Could I get...",
     promptEn: "Would you like some coffee?",
-    timeLimitSec: 4,
+    timeLimitSec: 10,
     acceptableAnswers: [
       "I'd rather have sparkling water, please.",
       "Could I get water instead?",
@@ -120,7 +120,7 @@ export const REFLEX_DRILLS: ReflexDrill[] = [
     promptEs: "Alguien te pregunta si tienes tiempo para hablar ahora mismo, pero estás ocupado.",
     targetChunk: "I'm in the middle of... / Can I get back to you...?",
     promptEn: "Do you have five minutes to chat?",
-    timeLimitSec: 4,
+    timeLimitSec: 10,
     acceptableAnswers: [
       "I'm in the middle of something right now. Can I get back to you?",
       "I'm kind of busy right now.",
@@ -134,7 +134,7 @@ export const REFLEX_DRILLS: ReflexDrill[] = [
     promptEs: "Te preguntan tu opinión sobre un proyecto y quieres ganar tiempo antes de opinar.",
     targetChunk: "To be honest / As far as I can tell...",
     promptEn: "What do you think about our new launch date?",
-    timeLimitSec: 4,
+    timeLimitSec: 10,
     acceptableAnswers: [
       "To be honest, I think it's doable.",
       "As far as I can tell, it looks great.",

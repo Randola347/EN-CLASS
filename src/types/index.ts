@@ -35,7 +35,7 @@ export interface ReflexDrill {
   promptEs: string; // "Te ofrecen un café pero prefieres té con educación"
   targetChunk: string; // "I'd rather have..." or "Could I get..."
   promptEn: string;
-  timeLimitSec: number; // e.g. 3 or 4
+  timeLimitSec: number; // segundos para responder sin traducir (10s por defecto)
   acceptableAnswers: string[];
   explanation: string;
   safetyBelt: string; // e.g., "Well, actually..."

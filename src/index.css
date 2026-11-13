@@ -5,3 +5,15 @@
     @apply bg-slate-900 text-slate-100 antialiased font-sans selection:bg-indigo-500 selection:text-white min-h-screen;
   }
 }
+
+/* Oculta la barra de scroll manteniendo la posibilidad de desplazarse.
+   Se usa en la navegación horizontal y en el modal de acceso. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+

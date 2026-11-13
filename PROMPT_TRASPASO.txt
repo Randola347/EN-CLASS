@@ -70,6 +70,14 @@ admin y persistencia en Neon. Ya está hecho:
   `tests/api.test.ts` (integración real contra Neon con usuarios temporales).
   `npm run smoke:prod -- URL` verifica un despliegue real de Vercel, incluidas
   las rutas anidadas `/api/*`.
+- Modo invitado: la app ya no bloquea con el login. Todas las clases, listenings
+  y drills se pueden usar sin cuenta; el acceso está en el botón del header y en
+  "Mi Perfil". Al iniciar sesión se sincroniza el progreso con Neon.
+- Reflex Prompts: el límite por respuesta pasó de 4 a 10 segundos.
+- El perfil ya no muestra el panel JSON de depuración; ahora incluye el estado
+  de la cuenta (invitado o conectada con opción de cerrar sesión).
+- Navegación horizontal y modal de acceso sin barras de scroll visibles; los
+  botones ya no se comprimen ni se cortan.
 - `npm run build`, `npm run typecheck:server`, `npm test` y `npm run lint` pasan.
 
 Variables necesarias en Vercel: `DATABASE_URL` y `JWT_SECRET` (mínimo 24 caracteres).

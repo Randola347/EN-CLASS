@@ -8,6 +8,7 @@ import {
   Award,
   BookOpen,
   LogOut,
+  LogIn,
   ShieldCheck
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -51,6 +52,7 @@ export const App: React.FC = () => {
   });
 
   const [activeTab, setActiveTab] = useState<'curriculum' | 'listening' | 'reflex' | 'rescue' | 'profile' | 'admin'>('curriculum');
+  const [authModalOpen, setAuthModalOpen] = useState(false);
   
   const [profile, setProfile] = useState<StudentProfile>({
     student_name: currentUser?.name || 'Estudiante',
@@ -120,6 +122,7 @@ export const App: React.FC = () => {
     setCurrentUser(user);
     localStorage.setItem('en_class_token', token);
     localStorage.setItem('en_class_user', JSON.stringify(user));
+    setAuthModalOpen(false);
   };
 
   const handleLogout = () => {
@@ -127,6 +130,7 @@ export const App: React.FC = () => {
     setCurrentUser(null);
     localStorage.removeItem('en_class_token');
     localStorage.removeItem('en_class_user');
+    setActiveTab('profile');
   };
 
   const triggerCelebration = () => {
@@ -257,8 +261,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans overflow-x-hidden">
-      {/* If not logged in, show AuthModal */}
-      {!authToken && <AuthModal onLoginSuccess={handleLoginSuccess} />}
+      {/* El modal de acceso solo aparece cuando el usuario lo pide: la app se
+          puede usar completa en modo invitado. */}
+      {authModalOpen && (
+        <AuthModal
+          onLoginSuccess={handleLoginSuccess}
+          onClose={() => setAuthModalOpen(false)}
+        />
+      )}
 
       {/* Top Navbar (Clean White & Blue Style) */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-xs">
@@ -295,31 +305,43 @@ export const App: React.FC = () => {
               <span className="font-semibold text-slate-700">{profile.drills_completed} Respuestas</span>
             </div>
 
-            <button
-              onClick={() => setActiveTab('profile')}
-              className="flex items-center gap-1.5 sm:gap-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl px-2 sm:px-3 py-1.5 text-xs font-semibold text-blue-700 transition"
-            >
-              <UserCircle className="w-4 h-4 text-blue-600 shrink-0" />
-              <span className="hidden sm:inline max-w-[140px] truncate">{currentUser?.name || profile.student_name}</span>
-            </button>
+            {authToken ? (
+              <>
+                <button
+                  onClick={() => setActiveTab('profile')}
+                  className="flex items-center gap-1.5 sm:gap-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl px-2 sm:px-3 py-1.5 text-xs font-semibold text-blue-700 transition"
+                >
+                  <UserCircle className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span className="hidden sm:inline max-w-[140px] truncate">{currentUser?.name || profile.student_name}</span>
+                </button>
 
-            <button
-              onClick={handleLogout}
-              className="p-2 shrink-0 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition border border-slate-200"
-              title="Cerrar Sesión"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
+                <button
+                  onClick={handleLogout}
+                  className="p-2 shrink-0 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition border border-slate-200"
+                  title="Cerrar Sesión"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={() => setAuthModalOpen(true)}
+                className="flex items-center gap-1.5 sm:gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 px-3 py-2 text-xs font-semibold text-white transition shadow-sm shadow-blue-600/20"
+              >
+                <LogIn className="w-4 h-4 shrink-0" />
+                <span>Iniciar sesión</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
 
       {/* Navigation Sub-bar */}
       <nav className="bg-white border-b border-slate-200 px-2 sm:px-4">
-        <div className="max-w-full lg:max-w-4xl mx-auto flex items-center justify-start sm:justify-center gap-1 sm:gap-3 py-2.5 overflow-x-auto">
+        <div className="max-w-full xl:max-w-5xl mx-auto flex items-center justify-start xl:justify-center gap-1 sm:gap-3 py-2.5 overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveTab('curriculum')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'curriculum'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -331,7 +353,7 @@ export const App: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('listening')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'listening'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -343,7 +365,7 @@ export const App: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('reflex')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'reflex'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -355,7 +377,7 @@ export const App: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('rescue')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'rescue'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -367,20 +389,20 @@ export const App: React.FC = () => {
 
           <button
             onClick={() => setActiveTab('profile')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
+            className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${
               activeTab === 'profile'
                 ? 'bg-blue-600 text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
             <UserCircle className="w-4 h-4" />
-            <span>Mi Perfil & DB</span>
+            <span>Mi Perfil</span>
           </button>
 
           {currentUser?.role === 'admin' && (
             <button
               onClick={() => setActiveTab('admin')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-black transition whitespace-nowrap ${
+              className={`flex shrink-0 items-center gap-2 px-4 py-2 rounded-2xl text-xs font-black transition whitespace-nowrap ${
                 activeTab === 'admin'
                   ? 'bg-amber-600 text-white shadow-xs'
                   : 'text-amber-700 hover:bg-amber-50'
@@ -428,7 +450,14 @@ export const App: React.FC = () => {
           {activeTab === 'rescue' && <RescueCenterHub />}
 
           {activeTab === 'profile' && (
-            <StudentProfileModal profile={profile} onUpdateProfile={updateProfileFields} />
+            <StudentProfileModal
+              profile={profile}
+              onUpdateProfile={updateProfileFields}
+              isAuthenticated={Boolean(authToken)}
+              userEmail={currentUser?.email}
+              onRequestAuth={() => setAuthModalOpen(true)}
+              onLogout={handleLogout}
+            />
           )}
 
           {activeTab === 'admin' && currentUser?.role === 'admin' && (
