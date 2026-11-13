@@ -4,12 +4,22 @@ dotenv.config();
 
 const connectionString = process.env.DATABASE_URL;
 
+if (!connectionString) {
+  throw new Error('DATABASE_URL no está definida. Configúrala en .env o en Vercel.');
+}
+
+const isLocalDatabase = /localhost|127\.0\.0\.1/.test(connectionString);
+
 export const pool = new Pool({
   connectionString,
-  ssl:
-    connectionString && /localhost|127\.0\.0\.1/.test(connectionString)
-      ? false
-      : { rejectUnauthorized: false },
+  ssl: isLocalDatabase ? false : { rejectUnauthorized: false },
+  // En Vercel cada instancia serverless mantiene su propio pool. Un límite bajo
+  // evita agotar las conexiones de Neon y `allowExitOnIdle` permite que la
+  // función termine sin dejar sockets abiertos.
+  max: Number(process.env.PG_POOL_MAX ?? 3),
+  idleTimeoutMillis: 10_000,
+  connectionTimeoutMillis: 10_000,
+  allowExitOnIdle: true,
 });
 
 export async function initDb() {
