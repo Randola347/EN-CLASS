@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Volume2, Eye, EyeOff, CheckCircle2, XCircle, ArrowRight, Sparkles, HelpCircle } from 'lucide-react';
 import type { MicroListeningDrill } from '../types';
+import { MICRO_LISTENING_DRILLS } from '../data/drillsData';
 import { useSpeech } from '../hooks/useSpeech';
 
 interface Props {
-  drills: MicroListeningDrill[];
   onCompleteDrill: (chunk: string, error?: { error: string; correction: string }) => void;
 }
 
-export const MicroListeningModule: React.FC<Props> = ({ drills, onCompleteDrill }) => {
+export const MicroListeningModule: React.FC<Props> = ({ onCompleteDrill }) => {
+  const drills: MicroListeningDrill[] = MICRO_LISTENING_DRILLS;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showScript, setShowScript] = useState(false);

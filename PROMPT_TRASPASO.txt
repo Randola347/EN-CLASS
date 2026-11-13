@@ -40,7 +40,6 @@ Completado:
 
 Pendiente / opcional:
 
-- Code splitting para reducir el bundle principal (~1 MB; aviso de Vite).
 - Limpiar scripts generadores antiguos y warnings de oxlint en scripts legacy.
 - Probar en móvil real.
 
@@ -64,6 +63,9 @@ admin y persistencia en Neon. Ya está hecho:
   y un rewrite `/api/:path*` -> `/api/[...path]`. Este rewrite es imprescindible:
   el catch-all de una función Node de Vercel solo captura un segmento y, sin él,
   `/api/auth/login` y el resto de rutas anidadas devuelven 404.
+- Code splitting: las pestañas y paneles se cargan con `React.lazy`/`Suspense`, y
+  cada nivel del currículo (A1/A2/B1/B2) vive en su propio chunk bajo demanda.
+  El bundle inicial bajó de ~1 MB a ~254 kB y ningún chunk supera los 500 kB.
 - Tests: `npm test` ejecuta `tests/security.test.ts` (unitarios) y
   `tests/api.test.ts` (integración real contra Neon con usuarios temporales).
   `npm run smoke:prod -- URL` verifica un despliegue real de Vercel, incluidas

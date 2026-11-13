@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   BookOpen, 
   Volume2, 
@@ -11,12 +11,13 @@ import {
   EyeOff
 } from 'lucide-react';
 import type { CourseLesson, MicroListeningItem } from '../types/curriculum';
+import { loadLessonsByLevel, type CourseLevel } from '../data/curriculumData';
+import { TOTAL_LESSONS } from '../data/curriculumMeta';
 import { useSpeech } from '../hooks/useSpeech';
 import { InteractiveWorkbook } from './InteractiveWorkbook';
 import { GrammarChartViewer } from './GrammarChartViewer';
 
 interface Props {
-  lessons: CourseLesson[];
   completedLessons: string[];
   savedAnswers: Record<string, string>;
   lastActiveLessonId?: string;
@@ -26,8 +27,27 @@ interface Props {
   onMarkLessonCompleted: (lessonId: string) => void;
 }
 
+function pickLesson(
+  lessons: CourseLesson[],
+  level: CourseLevel,
+  previous: CourseLesson | null,
+  lastActiveLessonId?: string
+): CourseLesson | null {
+  if (previous?.level === level) {
+    return lessons.find((lesson) => lesson.id === previous.id) ?? lessons[0] ?? null;
+  }
+  if (lastActiveLessonId) {
+    const match = lessons.find((lesson) => lesson.id === lastActiveLessonId);
+    if (match) return match;
+  }
+  return lessons[0] ?? null;
+}
+
+// Caché de módulo: los datos son estáticos y así cambiar de nivel no vuelve a
+// pedir el mismo chunk al navegador ni provoca estados de carga innecesarios.
+const lessonsCache = new Map<CourseLevel, CourseLesson[]>();
+
 export const CurriculumHub: React.FC<Props> = ({ 
-  lessons, 
   completedLessons,
   savedAnswers,
   lastActiveLessonId,
@@ -36,7 +56,7 @@ export const CurriculumHub: React.FC<Props> = ({
   onSaveWorkbookAnswer,
   onMarkLessonCompleted
 }) => {
-  const [selectedLevel, setSelectedLevel] = useState<'A1' | 'A2' | 'B1' | 'B2'>(() => {
+  const [selectedLevel, setSelectedLevel] = useState<CourseLevel>(() => {
     if (lastActiveLessonId) {
       if (lastActiveLessonId.includes('a2')) return 'A2';
       if (lastActiveLessonId.includes('b1')) return 'B1';
@@ -45,13 +65,16 @@ export const CurriculumHub: React.FC<Props> = ({
     return 'A1';
   });
 
-  const [selectedLesson, setSelectedLesson] = useState<CourseLesson>(() => {
-    if (lastActiveLessonId) {
-      const match = lessons.find(l => l.id === lastActiveLessonId);
-      if (match) return match;
-    }
-    return lessons[0];
+  const [levelLessons, setLevelLessons] = useState<CourseLesson[] | null>(
+    () => lessonsCache.get(selectedLevel) ?? null
+  );
+  const [selectedLesson, setSelectedLesson] = useState<CourseLesson | null>(() => {
+    const cached = lessonsCache.get(selectedLevel);
+    return cached ? pickLesson(cached, selectedLevel, null, lastActiveLessonId) : null;
   });
+  const [loadError, setLoadError] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
+  const initialLessonId = useRef<string | undefined>(lastActiveLessonId);
 
   const [activeStep, setActiveStep] = useState<'theory' | 'vocabulary' | 'chunks' | 'listening' | 'workbook'>(
     (lastActiveStep === 'clarification' ? 'listening' : (lastActiveStep as any)) || 'theory'
@@ -64,7 +87,69 @@ export const CurriculumHub: React.FC<Props> = ({
 
   const { speak, isSpeaking } = useSpeech();
 
-  const filteredLessons = lessons.filter(l => l.level === selectedLevel);
+  // Carga el nivel activo solo cuando hace falta. Cada nivel vive en un chunk
+  // separado, así que el navegador no descarga los cuatro de golpe.
+  useEffect(() => {
+    if (lessonsCache.has(selectedLevel)) return;
+
+    let cancelled = false;
+
+    loadLessonsByLevel(selectedLevel)
+      .then((loaded) => {
+        if (cancelled) return;
+        lessonsCache.set(selectedLevel, loaded);
+        setLevelLessons(loaded);
+        setSelectedLesson((previous) =>
+          pickLesson(loaded, selectedLevel, previous, initialLessonId.current)
+        );
+      })
+      .catch((err) => {
+        console.error(`No se pudo cargar el nivel ${selectedLevel}:`, err);
+        if (!cancelled) setLoadError(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedLevel, reloadKey]);
+
+  if (loadError) {
+    return (
+      <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4">
+        <div className="rounded-3xl border border-rose-200 bg-rose-50 p-6 text-center">
+          <p className="text-sm font-semibold text-rose-800">
+            No se pudo cargar el contenido del nivel {selectedLevel}.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setLoadError(false);
+              setReloadKey((key) => key + 1);
+            }}
+            className="mt-4 rounded-2xl bg-rose-600 px-4 py-2 text-sm font-bold text-white hover:bg-rose-700"
+          >
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!levelLessons || !selectedLesson) {
+    return (
+      <div className="w-full max-w-[1600px] mx-auto px-2 sm:px-4">
+        <div className="flex min-h-[40vh] items-center justify-center">
+          <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-semibold text-slate-600 shadow-sm">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-indigo-600" />
+            Cargando nivel {selectedLevel}...
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const lessons = levelLessons;
+  const filteredLessons = lessons.filter((lesson) => lesson.level === selectedLevel);
   const currentListenings: MicroListeningItem[] = selectedLesson.listenings || [];
   const activeListening = currentListenings[activeListeningIdx] || currentListenings[0];
 
@@ -82,11 +167,21 @@ export const CurriculumHub: React.FC<Props> = ({
     onSavePosition(lesson.id, 'theory');
   };
 
-  const handleLevelChange = (lvl: 'A1' | 'A2' | 'B1' | 'B2') => {
+  const handleLevelChange = (lvl: CourseLevel) => {
     setSelectedLevel(lvl);
-    const firstOfLevel = lessons.find(l => l.level === lvl);
-    if (firstOfLevel) {
-      handleSelectLesson(firstOfLevel);
+    setLoadError(false);
+    setActiveStep('theory');
+    setActiveListeningIdx(0);
+    setSelectedOptions({});
+    setShowScript({});
+
+    const cached = lessonsCache.get(lvl);
+    if (cached) {
+      setLevelLessons(cached);
+      setSelectedLesson(pickLesson(cached, lvl, null, initialLessonId.current));
+    } else {
+      setLevelLessons(null);
+      setSelectedLesson(null);
     }
   };
 
@@ -100,7 +195,7 @@ export const CurriculumHub: React.FC<Props> = ({
           </div>
           <div className="min-w-0">
             <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider break-words">Plan de Clases Prácticas</h3>
-            <p className="text-xs text-slate-500 break-words">{lessons.length} Clases Maestras con Contenido 100% Único e Individual</p>
+            <p className="text-xs text-slate-500 break-words">{TOTAL_LESSONS} Clases Maestras con Contenido 100% Único e Individual</p>
           </div>
         </div>
 

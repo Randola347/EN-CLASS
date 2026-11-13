@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Timer, Zap, Check, AlertTriangle, ArrowRight, ShieldCheck } from 'lucide-react';
 import type { ReflexDrill } from '../types';
+import { REFLEX_DRILLS } from '../data/drillsData';
 
 interface Props {
-  drills: ReflexDrill[];
   onCompleteDrill: (chunk: string, error?: { error: string; correction: string }) => void;
 }
 
-export const ReflexTrainingModule: React.FC<Props> = ({ drills, onCompleteDrill }) => {
+export const ReflexTrainingModule: React.FC<Props> = ({ onCompleteDrill }) => {
+  const drills: ReflexDrill[] = REFLEX_DRILLS;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState<number>(drills[0].timeLimitSec);
   const [isActive, setIsActive] = useState<boolean>(false);

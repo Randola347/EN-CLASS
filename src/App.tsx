@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { 
   Headphones, 
   Zap, 
@@ -12,19 +12,36 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { StudentProfile } from './types';
-import { COMPREHENSIVE_CURRICULUM } from './data/curriculumData';
-import { 
-  MICRO_LISTENING_DRILLS, 
-  REFLEX_DRILLS 
-} from './data/drillsData';
-import { CurriculumHub } from './components/CurriculumHub';
-import { RescueCenterHub } from './components/RescueCenterHub';
-import { MicroListeningModule } from './components/MicroListeningModule';
-import { ReflexTrainingModule } from './components/ReflexTrainingModule';
-import { StudentProfileModal } from './components/StudentProfileModal';
+import { TOTAL_LESSONS } from './data/curriculumMeta';
 import { AuthModal } from './components/AuthModal';
-import { AdminDashboard } from './components/AdminDashboard';
 import { apiFetch } from './config/api';
+
+// Las pestañas y paneles pesados se cargan bajo demanda. Así el bundle inicial
+// no incluye las 20 lecciones completas ni los módulos que no se están usando.
+const CurriculumHub = lazy(() =>
+  import('./components/CurriculumHub').then((module) => ({ default: module.CurriculumHub }))
+);
+const RescueCenterHub = lazy(() =>
+  import('./components/RescueCenterHub').then((module) => ({ default: module.RescueCenterHub }))
+);
+const MicroListeningModule = lazy(() =>
+  import('./components/MicroListeningModule').then((module) => ({
+    default: module.MicroListeningModule,
+  }))
+);
+const ReflexTrainingModule = lazy(() =>
+  import('./components/ReflexTrainingModule').then((module) => ({
+    default: module.ReflexTrainingModule,
+  }))
+);
+const StudentProfileModal = lazy(() =>
+  import('./components/StudentProfileModal').then((module) => ({
+    default: module.StudentProfileModal,
+  }))
+);
+const AdminDashboard = lazy(() =>
+  import('./components/AdminDashboard').then((module) => ({ default: module.AdminDashboard }))
+);
 
 export const App: React.FC = () => {
   const [authToken, setAuthToken] = useState<string | null>(() => localStorage.getItem('en_class_token'));
@@ -312,7 +329,7 @@ export const App: React.FC = () => {
             }`}
           >
             <BookOpen className="w-4 h-4" />
-            <span>Clases A1-B2 ({COMPREHENSIVE_CURRICULUM.length} Clases)</span>
+            <span>Clases A1-B2 ({TOTAL_LESSONS} Clases)</span>
           </button>
 
           <button
@@ -381,47 +398,46 @@ export const App: React.FC = () => {
 
       {/* Main Dynamic Viewport */}
       <main className="flex-1 w-full max-w-[1600px] mx-auto px-2 sm:px-6 py-6">
-        {activeTab === 'curriculum' && (
-          <CurriculumHub
-            lessons={COMPREHENSIVE_CURRICULUM}
-            completedLessons={completedLessons}
-            savedAnswers={savedAnswers}
-            lastActiveLessonId={lastPosition.lessonId}
-            lastActiveStep={lastPosition.step}
-            onSavePosition={handleSavePosition}
-            onSaveWorkbookAnswer={handleSaveWorkbookAnswer}
-            onMarkLessonCompleted={handleMarkLessonCompleted}
-          />
-        )}
+        <Suspense
+          fallback={
+            <div className="flex min-h-[40vh] items-center justify-center px-4">
+              <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-4 text-sm font-semibold text-slate-600 shadow-sm">
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-indigo-600" />
+                Cargando contenido...
+              </div>
+            </div>
+          }
+        >
+          {activeTab === 'curriculum' && (
+            <CurriculumHub
+              completedLessons={completedLessons}
+              savedAnswers={savedAnswers}
+              lastActiveLessonId={lastPosition.lessonId}
+              lastActiveStep={lastPosition.step}
+              onSavePosition={handleSavePosition}
+              onSaveWorkbookAnswer={handleSaveWorkbookAnswer}
+              onMarkLessonCompleted={handleMarkLessonCompleted}
+            />
+          )}
 
-        {activeTab === 'listening' && (
-          <MicroListeningModule
-            drills={MICRO_LISTENING_DRILLS}
-            onCompleteDrill={(chunk, err) => handleCompleteDrill(chunk, err)}
-          />
-        )}
+          {activeTab === 'listening' && (
+            <MicroListeningModule onCompleteDrill={(chunk, err) => handleCompleteDrill(chunk, err)} />
+          )}
 
-        {activeTab === 'reflex' && (
-          <ReflexTrainingModule
-            drills={REFLEX_DRILLS}
-            onCompleteDrill={(chunk, err) => handleCompleteDrill(chunk, err)}
-          />
-        )}
+          {activeTab === 'reflex' && (
+            <ReflexTrainingModule onCompleteDrill={(chunk, err) => handleCompleteDrill(chunk, err)} />
+          )}
 
-        {activeTab === 'rescue' && (
-          <RescueCenterHub />
-        )}
+          {activeTab === 'rescue' && <RescueCenterHub />}
 
-        {activeTab === 'profile' && (
-          <StudentProfileModal
-            profile={profile}
-            onUpdateProfile={updateProfileFields}
-          />
-        )}
+          {activeTab === 'profile' && (
+            <StudentProfileModal profile={profile} onUpdateProfile={updateProfileFields} />
+          )}
 
-        {activeTab === 'admin' && currentUser?.role === 'admin' && (
-          <AdminDashboard token={authToken || ''} />
-        )}
+          {activeTab === 'admin' && currentUser?.role === 'admin' && (
+            <AdminDashboard token={authToken || ''} />
+          )}
+        </Suspense>
       </main>
 
       {/* Footer */}
