@@ -234,47 +234,6 @@ El endpoint de administración comprueba además el rol en la base de datos en c
 petición, de modo que si retiras el rol a alguien, pierde el acceso al instante
 aunque conserve un token antiguo.
 
-### Gestionar usuarios desde Neon (SQL Editor)
-
-1. Entra en <https://console.neon.tech> y abre tu proyecto.
-2. En el menú lateral elige **SQL Editor**.
-3. Pega la consulta, revísala y ejecútala con **Run**.
-
-```sql
--- Ver todos los usuarios
-SELECT id, email, role, created_at FROM users ORDER BY id;
-
--- Borrar una cuenta (perfil, drills y respuestas se borran en cascada)
-DELETE FROM users WHERE email = 'correo@ejemplo.com';
-
--- Dar o quitar el rol de administrador
-UPDATE users SET role = 'admin'   WHERE email = 'correo@ejemplo.com';
-UPDATE users SET role = 'student' WHERE email = 'correo@ejemplo.com';
-```
-
-### Sobre los IDs y la secuencia
-
-El `id` es la clave interna de cada usuario. No es necesario que sea consecutivo y
-**no conviene renumerarlo**: `student_profiles`, `drill_logs` y `workbook_answers`
-apuntan a él con claves foráneas.
-
-Cuando borras cuentas, la secuencia sigue avanzando y el siguiente usuario recibe
-un número más alto. Si quieres que continúe justo después del ID más alto actual:
-
-```sql
-SELECT setval('users_id_seq', (SELECT COALESCE(MAX(id), 0) + 1 FROM users), false);
-```
-
-Si de verdad quieres empezar otra vez desde el ID 1, la forma limpia es vaciar la
-tabla y reiniciar la identidad:
-
-```sql
-TRUNCATE TABLE users RESTART IDENTITY CASCADE;
-```
-
-Esto elimina **todas** las cuentas, perfiles, drills y respuestas. Después tendrías
-que volver a registrar las cuentas y promocionar al admin otra vez.
-
 ### Endpoints principales
 
 | Método | Ruta | Descripción |
