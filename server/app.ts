@@ -17,7 +17,14 @@ import {
 dotenv.config();
 
 const app = express();
-const JWT_SECRET = assertJwtSecret(process.env.JWT_SECRET);
+let JWT_SECRET = process.env.JWT_SECRET ?? '';
+let jwtConfigError: string | null = null;
+
+try {
+  JWT_SECRET = assertJwtSecret(JWT_SECRET);
+} catch (err) {
+  jwtConfigError = err instanceof Error ? err.message : 'JWT_SECRET no válido';
+}
 
 const LEVELS = new Set(['A1', 'A2', 'B1', 'B2']);
 
@@ -46,6 +53,17 @@ app.use(
     },
   })
 );
+
+// Fail closed but with a clear JSON error if a required secret is missing.
+// Vercel shows these messages in the response and in the function logs.
+app.use((_req: Request, res: Response, next: NextFunction) => {
+  if (jwtConfigError) {
+    return res.status(503).json({
+      error: `Configuración del servidor incompleta: ${jwtConfigError}`,
+    });
+  }
+  return next();
+});
 
 // In-memory rate limiting is best-effort on serverless, but blocks basic abuse.
 const rateLimitsDisabled = process.env.RATE_LIMIT_DISABLED === '1';
@@ -518,6 +536,11 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   }
   if (err?.type === 'entity.too.large' || err?.status === 413) {
     return res.status(413).json({ error: 'El cuerpo de la solicitud es demasiado grande.' });
+  }
+  if (err?.message === 'DATABASE_URL_MISSING') {
+    return res.status(503).json({
+      error: 'Base de datos no configurada: define DATABASE_URL en Vercel.',
+    });
   }
   console.error('Unhandled error:', err);
   return res.status(500).json({ error: 'Error interno del servidor.' });
