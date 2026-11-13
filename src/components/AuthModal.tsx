@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LogIn, UserPlus, AlertCircle } from 'lucide-react';
-import { apiFetch } from '../config/api';
+import { apiJson } from '../config/api';
 
 interface Props {
   onLoginSuccess: (token: string, user: any) => void;
@@ -26,20 +26,15 @@ export const AuthModal: React.FC<Props> = ({ onLoginSuccess }) => {
       : { email, password };
 
     try {
-      const res = await apiFetch(endpoint, {
+      const data = await apiJson<{ token: string; user: any }>(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || 'Error al autenticar');
-      }
 
       onLoginSuccess(data.token, data.user);
-    } catch (err: any) {
-      setError(err.message || 'Error de conexión con la base de datos Neon');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error de conexión con el servidor');
     } finally {
       setLoading(false);
     }

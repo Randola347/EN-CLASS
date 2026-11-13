@@ -14,7 +14,7 @@ import confetti from 'canvas-confetti';
 import type { StudentProfile } from './types';
 import { TOTAL_LESSONS } from './data/curriculumMeta';
 import { AuthModal } from './components/AuthModal';
-import { apiFetch } from './config/api';
+import { apiFetch, apiJson } from './config/api';
 
 // Las pestañas y paneles pesados se cargan bajo demanda. Así el bundle inicial
 // no incluye las 20 lecciones completas ni los módulos que no se están usando.
@@ -83,10 +83,9 @@ export const App: React.FC = () => {
   useEffect(() => {
     if (!authToken) return;
 
-    apiFetch('/api/student/profile', {
+    apiJson('/api/student/profile', {
       headers: { 'Authorization': `Bearer ${authToken}` }
     })
-      .then(res => res.json())
       .then(data => {
         if (data.profile) {
           setProfile(prev => ({
@@ -162,7 +161,7 @@ export const App: React.FC = () => {
 
     if (!authToken) return;
 
-    apiFetch('/api/student/workbook', {
+    apiJson('/api/student/workbook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -174,7 +173,6 @@ export const App: React.FC = () => {
         user_text: text
       })
     })
-      .then(res => res.json())
       .then((data) => {
         if (typeof data.drills_completed === 'number') {
           setProfile(prev => ({ ...prev, drills_completed: data.drills_completed }));
@@ -231,7 +229,7 @@ export const App: React.FC = () => {
 
     if (!authToken) return;
 
-    apiFetch('/api/student/drill', {
+    apiJson('/api/student/drill', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -245,7 +243,6 @@ export const App: React.FC = () => {
         correction: errorFeedback?.correction
       })
     })
-      .then(res => res.json())
       .then((data) => {
         if (typeof data.drills_completed === 'number') {
           setProfile(prev => ({ ...prev, drills_completed: data.drills_completed }));

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Shield, AlertCircle, RefreshCw } from 'lucide-react';
-import { apiFetch } from '../config/api';
+import { apiJson } from '../config/api';
 
 interface Props {
   token: string;
@@ -15,16 +15,14 @@ export const AdminDashboard: React.FC<Props> = ({ token }) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await apiFetch('/api/admin/overview', {
+      const data = await apiJson<{ students?: any[] }>('/api/admin/overview', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Error al obtener alumnos');
       setStudents(data.students || []);
-    } catch (err: any) {
-      setError(err.message || 'Error cargando dashboard de administración');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error cargando dashboard de administración');
     } finally {
       setLoading(false);
     }
